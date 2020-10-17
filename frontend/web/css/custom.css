@@ -1,0 +1,10 @@
+
+/*# sourceMappingURL=maps/custom.css.map */
+@media (max-width: 767px) {
+    .terms-page-main {
+      margin-top: 50px !important;
+    }
+    .brand-logo img{
+        width: 120px;
+    }
+  }

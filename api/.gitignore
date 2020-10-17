@@ -1,0 +1,7 @@
+config/var.php
+runtime
+.github
+
+# Mac DS_Store Files
+.DS_Store
+
