@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'MoreRave';
+$this->title = 'BE MOTIVATED TO ENGAGE';
 ?>
 
 <!-- Hero Area -->
@@ -39,9 +39,8 @@ $this->title = 'MoreRave';
             </div>
             <div class="col-lg-7 order-lg-1" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
                 <div class="hero-content py--50">
-                    <h1 class="title">Motivate to engage</h1>
-                    <p> Think influencers raised to the power of every SM user that is willing to make side money, just
-                        making comments and engaging with brands. </p>
+                    <h1 class="title">BE MOTIVATED TO ENGAGE</h1>
+                    <p> Morerave is a micro-influencer platform that leverages Social Media to accelerate your marketing, engage your audience and boost your conversion and sales. </p>
                     <div class="hero-btn">
                         <a href="#" class="btn--primary hvr-bounce-to-left">Download App</a>
                         <a href="https://www.youtube.com/watch?v=AOVRKqYy-Z0" class="excerpt video-link"
@@ -53,32 +52,58 @@ $this->title = 'MoreRave';
     </div>
 </div>
 <!-- Clients Brands Area -->
-<div class="brands-area">
-    <div class="brand-title-wrapper">
-        <div class="container">
-            <h3 class="brand-title">Popular among top influencers around the world </h3>
-        </div>
-    </div>
+<!--<div class="brands-area">-->
+<!--    <div class="brand-title-wrapper">-->
+<!--        <div class="container">-->
+<!--            <h3 class="brand-title">Popular among top influencers around the world </h3>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="container">-->
+<!--        <div class="brand-logos">-->
+<!--            <div class="single-brand">-->
+<!--                <img src="image/custom/inf-1.png" width="150" alt="">-->
+<!--            </div>-->
+<!--            <div class="single-brand">-->
+<!--                <img src="image/custom/inf-2.png" width="150" alt="">-->
+<!--            </div>-->
+<!--            <div class="single-brand">-->
+<!--                <img src="image/custom/inf-1.png" width="150" alt="">-->
+<!--            </div>-->
+<!--            <div class="single-brand">-->
+<!--                <img src="image/custom/inf-2.png" width="150" alt="">-->
+<!--            </div>-->
+<!--            <div class="single-brand">-->
+<!--                <img src="image/custom/inf-1.png" width="150" alt="">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- Content section 1 -->
+<div class="content-section1 section-padding">
     <div class="container">
-        <div class="brand-logos">
-            <div class="single-brand">
-                <img src="image/custom/inf-1.png" width="150" alt="">
-            </div>
-            <div class="single-brand">
-                <img src="image/custom/inf-2.png" width="150" alt="">
-            </div>
-            <div class="single-brand">
-                <img src="image/custom/inf-1.png" width="150" alt="">
-            </div>
-            <div class="single-brand">
-                <img src="image/custom/inf-2.png" width="150" alt="">
-            </div>
-            <div class="single-brand">
-                <img src="image/custom/inf-1.png" width="150" alt="">
+        <div class="row align-items-center">
+
+            <div class="col-lg-12 text-center order-lg-1" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+                <div class="content-text section-title pr--25">
+                    <h2 class="title">Put your marketing to work.</h2>
+                    <p>
+                        Increase your Reach, engage your prospects and leads, Improve your conversion.
+                    </p>
+                    <p>
+                        Morerave gives you buck-for-buck social engagement that matter to your business and gives you value for your marketing budget.
+                    </p>
+                    <div class="content-btn  d-flex justify-content-center">
+                        <a href="landing-1.html#" class="btn--secondary hvr-bounce-to-left">Start your marketing</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <!-- Feature section -->
 <div class="feature-section section-padding">
     <div class="shape-1" data-aos="fade-left" data-aos-duration="400" data-aos-once="true">
@@ -91,9 +116,9 @@ $this->title = 'MoreRave';
         <div class="row align-items-center">
             <div class="col-lg-6 pl-lg--40 order-lg-2">
                 <div class="feature-content section-title">
-                    <h2 class="title">Brands promotion</h2>
-                    <p class="">Promote small and individual businesses for a token using the power and wisdom of the
-                        crowd using <strong> Instagram </strong> and <strong> Twitter </strong> accounts</p>
+                    <h2 class="title">More Engagements will lead to more deals</h2>
+                    <p class="">More deals will lead to more customers. </p>
+                    <p>Engagements starts with telling someone about something, at Morerave.com we have made that <strong>tell</strong> super-duper easy.</p>
                     <div class="content-btn">
                         <a href="landing-1.html#" class="btn--secondary hvr-bounce-to-left">Download App</a>
                     </div>
@@ -109,7 +134,7 @@ $this->title = 'MoreRave';
                                 </div>
                                 <div class="card-text">
                                     <h3 class="title">Make a Post</h3>
-                                    <p>Provide an experience that is informative as well as enjoyable.</p>
+                                    <p>Provide information about your business or product via media (graphics, banners, videos) laced with enjoyment, a clear CTA and unique trackable metrics</p>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +145,18 @@ $this->title = 'MoreRave';
                                 </div>
                                 <div class="card-text">
                                     <h3 class="title">Engagements</h3>
-                                    <p>Give businesses and brands a better way to get engagements.</p>
+                                    <p>Brands and businesses get the opportunity to connect via engagements that creates an awesome customer engagement experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt--30">
+                            <div class="feature-card">
+                                <div class="card-icon ash">
+                                    <img src="image/png/icon-chat-black.png" alt="">
+                                </div>
+                                <div class="card-text">
+                                    <h3 class="title">Support</h3>
+                                    <p>The availability of real time support using data and AI to tailor market offerings for best results.</p>
                                 </div>
                             </div>
                         </div>
@@ -131,22 +167,11 @@ $this->title = 'MoreRave';
                                 </div>
                                 <div class="card-text">
                                     <h3 class="title">Analytics</h3>
-                                    <p>We want to show users accountability and profitability as they put in effort.</p>
+                                    <p>We have merged accountability and profitability with effort. See your reach, know what works, and use real time analytics to tweak products to market standards, WIN.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mt--30">
-                            <div class="feature-card">
-                                <div class="card-icon ash">
-                                    <img src="image/png/icon-chat-black.png" alt="">
-                                </div>
-                                <div class="card-text">
-                                    <h3 class="title">Great Support</h3>
-                                    <p>Give businesses and brands a more effective way to utilize their marketing
-                                        budget.</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -179,12 +204,11 @@ $this->title = 'MoreRave';
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
                 <div class="content-text section-title pr--25">
-                    <h2 class="title">Be your own influencer.</h2>
-                    <p> where you are paid to read a post, retweet a post, share a post, comment on a post, like a post
-                        or even micro-blog about same.</p>
-                    <!--<div class="content-btn">
-                      <a href="landing-1.html#" class="btn--primary hvr-bounce-to-left">Get Started</a>
-                    </div>-->
+                    <h2 class="title">Take advantage of the of a million influencers.</h2>
+                    <p> One influencer may reach a million prospects, how about turning a million prospects into influencers just for one product, business or brand.</p>
+                    <div class="content-btn">
+                      <a href="landing-1.html#" class="btn--primary hvr-bounce-to-left">Let’s show you how</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -219,10 +243,9 @@ $this->title = 'MoreRave';
             <div class="col-lg-7" data-aos="fade-left" data-aos-duration="500" data-aos-once="true">
                 <div class="content-text pl-lg--50">
                     <div class="section-title">
-                        <h2 class="title">It’s everything you’ll <br class="d-none d-sm-block"> ever need.</h2>
-                        <p class="pr-lg--45">We are building for a young hip and trendy audience. 14yrs to 30yrs.
-                            Then we also will grow into the middle ages when we have made traction 31- 45 years We are
-                            also not oblivious of the senior citizens who may want to engage. Above 45 years.</p>
+                        <h2 class="title">Our one for two advantage.</h2>
+                        <p class="pr-lg--45">One platform offers you product and market visibility on twitter and instagram.</p>
+                        <p class="pr-lg--45">Welcome to less work, more result, accountable marketing spend, and actionable analytics to make business more profitable.</p>
                     </div>
                     <div class="widgets-wrapper mt--35">
                         <div class="content-widget mb--15">
