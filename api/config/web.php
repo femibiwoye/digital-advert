@@ -1,5 +1,5 @@
 <?php
-require 'var.php';
+require '../../common/config/var.php';
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $mainUrl = require 'urls.php';
