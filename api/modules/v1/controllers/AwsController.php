@@ -81,7 +81,7 @@ class AwsController extends Controller
 
     public function actionUploadFile($folder, $base64 = 0)
     {
-        return 'hello';
+
         $generatedFileName = Yii::$app->security->generateRandomString(50);
         if ($base64 == 1) {
 
