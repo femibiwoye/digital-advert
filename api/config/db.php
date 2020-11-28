@@ -1,5 +1,5 @@
 <?php
-require 'var.php';
+
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host='.HOST.';port='.PORT.';dbname='.DATABASE,

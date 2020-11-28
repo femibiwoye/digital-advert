@@ -8,4 +8,6 @@ return [
     'POST v1/forgot-password' => 'v1/auth/forgot-password',
     'POST v1/reset-password' => 'v1/auth/reset-password',
 
+    'GET v1/token/<video_token:[a-zA-Z0-9/]+>' => 'v1/token'
+
 ];

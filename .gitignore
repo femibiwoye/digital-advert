@@ -45,7 +45,7 @@ phpunit.phar
 frontend/runtime
 backend/runtime
 theme
+affiliate
 backend/web/images
 frontend/web/images
 frontend/web/ckeditor
-theme

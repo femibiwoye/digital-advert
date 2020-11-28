@@ -143,5 +143,11 @@ class AuthController extends Controller
 
         return (new ApiResponse)->success(null, ApiResponse::SUCCESSFUL, 'Password successfully changed');
     }
+
+    public function actionToken($token)
+    {
+        return $token;
+
+    }
 }
 

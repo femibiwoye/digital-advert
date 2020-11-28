@@ -1,7 +1,9 @@
 <?php
+require 'var.php';
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $mainUrl = require 'urls.php';
+$awsUrl = require 'aws-url.php';
 
 $config = [
     'id' => 'marorave',
@@ -34,7 +36,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\modules\v2\models\User',
+            'identityClass' => 'api\modules\v1\models\User',
             'enableAutoLogin' => false,
             'enableSession' => false,
             'loginUrl' => null,
@@ -64,7 +66,7 @@ $config = [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
             'showScriptName' => false,
-            'rules' => $mainUrl,
+            'rules' =>array_merge($mainUrl,$awsUrl),
         ],
 
     ],

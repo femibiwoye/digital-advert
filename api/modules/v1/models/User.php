@@ -17,7 +17,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
 
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%users}}';
     }
 
     /**
@@ -30,7 +30,6 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
-
 
 
     public static function findIdentity($id)
@@ -47,16 +46,8 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             /**
              * This token is expired if expiry date is greater than current time.
              **/
-            $expires = strtotime("+60 second", strtotime($user->token_expires));
-            if ($expires > time()) {
-                $user->token_expires = date('Y-m-d H:i:s', strtotime("+1 month", time()));
-                $user->save();
-                return $user;
-            } else {
-                $user->token = null;
-                $user->token_expires = null;
-                $user->save();
-            }
+            return $user;
+
         }
     }
 

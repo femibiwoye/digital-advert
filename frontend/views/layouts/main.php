@@ -21,19 +21,24 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="shortcut icon" href="<?= Url::to('@web') ?>image/custom/rave-favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= Url::to('@web') ?>img/favicon.png" type="image/x-icon">
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 <?php
 $action = Yii::$app->controller->action->id;
+$controller = Yii::$app->controller->id;
+$module = Yii::$app->controller->module->id;
+
 if ($action == 'about')
-    $extraClass = 'about-page';
+    $extraClass = 'about-page landing-1';
 elseif ($action == 'terms' || $action == 'privacy')
-    $extraClass = 'terms-page';
+    $extraClass = 'terms-page landing-1';
+elseif ($module == 'affiliate' && $action == 'index')
+    $extraClass = 'landing-6';
 else
-    $extraClass = 'terms-page';
+    $extraClass = 'terms-page landing-1';
 ?>
 
 
@@ -41,7 +46,7 @@ else
     <div class="load-circle"><span class="one"></span></div>
 </div>
 <div class="site-wrapper overflow-hidden">
-    <div class="<?=$extraClass?> landing-1">
+    <div class="<?= $extraClass ?>">
         <?= $this->render('header') ?>
         <?= Alert::widget() ?>
         <?= $content ?>

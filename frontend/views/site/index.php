@@ -40,7 +40,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
             <div class="col-lg-7 order-lg-1" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
                 <div class="hero-content py--50">
                     <h1 class="title">BE MOTIVATED TO ENGAGE</h1>
-                    <p> Morerave is a micro-influencer platform that leverages Social Media to accelerate your marketing, engage your audience and boost your conversion and sales. </p>
+                    <p> Morerave is a micro-influencer platform that leverages Social Media to accelerate your marketing, engage your audience, boost your conversion and sales. </p>
                     <div class="hero-btn">
                         <a href="#" class="btn--primary hvr-bounce-to-left">Download App</a>
                         <a href="https://www.youtube.com/watch?v=AOVRKqYy-Z0" class="excerpt video-link"
@@ -227,14 +227,14 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
                         <img src="image/png/content-img2--mobile.png" alt="">
                     </div>
                     <div class="abs-img img-2" data-aos="fade-right" data-aos-duration="400" data-aos-once="true"
-                         data-aos-delay="300">
+                         data-aos-delay="300">earn
                         <div class="image-card-2 card-red">
                             <div class="card-icon">
                                 <i class="fas fa-wallet"></i>
                             </div>
                             <div class="card-text">
                                 <span class="date">Points</span>
-                                <p>You just earn 10,000 point on your last post</p>
+                                <p>You just earned 10,000 point on your last post</p>
                             </div>
                         </div>
                     </div>
@@ -356,8 +356,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
             <div class="col-lg-7 col-xl-6">
                 <div class="section-title text-center">
                     <h2 class="title">Get started</h2>
-                    <p> Think influencers raised to the power of every SM user that is willing to make side money, just
-                        making comments and engaging with brands.</p>
+                    <p> Think Think Influencers raised to the power of every Social Media User that would be given the opportunity to engage with your product, business or service.<br> Think EXPONENTIALLY.</p>
                 </div>
                 <div class="btns">
                     <ul>

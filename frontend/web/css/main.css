@@ -22093,7 +22093,7 @@ p {
 }
 
 .landing-4 .sticky-header.reveal-header {
-  background: #5454d4;
+  background: #620560;
 }
 
 .landing-5 .sticky-header.reveal-header {
@@ -22168,7 +22168,7 @@ p {
     border: 1px solid #eae9f2;
     background-color: #ffffff;
     display: block;
-    border-top: 3px solid #5454d4;
+    border-top: 3px solid #620560;
   }
 }
 
@@ -22184,7 +22184,7 @@ p {
 }
 
 .menu-dropdown > .drop-menu-item:hover > a {
-  color: #5454d4;
+  color: #620560;
 }
 
 .menu-dropdown > .drop-menu-item.dropdown {
@@ -22270,8 +22270,8 @@ p {
   width: 200px;
   height: 60px;
   border-radius: 5px;
-  border: 1px solid #1461c5;
-    background: #016bf4;
+  border: 1px solid #5a0759;
+    background: #620560;
   color: #ffffff;
   font-family: "CircularStd", sans-serif;
   font-size: 21px;
@@ -22309,7 +22309,7 @@ p {
   font-size: 21px;
   font-weight: 500;
   letter-spacing: -0.66px;
-  background-color: #0b53af;
+  background-color: #f4c633;
 }
 
 .landing-1 .image-card {
@@ -22358,7 +22358,7 @@ p {
 }
 
 .landing-1 .image-card.card-blue {
-  background-color: #026dfa;
+  background-color: #610760;
 }
 
 .landing-1 .image-card.card-blue .card-icon {
@@ -22370,7 +22370,7 @@ p {
 }
 
 .landing-1 .image-card.card-yellow .card-icon {
-  background-color: #026dfa;
+  background-color: #610760;
 }
 
 .landing-1 .image-card.card-yellow p {
@@ -22558,7 +22558,7 @@ p {
 }
 
 .landing-1 .hero-content .video-link {
-  color: #026dfa;
+  color: #610760;
   font-family: "CircularStd", sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -22787,7 +22787,7 @@ p {
 }
 
 .landing-1 .feature-section {
-  background: #016bf4;
+  background: #620560;
   position: relative;
 }
 
@@ -22855,7 +22855,7 @@ p {
 
 .landing-1 .feature-card .card-icon.blue {
   background-color: rgba(84, 84, 212, 0.1);
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-1 .feature-card .card-icon.ash {
@@ -22936,7 +22936,7 @@ p {
 
 .landing-1 .content-widget .widget-icon.blue {
   background-color: rgba(84, 84, 212, 0.1);
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-1 .content-widget .widget-icon.ash {
@@ -23206,7 +23206,7 @@ p {
 
 .landing-1 .testimonial-card .card-top-area .review-media i {
   font-size: 27px;
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-1 .testimonial-card .review-text {
@@ -23219,7 +23219,7 @@ p {
 }
 
 .landing-1 .testimonial-card .review-text .secondary-text {
-  color: #5454d4;
+  color: #620560;
   font-family: "CircularStd", sans-serif;
   font-size: 21px;
   font-weight: 300;
@@ -23228,7 +23228,7 @@ p {
 }
 
 .landing-1 .testimonial-link {
-  color: #5454D4;
+  color: #620560;
   font-family: "CircularStd", sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -23356,7 +23356,7 @@ p {
 }
 
 .landing-1 .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 4.Landing 2 -------*/
@@ -24076,7 +24076,7 @@ p {
   width: 45px;
   height: 8px;
   border-radius: 4px;
-  background: #5454d4;
+  background: #620560;
 }
 
 .landing-2 .testimonial-card {
@@ -24248,12 +24248,12 @@ p {
 
 @media (min-width: 768px) {
   .landing-2 .footer-list a:hover {
-    color: #5454d4;
+    color: #620560;
   }
 }
 
 .landing-2 .footer-list.contact-list a {
-  color: #5454D4;
+  color: #620560;
 }
 
 .landing-2 .social-icons {
@@ -24373,7 +24373,7 @@ p {
   font-size: 21px;
   font-weight: 500;
   letter-spacing: -0.66px;
-  background-color: #5454d4;
+  background-color: #620560;
 }
 
 .landing-3 .main-menu .menu-dropdown .single-item a p {
@@ -24634,7 +24634,7 @@ p {
 
 .landing-3 .hero-form .nice-select:focus {
   box-shadow: none;
-  outline: #5454d4;
+  outline: #620560;
 }
 
 .landing-3 .hero-form .nice-select .list {
@@ -24666,7 +24666,7 @@ p {
 
 .landing-3 .feature-section .video-image a {
   font-size: 22px;
-  background-color: #5454D4;
+  background-color: #620560;
   border-radius: 500px;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -24774,7 +24774,7 @@ p {
 .landing-3 .content-badge {
   height: 32px;
   border-radius: 5px;
-  background-color: #5454d4;
+  background-color: #620560;
   color: #fff;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -24962,7 +24962,7 @@ p {
 
 @media (min-width: 768px) {
   .landing-3 .footer-list a:hover {
-    color: #5454d4;
+    color: #620560;
   }
 }
 
@@ -25071,7 +25071,7 @@ p {
 }
 
 .landing-4 .hero-area {
-  background: #5454d4;
+  background: #620560;
 }
 
 .landing-4 .hero-area .hero-image {
@@ -25313,7 +25313,7 @@ p {
 
 .landing-4 .content-widget .widget-icon.blue {
   background-color: rgba(84, 84, 212, 0.1);
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-4 .content-widget .widget-icon.green {
@@ -25365,7 +25365,7 @@ p {
 }
 
 .landing-4 .content-section4 {
-  background: #5454d4;
+  background: #620560;
   position: relative;
   overflow: hidden;
   padding-top: 73px;
@@ -25477,7 +25477,7 @@ p {
   width: 45px;
   height: 8px;
   border-radius: 4px;
-  background: #5454d4;
+  background: #620560;
 }
 
 .landing-4 .testimonial-card {
@@ -25536,7 +25536,7 @@ p {
 .landing-4 .cta-section {
   padding-top: 90px;
   padding-bottom: 85px;
-  background-color: #5454d4;
+  background-color: #620560;
   color: #fff;
 }
 
@@ -25594,7 +25594,7 @@ p {
 
 @media (min-width: 768px) {
   .landing-4 .footer-list a:hover {
-    color: #5454d4;
+    color: #620560;
   }
 }
 
@@ -25657,8 +25657,8 @@ p {
   width: 252px;
   height: 60px;
   border-radius: 5px;
-  border: 1px solid #f0544c;
-  background-color: #f0544c;
+  border: 1px solid #f4c633;
+  background-color: #f4c633;
   color: #fff;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -26031,7 +26031,7 @@ p {
   -webkit-box-pack: center;
           justify-content: center;
   border-radius: 500px;
-  color: #5454d4;
+  color: #620560;
   position: relative;
   top: 9px;
   margin-right: 13px;
@@ -26249,7 +26249,7 @@ p {
   display: -webkit-box;
   display: flex;
   width: 65px;
-  background: #5454d4;
+  background: #620560;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 500px;
@@ -26264,7 +26264,7 @@ p {
 }
 
 .landing-5 .testimonial-slider-l5 .slick-arrow:hover:after {
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-5 .testimonial-slider-l5 .slick-arrow:after {
@@ -26455,7 +26455,7 @@ p {
 }
 
 .landing-5 .single-fact .title {
-  color: #5454d4;
+  color: #620560;
   font-size: 60px;
   font-weight: 700;
   letter-spacing: -1.88px;
@@ -26578,7 +26578,7 @@ p {
 }
 
 .landing-5 .pricing-wrapper .pricing-btn .toggle-btn.clicked {
-  background: #5454d4;
+  background: #620560;
 }
 
 .landing-5 .pricing-wrapper .pricing-btn .toggle-btn.clicked span {
@@ -26597,7 +26597,7 @@ p {
 }
 
 .landing-5 .pricing-card .price-content .small-title {
-  color: #5454d4;
+  color: #620560;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: -0.5px;
@@ -26673,7 +26673,7 @@ p {
   -webkit-box-pack: center;
           justify-content: center;
   border-radius: 500px;
-  color: #5454d4;
+  color: #620560;
   position: relative;
   top: 9px;
   margin-right: 13px;
@@ -26683,7 +26683,7 @@ p {
   padding-top: 18px;
   padding-bottom: 22px;
   border-radius: 0 0 10px 10px;
-  background-color: #5454d4;
+  background-color: #620560;
   color: #fff;
   font-size: 21px;
   font-weight: 500;
@@ -26742,7 +26742,7 @@ p {
   min-height: 30px;
   max-height: 30px;
   font-size: 15px;
-  background-color: #5454d4;
+  background-color: #620560;
   color: #fff;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -26868,12 +26868,12 @@ p {
 
 @media (min-width: 768px) {
   .landing-5 .footer-list a:hover {
-    color: #5454d4;
+    color: #620560;
   }
 }
 
 .landing-5 .footer-list.contact-list a {
-  color: #5454D4;
+  color: #620560;
 }
 
 .landing-5 .social-icons {
@@ -26971,8 +26971,8 @@ p {
   width: 252px;
   height: 60px;
   border-radius: 5px;
-  border: 1px solid #f0544c;
-  background-color: #f0544c;
+  border: 1px solid #f4c633;
+  background-color: #f4c633;
   color: #fff;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -27035,7 +27035,7 @@ p {
     font-weight: 300;
   }
   .landing-6 .main-menu > li > .nav-link:hover {
-    color: #5454d4 !important;
+    color: #620560 !important;
   }
 }
 
@@ -27204,7 +27204,7 @@ p {
   -webkit-box-pack: center;
   justify-content: center;
   border-radius: 500px;
-  color: #5454d4;
+  color: #620560;
   position: relative;
   top: 3px;
   margin-right: 13px;
@@ -27231,7 +27231,7 @@ p {
 }
 
 .landing-6 .hero-btn .button-bottom-text .link {
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-6 .author-section {
@@ -27372,7 +27372,7 @@ p {
   display: -webkit-box;
   display: flex;
   width: 65px;
-  background: #5454d4;
+  background: #620560;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 500px;
@@ -27386,7 +27386,7 @@ p {
 }
 
 .landing-6 .testimonial-slider-l6 .slick-arrow:hover:after {
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-6 .testimonial-slider-l6 .slick-arrow:after {
@@ -27534,7 +27534,7 @@ p {
 }
 
 .landing-6 .testimonial-card .testmonial-texts .title-top {
-  color: #5454d4;
+  color: #620560;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: -0.5px;
@@ -27543,7 +27543,7 @@ p {
 }
 
 .landing-6 .testimonial-card .testmonial-texts .title-top {
-  color: #5454d4;
+  color: #620560;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: -0.5px;
@@ -27636,7 +27636,7 @@ p {
           justify-content: center;
   margin-right: 20px;
   color: #fff;
-  background-color: #5454d4;
+  background-color: #620560;
 }
 
 .landing-6 .content-widget .widget-text .title {
@@ -27732,7 +27732,7 @@ p {
 }
 
 .landing-6 .single-fact .title {
-  color: #5454d4;
+  color: #620560;
   font-size: 60px;
   font-weight: 700;
   letter-spacing: -1.88px;
@@ -27852,11 +27852,11 @@ p {
 }
 
 .landing-6 .more-review-link a {
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-6 .more-review-link a:hover {
-  color: #5454d4;
+  color: #620560;
   text-decoration: underline;
 }
 
@@ -27964,7 +27964,7 @@ p {
 }
 
 .landing-6 .pricing-card .title-top {
-  color: #5454d4;
+  color: #620560;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: -0.5px;
@@ -28092,12 +28092,12 @@ p {
 
 .landing-6 .pricing-card .card-btn.btn--blue {
   border: 1px solid #3d3dad;
-  background-color: #5454d4;
+  background-color: #620560;
 }
 
 .landing-6 .pricing-card .card-btn.btn--orange {
   border: 1px solid #c31a12;
-  background-color: #f0544c;
+  background-color: #f4c633;
 }
 
 .landing-6 .pricing-card.premium {
@@ -28136,7 +28136,7 @@ p {
   min-height: 30px;
   max-height: 30px;
   font-size: 15px;
-  background-color: #5454d4;
+  background-color: #620560;
   color: #fff;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -28235,7 +28235,7 @@ p {
 
 @media (min-width: 768px) {
   .landing-6 .footer-list a:hover {
-    color: #5454d4;
+    color: #620560;
   }
 }
 
@@ -28520,7 +28520,7 @@ p {
 }
 
 .landing-7 .review-area {
-  background-color: #5454d4;
+  background-color: #620560;
   padding-top: 50px;
   padding-bottom: 20px;
 }
@@ -28676,7 +28676,7 @@ p {
   left: 0;
   width: 49px;
   height: 49px;
-  background-color: #5454d4;
+  background-color: #620560;
   border-radius: 500px;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -28922,7 +28922,7 @@ p {
 
 @media (min-width: 768px) {
   .landing-7 .footer-list a:hover {
-    color: #5454d4;
+    color: #620560;
   }
 }
 
@@ -28953,7 +28953,7 @@ p {
 }
 
 .landing-8 .text--primary {
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-8 .btn--primary {
@@ -29205,7 +29205,7 @@ p {
 }
 
 .landing-8 .single-fact .title {
-  color: #5454d4;
+  color: #620560;
   font-size: 60px;
   font-weight: 700;
   letter-spacing: -1.88px;
@@ -29255,7 +29255,7 @@ p {
 .landing-8 .service-card:hover {
   box-shadow: 0 52px 54px rgba(25, 25, 27, 0.3);
   border-radius: 10px;
-  background-color: #5454d4;
+  background-color: #620560;
 }
 
 .landing-8 .service-card:hover i {
@@ -29373,7 +29373,7 @@ p {
 }
 
 .landing-8 .case-card .c-card-text {
-  background: #5454d4;
+  background: #620560;
   position: relative;
   z-index: 1;
   -webkit-transition: .4s;
@@ -29426,7 +29426,7 @@ p {
 }
 
 .landing-8 .case-card .c-card-text .shape svg path {
-  fill: #5454d4;
+  fill: #620560;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -29593,7 +29593,7 @@ p {
   height: 49%;
   content: "";
   width: 100%;
-  background: #5454d4;
+  background: #620560;
   z-index: -1;
 }
 
@@ -29719,8 +29719,8 @@ p {
 }
 
 .landing-8 .contact-form .agree-block #agree-check:checked ~ label {
-  border-color: #5454d4;
-  background: #5454d4;
+  border-color: #620560;
+  background: #620560;
 }
 
 .landing-8 .contact-form .agree-block #agree-check:checked ~ label::before {
@@ -29734,11 +29734,11 @@ p {
 }
 
 .landing-8 .contact-form .agree-block p a {
-  color: #5454d4;
+  color: #620560;
 }
 
 .landing-8 .footer-section {
-  background-color: #5454d4;
+  background-color: #620560;
 }
 
 @media (min-width: 992px) {
@@ -30076,7 +30076,7 @@ p {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   right: 15px;
-  color: #5454d4;
+  color: #620560;
   font-family: "CircularStd", sans-serif;
   font-size: 16px;
   font-weight: 300;
@@ -30097,7 +30097,7 @@ p {
   content: "\f14a";
   font-family: "Font Awesome 5 free";
   font-weight: 900;
-  color: #5454d4;
+  color: #620560;
 }
 
 .omega-form .form-check-label label .checkbox {
@@ -30131,7 +30131,7 @@ p {
 }
 
 .omega-form .form-check-label label p a {
-  color: #5454d4;
+  color: #620560;
 }
 
 .omega-form .button-block {
@@ -30161,7 +30161,7 @@ p {
 }
 
 .omega-form .button-block .sign-up-text a {
-  color: #5454d4;
+  color: #620560;
   margin-left: 4px;
 }
 
@@ -30461,7 +30461,7 @@ p {
 }
 
 .about-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 .about-page .cta-section {
@@ -30573,7 +30573,7 @@ p {
 }
 
 .about-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 13.Career Details -------*/
@@ -30660,7 +30660,7 @@ p {
 }
 
 .career-details-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 .job-details-content {
@@ -30775,7 +30775,7 @@ p {
 
 .job-details-content .job-top-header .badge.purple {
   background-color: rgba(84, 84, 212, 0.15);
-  color: #5454d4;
+  color: #620560;
 }
 
 .job-details-content .contant-block-1 .main-title {
@@ -30963,7 +30963,7 @@ p {
 
 .career-page .card-job .badge.blue {
   background-color: rgba(84, 84, 212, 0.15);
-  color: #5454d4;
+  color: #620560;
 }
 
 .career-page .card-job:hover {
@@ -31101,7 +31101,7 @@ p {
 }
 
 .career-page .circle-bg-blue {
-  background: #5454d4;
+  background: #620560;
 }
 
 .career-page .circle-bg-blue.outer-circle {
@@ -31285,7 +31285,7 @@ p {
 
 .career-page .video-area .video-image a {
   font-size: 22px;
-  background-color: #5454D4;
+  background-color: #620560;
   border-radius: 500px;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -31376,7 +31376,7 @@ p {
 }
 
 .career-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 15.Case Study -------*/
@@ -31672,7 +31672,7 @@ p {
 }
 
 .case-study-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 .case-study-page.case-study-details .case-study-details-section {
@@ -31843,7 +31843,7 @@ p {
 }
 
 .pricing-page .pricing-btns a.active {
-  background-color: #5454d4;
+  background-color: #620560;
   color: #fff;
 }
 
@@ -31906,7 +31906,7 @@ p {
   border-radius: 10px;
   border: 1px solid #eae9f2;
   background-color: #ffffff;
-  color: #5454d4;
+  color: #620560;
   font-size: 21px;
   font-weight: 500;
   letter-spacing: -0.66px;
@@ -32101,7 +32101,7 @@ p {
 }
 
 .pricing-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 .pricing-page-2 .site-header {
@@ -32277,7 +32277,7 @@ p {
   border-radius: 5px;
   border: 1px solid #eae9f2;
   background-color: #ffffff;
-  color: #5454d4;
+  color: #620560;
   font-size: 18px;
   font-weight: 500;
   letter-spacing: -0.56px;
@@ -32642,8 +32642,8 @@ p {
 }
 
 .blog-page .omega-blog-pagination .pagination-list li:hover {
-  border: 1px solid #5454d4;
-  background-color: #5454d4;
+  border: 1px solid #620560;
+  background-color: #620560;
   color: #fff;
 }
 
@@ -32765,7 +32765,7 @@ p {
 }
 
 .blog-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 .blog-page.blog-details .page-banner {
@@ -32807,7 +32807,7 @@ p {
 .blog-page.blog-details .page-banner .banner-content p .bullet {
   width: 10px;
   height: 10px;
-  background-color: #5454d4;
+  background-color: #620560;
   border-radius: 500px;
   margin: 0 18px;
 }
@@ -33281,7 +33281,7 @@ p {
 }
 
 .contact-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 19.Thank You -------*/
@@ -33308,7 +33308,7 @@ p {
 .thank-page .thank-page-main .contents .content-icon {
   width: 118px;
   height: 118px;
-  background-color: #5454d4;
+  background-color: #620560;
   border-radius: 500px;
   display: -webkit-inline-box;
   display: inline-flex;
@@ -33432,7 +33432,7 @@ p {
 }
 
 .thank-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 20.404 -------*/
@@ -33583,7 +33583,7 @@ p {
 }
 
 .error-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 21.Terms page -------*/
@@ -33705,7 +33705,7 @@ p {
 }
 
 .terms-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 22.Faq page -------*/
@@ -33819,11 +33819,11 @@ p {
 
 .faq-page .nav.faq-tab .nav-link:hover {
   border-color: transparent;
-  color: #5454d4;
+  color: #620560;
 }
 
 .faq-page .nav.faq-tab .nav-link.active {
-  color: #5454d4;
+  color: #620560;
   background-color: transparent;
   border-color: transparent;
 }
@@ -33927,7 +33927,7 @@ p {
 }
 
 .faq-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 23.review page -------*/
@@ -34123,7 +34123,7 @@ p {
 }
 
 .review-page .copyright-area .social-icons li a:hover {
-  color: #5454d4;
+  color: #620560;
 }
 
 /*==== 24.coming soon page -------*/
@@ -34298,7 +34298,7 @@ p {
   -webkit-box-flex: unset;
           flex: unset;
   border-radius: 8px;
-  background-color: #5454d4;
+  background-color: #620560;
   margin: 0 2.5px;
   text-align: center;
   margin-top: 10px;
@@ -34477,7 +34477,7 @@ p {
 
 @media (min-width: 992px) {
   .coming-soon-2 .site-footer .social-icons li a:hover {
-    color: #5454d4;
+    color: #620560;
     -webkit-transform: translateY(-3px);
             transform: translateY(-3px);
   }
