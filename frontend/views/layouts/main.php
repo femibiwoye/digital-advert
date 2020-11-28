@@ -35,7 +35,7 @@ if ($action == 'about')
     $extraClass = 'about-page landing-1';
 elseif ($action == 'terms' || $action == 'privacy')
     $extraClass = 'terms-page landing-1';
-elseif ($module == 'affiliate' && $action == 'index')
+elseif ($controller == 'affiliates' && $action == 'index')
     $extraClass = 'landing-6';
 else
     $extraClass = 'terms-page landing-1';
