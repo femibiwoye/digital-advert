@@ -42,12 +42,12 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            TimestampBehavior::className(),
+//        ];
+//    }
 
     /**
      * {@inheritdoc}
@@ -57,6 +57,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['image_path','phone','username','email'],'string']
         ];
     }
 

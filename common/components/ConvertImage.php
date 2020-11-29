@@ -26,6 +26,7 @@ class ConvertImage extends Widget
         //$data = file_get_contents($this->model->fileImage->tempName);
         $cfile = new \CURLFile(realpath($model->tempName), $model->type, $model->name);
 
+
         $response = $this->FileUpload($folder, $cfile);
         return ArrayHelper::toArray($response)['data'];
 //        } catch (\Exception $e) {

@@ -37,6 +37,7 @@ class ProfileController extends Controller
     {
 
         $model = User::findOne(['id' => Yii::$app->user->id]);
+        $modelCopy = clone $model;
         if ($model->load(Yii::$app->request->post())) {
 
             $model->image_path = UploadedFile::getInstance($model, 'image_path');
@@ -47,9 +48,10 @@ class ProfileController extends Controller
                 if (isset($imageResponse['ObjectURL']) && !empty($imageResponse['ObjectURL'])) {
                     $model->image_path = $imageResponse['ObjectURL'];
                 }
+            }else{
+              $model->image_path = $modelCopy->image_path;
             }
-
-            $model->updated();
+            $model->update();
         }
 
         return $this->render('index', ['model' => $model]);

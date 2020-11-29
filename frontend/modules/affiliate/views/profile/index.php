@@ -46,25 +46,26 @@ use yii\widgets\ActiveForm;
                         <?= $form->field($model, 'username') ?>
                         <?= $form->field($model, 'phone') ?>
                         <?= $form->field($model, 'email') ?>
-                        <?= $form->field($model, 'image_path')->fileInput(); ?>
+                        <?= $form->field($model, 'image_path')
+                            //->fileInput()->label('Image');
 
-<?php // ->widget(FileInput::classname(), [
-//                            'options' => ['multiple' => false, 'accept' => 'image/*'],
-//                            'pluginOptions' => [
-//                                'initialPreview' =>  !$model->isNewRecord ? Yii::$app->params['baseUrl'].'/images/placeholders/' . $model->image_path:'',
-//                                'initialPreviewAsData' => true,
-//                                //'showPreview' => false,
-//                                'showCaption' => true,
-//                                'showRemove' => true,
-//
-//                                'showUpload' => false,
-//                                'showCancel' => false
-//                            ]
-//                        ]) ?>
+                            ->widget(FileInput::classname(), [
+                                'options' => ['multiple' => false, 'accept' => 'image/*'],
+                                'pluginOptions' => [
+                                    'initialPreview' => !empty($model->image_path) ? $model->image_path : Yii::$app->params['s3BaseUrl'] . 'placeholders/user.png',
+                                    'initialPreviewAsData' => true,
+                                    //'showPreview' => false,
+                                    'showCaption' => true,
+                                    'showRemove' => true,
+
+                                    'showUpload' => false,
+                                    'showCancel' => false
+                                ]
+                            ]) ?>
 
 
                         <div class="form-actions form-group">
-                            <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>

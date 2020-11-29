@@ -201,11 +201,11 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
-            $this->created_at = time();
-            $this->updated_at = time();
+            $this->created_at = date('Y-m-d H:i:s');
+            $this->updated_at = date('Y-m-d H:i:s');
             $this->status = self::STATUS_ACTIVE;
         } else {
-            $this->updated_at = time();
+            $this->updated_at = date('Y-m-d H:i:s');
         }
 
         return parent::beforeSave($insert);
