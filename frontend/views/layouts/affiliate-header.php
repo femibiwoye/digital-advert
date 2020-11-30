@@ -29,7 +29,7 @@ $user = Yii::$app->user->identity;
 
                     <a class="nav-link" href="<?=Url::to(['/affiliate/notifications'])?>"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
 
-                    <a class="nav-link" href="<?=Url::to(['/affiliate/settings'])?>"><i class="fa fa -cog"></i>Settings</a>
+                    <a class="nav-link" href="<?=Url::to(['/affiliate/profile/password'])?>"><i class="fa fa -cog"></i>Settings</a>
 
                     <?=Html::a('<i class="fa fa-power -off"></i>Logout', Url::to(['/site/logout']), ['data-method' => 'POST', 'class' => 'nav-link']) ?>
                 </div>

@@ -4,6 +4,8 @@ namespace frontend\modules\affiliate\controllers;
 
 use common\components\ConvertImage;
 use common\models\User;
+use common\models\UserModel;
+use common\models\UsersModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -48,12 +50,41 @@ class ProfileController extends Controller
                 if (isset($imageResponse['ObjectURL']) && !empty($imageResponse['ObjectURL'])) {
                     $model->image_path = $imageResponse['ObjectURL'];
                 }
-            }else{
-              $model->image_path = $modelCopy->image_path;
+            } else {
+                $model->image_path = $modelCopy->image_path;
             }
-            $model->update();
+            if ($model->update())
+                Yii::$app->session->setFlash('success', 'Profile updated');
+            else
+                Yii::$app->session->setFlash('danger', 'Could not update profile');
         }
 
         return $this->render('index', ['model' => $model]);
+    }
+
+    public function actionPassword()
+    {
+        $model = UserModel::findOne(['id' => Yii::$app->user->id]);
+        $model->scenario = 'password';
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->validate()) {
+                print_r($model->errors);
+                die;
+                Yii::$app->session->setFlash('danger', 'Try again');
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            if (Yii::$app->security->validatePassword($model->current_password, Yii::$app->user->identity->password)) {
+                $model->password = Yii::$app->security->generatePasswordHash($model->new_password);
+                if ($model->save()) { //update is successful
+                    Yii::$app->session->setFlash('success', 'Password updated');
+                    return $this->refresh();
+                } else { //update was not successful
+                    Yii::$app->session->setFlash('danger', 'Try again');
+                }
+            } else { //current password not correct
+                Yii::$app->session->setFlash('danger', 'Invalid Current Password!');
+            }
+        }
+        return $this->render('password', ['model' => $model]);
     }
 }

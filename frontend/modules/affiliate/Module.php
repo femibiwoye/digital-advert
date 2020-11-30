@@ -19,10 +19,10 @@ class Module extends \yii\base\Module
     {
         parent::init();
         $this->layout = '//affiliate';
-        \Yii::$app->assetManager->bundles['yii\\bootstrap\\BootstrapAsset'] = [
-            'css' => [],
-            'js' => []
-        ];
+//        \Yii::$app->assetManager->bundles['yii\\bootstrap\\BootstrapAsset'] = [
+//            'css' => [],
+//            'js' => []
+//        ];
         // custom initialization code goes here
     }
 }

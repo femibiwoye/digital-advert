@@ -48,7 +48,7 @@ else
 <div class="site-wrapper overflow-hidden">
     <div class="<?= $extraClass ?>">
         <?= $this->render('header') ?>
-        <?= Alert::widget() ?>
+        <?=\frontend\components\Alert::widget()?>
         <?= $content ?>
         <?= $this->render('footer') ?>
     </div>
