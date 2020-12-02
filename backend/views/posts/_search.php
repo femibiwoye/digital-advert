@@ -17,39 +17,35 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'owner_id') ?>
+    <?= $form->field($model, 'created_at') ?>
 
-    <?= $form->field($model, 'title') ?>
+    <?= $form->field($model, 'updated_at') ?>
 
-    <?= $form->field($model, 'slug') ?>
+    <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'content') ?>
 
-    <?php // echo $form->field($model, 'platform') ?>
+    <?php // echo $form->field($model, 'media') ?>
 
-    <?php // echo $form->field($model, 'file') ?>
+    <?php // echo $form->field($model, 'platforms') ?>
 
-    <?php // echo $form->field($model, 'approved') ?>
+    <?php // echo $form->field($model, 'is_approved') ?>
 
-    <?php // echo $form->field($model, 'multiple_file') ?>
+    <?php // echo $form->field($model, 'is_promoted') ?>
 
-    <?php // echo $form->field($model, 'paid_post') ?>
+    <?php // echo $form->field($model, 'comment_count') ?>
 
-    <?php // echo $form->field($model, 'post_token') ?>
+    <?php // echo $form->field($model, 'like_count') ?>
 
-    <?php // echo $form->field($model, 'advert_amount') ?>
+    <?php // echo $form->field($model, 'boost_amount') ?>
 
-    <?php // echo $form->field($model, 'payment_status') ?>
+    <?php // echo $form->field($model, 'tweet_id') ?>
 
-    <?php // echo $form->field($model, 'created_by') ?>
+    <?php // echo $form->field($model, 'retweet_post_id') ?>
 
-    <?php // echo $form->field($model, 'updated_by') ?>
+    <?php // echo $form->field($model, 'is_posted_to_twitter') ?>
 
-    <?php // echo $form->field($model, 'approved_by') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'raw') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

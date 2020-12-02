@@ -11,6 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="banks-create">
 
+    
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

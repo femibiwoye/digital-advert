@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Banks */
+/* @var $model common\models\Checkouts */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="banks-form">
+<div class="checkouts-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -16,13 +16,15 @@ use yii\widgets\ActiveForm;
 
     <?//= $form->field($model, 'updated_at')->textInput() ?>
 
-    <?//= $form->field($model, 'user_id')->textInput() ?>
+    <?//= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'bank_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'amount')->textInput() ?>
 
-    <?= $form->field($model, 'account_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'current_balance')->textInput() ?>
 
-    <?= $form->field($model, 'account_number')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'message')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'preferred_choice')->dropDownList([ 'bank' => 'Bank', 'card' => 'Card', ], ['prompt' => '']) ?>
 
     <?//= $form->field($model, 'approval_status')->textInput() ?>
 

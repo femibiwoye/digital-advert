@@ -12,49 +12,41 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'remember_token')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'middle_name')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'updated_at')->textInput() ?>
 
-    <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'is_admin')->textInput() ?>
 
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'wallet_balance')->textInput() ?>
+
+    <?//= $form->field($model, 'verification_status')->textInput() ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'email_verified_at')->textInput() ?>
 
-    <?= $form->field($model, 'type')->dropDownList([ 'influencer' => 'Influencer', 'business' => 'Business', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'phone_number')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'wallet')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'previous_wallet')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'twitter_id')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'image_path')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email_verified')->textInput() ?>
+    <?//= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'profile_verified')->textInput() ?>
+    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?//= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?>
-
-
-
-    <?= $form->field($model, 'token')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'token_expires')->textInput() ?>
-
-    <?= $form->field($model, 'last_accessed')->textInput() ?>
-
-    <?= $form->field($model, 'is_boarded')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?//= $form->field($model, 'token')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

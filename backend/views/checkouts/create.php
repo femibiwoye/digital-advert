@@ -3,15 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Checkout */
+/* @var $model common\models\Checkouts */
 
-$this->title = 'Create Checkout';
+$this->title = 'Create Checkouts';
 $this->params['breadcrumbs'][] = ['label' => 'Checkouts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="checkout-create">
+<div class="checkouts-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
