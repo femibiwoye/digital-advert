@@ -20,6 +20,9 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'enableCookieValidation' => true,
+            'cookieValidationKey' => 'fklkkwvssqeolwa13p8cvsnm3k4hjskk',
+            
         ],
         'user' => [
             'identityClass' => 'common\models\User',

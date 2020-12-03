@@ -21,7 +21,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text">$<span class="count">23569</span></div>
-                                    <div class="stat-heading">Revenue</div>
+                                    <div class="stat-heading">Total Amount</div>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count">3435</span></div>
-                                    <div class="stat-heading">Sales</div>
+                                    <div class="stat-heading">Month Earnings</div>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count">349</span></div>
-                                    <div class="stat-heading">Templates</div>
+                                    <div class="stat-heading">Balance</div>
                                 </div>
                             </div>
                         </div>
