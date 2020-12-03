@@ -25,7 +25,7 @@ use yii\helpers\Url
                     foreach($affilliates as $affilliate) {
                         
                     ?>                         
-                        <li><i class="fa fa-puzzle-piece"></i><a href="<?= Url::to(['']) ?>">
+                        <li><i class="fa <?= $icons[mt_rand(0, 10)] ?>"></i><a href="<?= Url::to(['']) ?>">
                         <?= $affilliate->name ?></a></li>
                     <?php } ?>
                     
@@ -33,10 +33,11 @@ use yii\helpers\Url
                     
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Businesses</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                        <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+                        <li><i class="fa fa-table"></i><a href="tables-basic.html">All Businesses</a></li>
+                        <li><i class="fa fa-table"></i><a href="tables-data.html">Paid Business</a></li>
+                        <li><i class="fa fa-table"></i><a href="tables-data.html">Unpaid Business</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
