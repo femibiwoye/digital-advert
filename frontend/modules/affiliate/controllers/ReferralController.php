@@ -2,15 +2,11 @@
 
 namespace frontend\modules\affiliate\controllers;
 
-use common\components\ConvertImage;
 use common\models\User;
-use common\models\AffiliateLog;
 use common\models\Referrer;
-use common\models\ReferrerSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -156,8 +152,7 @@ class ReferralController extends Controller
         }
         
 
-        Yii::$app->session->setFlash('danger', 'There are business invited with the code. 
-                                                    Sorry, This code cannot be deleted!');
+        Yii::$app->session->setFlash('danger', 'Cannot be deleted! Record(s) has used this code.');
         return $this->redirect(['view', 'id' => Referrer::find()->where(['code' => $id])->one()->id]);    
         
     }

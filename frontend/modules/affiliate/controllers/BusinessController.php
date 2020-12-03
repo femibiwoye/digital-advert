@@ -32,7 +32,7 @@ class BusinessController extends Controller
         ];
     }
 
-   
+
     /**
      * Lists all User models.
      * @return mixed
@@ -41,12 +41,11 @@ class BusinessController extends Controller
     {
         $user = User::findOne(Yii::$app->user->id);
 
-        $dataProvider  = new \yii\data\ActiveDataProvider([
-            'query' => User::find()->where(['is_admin' => 0, 'affliliate_id' => $user->affliliate_id])
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => User::find()->where(['is_admin' => 0, 'affiliate_id' => $user->id])
         ]);
 
         return $this->render('businesses', [
-            //'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -71,17 +70,17 @@ class BusinessController extends Controller
     public function actionPaidBusiness()
     {
 
-        $dataProvider  = new \yii\data\ActiveDataProvider([
+        $dataProvider = new \yii\data\ActiveDataProvider([
 
             'query' => User::find()->innerJoin('posts p')->where([
-                        'users.id'=>'p.user_id', 
-                        'is_approved' => 1, 
-                        'is_promoted' => 1
-                        ])
+                'users.id' => 'p.user_id',
+                'is_approved' => 1,
+                'is_promoted' => 1,
+                'affiliate_id' => Yii::$app->user->id
+            ])
         ]);
 
         return $this->render('paid-businesses', [
-            //'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -94,17 +93,17 @@ class BusinessController extends Controller
     {
 
 
-        $dataProvider  = new \yii\data\ActiveDataProvider([
+        $dataProvider = new \yii\data\ActiveDataProvider([
 
             'query' => User::find()->innerJoin('posts p')->where([
-                    'is_approved' => 0,
-                    'boost_amount' => 0,
-                    'users.id'=>'p.user_id',  
-                    ])
-            ]);
+                'is_approved' => 0,
+                'boost_amount' => 0,
+                'users.id' => 'p.user_id',
+                'affiliate_id' => Yii::$app->user->id
+            ])
+        ]);
 
         return $this->render('unpaid-businesses', [
-            //'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
