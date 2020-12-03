@@ -21,7 +21,7 @@ AffiliateAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="shortcut icon" href="<?= Url::to('@web') ?>img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= Url::to('@web/') ?>img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="<?= Url::to('@web/') ?>files/css/bootstrap.css">

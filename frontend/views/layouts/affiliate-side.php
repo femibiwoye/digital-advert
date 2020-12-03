@@ -1,7 +1,8 @@
 <?php
 
 use common\models\User;
-use yii\helpers\Url
+use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 <aside id="left-panel" class="left-panel">
@@ -9,81 +10,28 @@ use yii\helpers\Url
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    <a href="<?=Url::to(['/affiliate'])?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
-                <!-- <li class="menu-title">UI elements</li> --><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Invites</a>
-                    
-                    <ul class="sub-menu children dropdown-menu">
-                    <?php
-                        $icons = ["fa-id-badge", "fa-id-badge", "fa-puzzle-piece", 'fa-bars', 'fa-id-card-o',
-                        'fa-exclamation-triangle', 'fa-spinner', 'fa-fire', 'fa-book', 'fa-th', 'fa-file-word-o'
-                        ];
-                    $affilliates = User::findAll(['is not', 'affliliate_id', NULL]);
 
-                    foreach($affilliates as $affilliate) {
-                        
-                    ?>                         
-                        <li><i class="fa <?= $icons[mt_rand(0, 10)] ?>"></i><a href="<?= Url::to(['']) ?>">
-                        <?= $affilliate->name ?></a></li>
-                    <?php } ?>
-                    
-                    </ul>
-                    
-                </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Businesses</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="tables-basic.html">All Businesses</a></li>
-                        <li><i class="fa fa-table"></i><a href="tables-data.html">Paid Business</a></li>
-                        <li><i class="fa fa-table"></i><a href="tables-data.html">Unpaid Business</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                        <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">Icons</li><!-- /.menu-title -->
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
-                        <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="tables-basic.html">All Businesses</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="tables-data.html">Paid Business</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="tables-data.html">Unpaid Business</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
+                    <a href="<?=Url::to(['referrers'])?>"> <i class="menu-icon ti-shortcode"></i>Referrers </a>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                        <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                        <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                    </ul>
+                <li>
+                    <a href="<?=Url::to(['notifications'])?>"> <i class="menu-icon ti-bell"></i>Notifications </a>
                 </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                        <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                    </ul>
+                <li>
+                    <a href="<?=Url::to(['profile/password'])?>"> <i class="menu-icon ti-settings"></i>Settings </a>
                 </li>
-                <li class="menu-title">Extras</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                        <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
-                    </ul>
+                <li>
+                    <?=Html::a('<i class="menu-icon ti-power-off"></i>Logout', Url::to(['/site/logout']), ['data-method' => 'POST']) ?>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
