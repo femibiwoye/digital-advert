@@ -12,7 +12,7 @@
                     ['label' => 'Posts', 'icon' => 'list', 'url' => ['/posts']],
                     ['label' => 'Users', 'icon' => 'users', 'url' => ['/user']],
                     ['label' => 'Banks', 'icon' => 'bank', 'url' => ['/banks']],
-                    ['label' => 'Checkout', 'icon' => 'arrow-right', 'url' => ['/checkout']],
+                    ['label' => 'Checkout', 'icon' => 'arrow-right', 'url' => ['/checkouts']],
 
 
                 ],

@@ -4,13 +4,15 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\BanksSearch */
+/* @var $searchModel common\models\BanksSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Banks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="banks-index">
+
+    
 
     <p>
         <?= Html::a('Create Banks', ['create'], ['class' => 'btn btn-success']) ?>
@@ -25,13 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            //'slug',
-            'name',
-            'status',
             'created_at',
-            //'updated_at',
-            //'created_by',
-            //'updated_by',
+            'updated_at',
+            'user_id',
+            'bank_name',
+            //'account_name',
+            //'account_number',
+            //'approval_status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Admin;
 use common\models\AdminLoginForm;
-use common\models\Checkout;
+use common\models\Checkouts;
 use common\models\Posts;
 use common\models\User;
 use Yii;
@@ -69,10 +69,10 @@ class SiteController extends Controller
         $analytics = [
             ['number' => Admin::find()->count(), 'title' => 'Admin Count', 'url' => '#'],
             ['number' => User::find()->count(), 'title' => 'Users Count', 'url' => '#'],
-            ['number' => User::find()->where(['profile_verified' => 1])->count(), 'title' => 'Verified Users', 'url' => '#'],
+            ['number' => User::find()->where(['verification_status' => 1])->count(), 'title' => 'Verified Users', 'url' => '#'],
             ['number' => Posts::find()->count(), 'title' => 'Total Posts', 'url' => '#'],
-            ['number' => Posts::find()->where(['approved_by' => 1])->count(), 'title' => 'Approved Posts', 'url' => '#'],
-            ['number' => Checkout::find()->count(), 'title' => 'Checkout', 'url' => '#'],
+            ['number' => Posts::find()->where(['is_approved' => 1])->count(), 'title' => 'Approved Posts', 'url' => '#'],
+            ['number' => Checkouts::find()->count(), 'title' => 'Checkout', 'url' => '#'],
             ['number' => 0, 'title' => 'Total Money Paid', 'url' => '#'],
             ['number' => 0, 'title' => 'Total Comments', 'url' => '#'],
         ];

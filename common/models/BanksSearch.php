@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Posts;
+use common\models\Banks;
 
 /**
- * PostsSearch represents the model behind the search form of `common\models\Posts`.
+ * BanksSearch represents the model behind the search form of `common\models\Banks`.
  */
-class PostsSearch extends Posts
+class BanksSearch extends Banks
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class PostsSearch extends Posts
     public function rules()
     {
         return [
-            [['id', 'user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
-            [['created_at', 'updated_at', 'content', 'media', 'platforms', 'tweet_id', 'retweet_post_id', 'raw'], 'safe'],
+            [['id', 'user_id', 'approval_status'], 'integer'],
+            [['created_at', 'updated_at', 'bank_name', 'account_name', 'account_number'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class PostsSearch extends Posts
      */
     public function search($params)
     {
-        $query = Posts::find();
+        $query = Banks::find();
 
         // add conditions that should always apply here
 
@@ -62,20 +62,12 @@ class PostsSearch extends Posts
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'user_id' => $this->user_id,
-            'is_approved' => $this->is_approved,
-            'is_promoted' => $this->is_promoted,
-            'comment_count' => $this->comment_count,
-            'like_count' => $this->like_count,
-            'boost_amount' => $this->boost_amount,
-            'is_posted_to_twitter' => $this->is_posted_to_twitter,
+            'approval_status' => $this->approval_status,
         ]);
 
-        $query->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'media', $this->media])
-            ->andFilterWhere(['like', 'platforms', $this->platforms])
-            ->andFilterWhere(['like', 'tweet_id', $this->tweet_id])
-            ->andFilterWhere(['like', 'retweet_post_id', $this->retweet_post_id])
-            ->andFilterWhere(['like', 'raw', $this->raw]);
+        $query->andFilterWhere(['like', 'bank_name', $this->bank_name])
+            ->andFilterWhere(['like', 'account_name', $this->account_name])
+            ->andFilterWhere(['like', 'account_number', $this->account_number]);
 
         return $dataProvider;
     }

@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Banks;
-use common\models\BanksSearch;
+use common\models\Checkouts;
+use common\models\CheckoutsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BanksController implements the CRUD actions for Banks model.
+ * CheckoutsController implements the CRUD actions for Checkouts model.
  */
-class BanksController extends Controller
+class CheckoutsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class BanksController extends Controller
     }
 
     /**
-     * Lists all Banks models.
+     * Lists all Checkouts models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BanksSearch();
+        $searchModel = new CheckoutsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class BanksController extends Controller
     }
 
     /**
-     * Displays a single Banks model.
+     * Displays a single Checkouts model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class BanksController extends Controller
     }
 
     /**
-     * Creates a new Banks model.
+     * Creates a new Checkouts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Banks();
+        $model = new Checkouts();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class BanksController extends Controller
     }
 
     /**
-     * Updates an existing Banks model.
+     * Updates an existing Checkouts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -96,7 +96,7 @@ class BanksController extends Controller
     }
 
     /**
-     * Deletes an existing Banks model.
+     * Deletes an existing Checkouts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -110,15 +110,15 @@ class BanksController extends Controller
     }
 
     /**
-     * Finds the Banks model based on its primary key value.
+     * Finds the Checkouts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Banks the loaded model
+     * @return Checkouts the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Banks::findOne($id)) !== null) {
+        if (($model = Checkouts::findOne($id)) !== null) {
             return $model;
         }
 

@@ -12,6 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-model-index">
 
+
+    <p>
+        <?= Html::a('Create User Model', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -21,31 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'username',
-            'first_name',
-            'middle_name',
-            'last_name',
-            //'phone',
+            //'remember_token',
+            'created_at',
+            'updated_at',
+            'is_admin',
+            //'wallet_balance',
+            //'verification_status',
+            //'name',
             //'email:email',
-            //'image',
-            //'type',
-            //'wallet',
-            //'previous_wallet',
+            //'email_verified_at:email',
+            //'phone_number',
+            //'password',
+            //'twitter_id',
+            //'username',
+            //'image_path',
             //'auth_key',
-            //'password_hash',
-            //'password_reset_token',
-            //'email_verified:email',
-            //'profile_verified',
+            //'phone',
             //'status',
-            //'verification_token',
-            //'oauth_provider',
-            //'oauth_uid',
-            //'token',
-            //'token_expires',
-            //'last_accessed',
-            //'is_boarded',
-            //'created_at',
-            //'updated_at',
+            //'token:ntext',
+            //'affliliate_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

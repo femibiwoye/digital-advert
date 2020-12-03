@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Checkout */
+/* @var $model common\models\Checkouts */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Checkouts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="checkout-view">
+<div class="checkouts-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,14 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'created_at',
+            'updated_at',
             'user_id',
             'amount',
             'current_balance',
+            'message',
             'preferred_choice',
             'approval_status',
-            'approved_by',
-            'created_at',
-            'updated_at',
         ],
     ]) ?>
 
