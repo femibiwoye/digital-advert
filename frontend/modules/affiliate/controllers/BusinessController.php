@@ -107,4 +107,22 @@ class BusinessController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * Renders the amount earned view for the module
+     * @return string
+     */
+    public function actionAmountEarned()
+    {
+
+        $amount = WalletHistory::find()->aliase('wh')->innerJoin('posts p')
+                  ->where([
+                      'wh.user_id' => Yii::$app->user->id, 
+                      'p.id' => 'wh.reference_id', 
+                      'wh.reference_type' => 'ad'
+                    ])
+                  ->one();
+
+        return $amount->new_balance;          
+    }
 }

@@ -100,34 +100,7 @@ class ReferralController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Referrer model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-
-        $model = Referrer::findOne(['code' => $id]);
-
-        if ($model->load(Yii::$app->request->post())) {
-
-            $check_code = Referrer::find()->where(['code' => $model->code])->one();
-
-            if(!$check_code){
-                $model->save();
-            }
-
-            Yii::$app->session->setFlash('success', 'Referral Code Updated!');
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+    
 
     /**
      * Deletes an existing Referrer model.
@@ -138,7 +111,7 @@ class ReferralController extends Controller
      */
     public function actionDelete($id)
     {
-
+        
         $affiliateCode = Referrer::find()->innerJoin('affiliate_log log')->where([
             'log.affiliate_code' => $id
             ]);

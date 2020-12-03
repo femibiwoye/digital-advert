@@ -16,7 +16,7 @@ use yii\helpers\Url;
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/index']); ?>">All Businesses</a></li>
                         <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/paid-business']); ?>">Paid Business</a></li>
-                        <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/paid-business']); ?>">Unpaid Business</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/unpaid-business']); ?>">Unpaid Business</a></li>
                     </ul>
                 </li>
                 <li>

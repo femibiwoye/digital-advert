@@ -5,6 +5,7 @@ namespace frontend\modules\affiliate\controllers;
 use common\models\UserModel;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use common\models\WalletHistory;
 
 /**
  * Default controller for the `affiliate` module
@@ -40,4 +41,6 @@ class DefaultController extends Controller
         ];
         return $this->render('index', ['dashboard' => $dashboard]);
     }
+
+    
 }
