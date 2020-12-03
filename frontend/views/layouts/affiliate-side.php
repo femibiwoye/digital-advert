@@ -14,13 +14,13 @@ use yii\helpers\Url;
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Businesses</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-arrow-right"></i><a href="tables-basic.html">All Businesses</a></li>
-                        <li><i class="fa fa-arrow-right"></i><a href="tables-data.html">Paid Business</a></li>
-                        <li><i class="fa fa-arrow-right"></i><a href="tables-data.html">Unpaid Business</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/index']); ?>">All Businesses</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/paid-business']); ?>">Paid Business</a></li>
+                        <li><i class="fa fa-arrow-right"></i><a href="<?= Url::to(['../affiliate/business/paid-business']); ?>">Unpaid Business</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="<?=Url::to(['referrers'])?>"> <i class="menu-icon ti-shortcode"></i>Referrers </a>
+                    <a href="<?=Url::to(['referral/index'])?>"> <i class="menu-icon ti-shortcode"></i>Referrers </a>
                 </li>
                 <li>
                     <a href="<?=Url::to(['notifications'])?>"> <i class="menu-icon ti-bell"></i>Notifications </a>
