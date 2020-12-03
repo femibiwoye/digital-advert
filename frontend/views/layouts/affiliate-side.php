@@ -1,7 +1,7 @@
 <?php
 
 use common\models\User;
-use yii\helpers\Url
+use yii\helpers\Url;
 ?>
 
 <aside id="left-panel" class="left-panel">
