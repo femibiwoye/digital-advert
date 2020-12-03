@@ -4,12 +4,14 @@ namespace frontend\modules\affiliate\controllers;
 
 use common\components\ConvertImage;
 use common\models\User;
+use common\models\AffiliateLog;
 use common\models\Referrer;
 use common\models\ReferrerSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
+use yii\web\NotFoundHttpException;
 
 /**
  * Default controller for the `affiliate` module
@@ -57,8 +59,16 @@ class ReferralController extends Controller
      */
     public function actionView($id)
     {
+
+        $dataProvider  = new \yii\data\ActiveDataProvider([
+            'query' => User::find()->innerJoin('affiliate_log log')->
+            where(['log.affiliate_code' => $this->findModel($id)->code, 
+            'log.affiliate_id' => Yii::$app->user->id])
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 

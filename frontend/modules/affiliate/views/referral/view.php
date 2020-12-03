@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Referrer */
@@ -38,6 +39,42 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'updated_at',
             ],
         ]) ?>
+
+    <?php
+
+        $this->title = Yii::t('app', 'Businesses Invited using this code');
+        echo "<br><h3>" . $this->title . "</h3>";
+        ?>
+
+
+            <div class="business-index">
+                
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    //'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+
+                        'name',
+                        'phone_number',
+                        'email',
+                        'twitter_id',
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => '{view}',
+                            'buttons' => [
+                                'view' => function($url, $model, $key) {     // render your custom button                            
+                                    return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', 
+                                    ['../affiliate/business/view', 'id'=>$model->id]);
+                                }
+                            ]
+                        ],
+                    ],
+                ]); ?>
+
+</div>
+</div>
+
     </div>
 
 </div>
