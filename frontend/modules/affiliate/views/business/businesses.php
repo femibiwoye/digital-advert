@@ -28,15 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Amount Earned',
                     'value' => function($index, $model, $url){
 
-                        $amount = WalletHistories::find()->alias('wh')->innerJoin('posts p')
+                        $amount = WalletHistories::find()->alias('wh')
+                            ->innerJoin('posts p','p.id = wh.reference_id')
+                            ->innerJoin('users u','u.id = p.user_id')
                         ->where([
-                            'wh.user_id' => Yii::$app->user->id, 
-                            'p.id' => 'wh.reference_id', 
-                            'wh.reference_type' => 'ad'
+                            'wh.user_id' => Yii::$app->user->id,
+                            'wh.reference_type' => 'ad',
+                            'u.affiliate_id'=>Yii::$app->user->id
                             ])
-                        ->one();
+                        ->sum('amount');
 
-                        return $amount ? $amount->new_balance : '0.00'; 
+                        return $amount; // ? $amount->new_balance : '0.00';
                     },
                 ],
                 'phone_number',

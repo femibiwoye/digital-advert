@@ -13,6 +13,7 @@ use Yii;
  * @property string $user_id
  * @property string $type
  * @property float $old_balance
+ * @property float $amount
  * @property float $new_balance
  * @property string $operation
  * @property string $IP
@@ -34,7 +35,7 @@ class WalletHistories extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at'], 'safe'],
-            [['user_id', 'type', 'old_balance', 'new_balance', 'IP'], 'required'],
+            [['user_id', 'type', 'old_balance', 'new_balance', 'IP','amount'], 'required'],
             [['type'], 'string'],
             [['old_balance', 'new_balance'], 'number'],
             [['user_id', 'operation', 'IP'], 'string', 'max' => 191],
