@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\UserModel;
-use common\models\UserModelSearch;
+use common\models\WalletHistories;
+use common\models\WalletHistoriesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for UserModel model.
+ * WalletHistoriesController implements the CRUD actions for WalletHistories model.
  */
-class UserController extends Controller
+class WalletHistoriesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,22 +20,6 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -47,12 +30,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all UserModel models.
+     * Lists all WalletHistories models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserModelSearch();
+        $searchModel = new WalletHistoriesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,8 +45,8 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single UserModel model.
-     * @param integer $id
+     * Displays a single WalletHistories model.
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -75,13 +58,13 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a new UserModel model.
+     * Creates a new WalletHistories model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UserModel();
+        $model = new WalletHistories();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -93,9 +76,9 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing UserModel model.
+     * Updates an existing WalletHistories model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -113,9 +96,9 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing UserModel model.
+     * Deletes an existing WalletHistories model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -127,15 +110,15 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the UserModel model based on its primary key value.
+     * Finds the WalletHistories model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return UserModel the loaded model
+     * @param string $id
+     * @return WalletHistories the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = UserModel::findOne($id)) !== null) {
+        if (($model = WalletHistories::findOne($id)) !== null) {
             return $model;
         }
 

@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\UserModel;
-use common\models\UserModelSearch;
+use common\models\Notification;
+use common\models\NotificationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for UserModel model.
+ * NotificationController implements the CRUD actions for Notification model.
  */
-class UserController extends Controller
+class NotificationController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,22 +20,6 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -47,12 +30,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all UserModel models.
+     * Lists all Notification models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserModelSearch();
+        $searchModel = new NotificationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,7 +45,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single UserModel model.
+     * Displays a single Notification model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -75,13 +58,13 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a new UserModel model.
+     * Creates a new Notification model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UserModel();
+        $model = new Notification();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -93,7 +76,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing UserModel model.
+     * Updates an existing Notification model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -113,7 +96,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing UserModel model.
+     * Deletes an existing Notification model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -127,15 +110,15 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the UserModel model based on its primary key value.
+     * Finds the Notification model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return UserModel the loaded model
+     * @return Notification the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = UserModel::findOne($id)) !== null) {
+        if (($model = Notification::findOne($id)) !== null) {
             return $model;
         }
 

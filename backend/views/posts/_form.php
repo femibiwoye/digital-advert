@@ -53,7 +53,8 @@ echo $form->field($model, 'media')->widget(FileInput::classname(), [
 ?>
     <?= $form->field($model, 'platforms')->textarea(['rows' => 6]) ?>
 
-    <?//= $form->field($model, 'is_approved')->textInput() ?>
+
+    <?= $form->field($model, 'is_approved')->textInput() ?>
 
     <?//= $form->field($model, 'is_promoted')->textInput() ?>
 

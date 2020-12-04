@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\UserModel */
@@ -38,11 +39,41 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image_path')->textInput(['maxlength' => true]) ?>
+    <?php
+
+function image($image)
+{
+    if (empty($image)) {
+        return '@web/img/user-icon.png';
+    } else {
+        return '@web/img/media/' . $image;
+    }
+}
+
+echo $form->field($model, 'image_path')->widget(FileInput::classname(), [
+    'name' => 'media',
+    'pluginOptions' => [
+        'initialPreview' => [
+            Html::img(image($model->image_path), ['class' => 'file-preview-image', 'alt' => $model->id, 'title' => $model->image_path, 'width' => 150]),
+        ],
+        'initialCaption' => $model->image_path,
+        'overwriteInitial' => true,
+    ],
+
+    'options' => [
+        'accept' => 'image/*',
+        'multiple' => false,
+
+    ],
+
+]);
+
+?>
+    <?//= $form->field($model, 'image_path')->textInput(['maxlength' => true]) ?>
 
     <?//= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'type'=>'number']) ?>
 
     <?//= $form->field($model, 'status')->textInput() ?>
 
