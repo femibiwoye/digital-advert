@@ -13,18 +13,19 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="notification-view">
 
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            
-            'title',
-            'description:ntext',
-            [
-                'label' => 'Sent Date',
-                'value' => 'created_at'
-            ],
-        ],
-    ]) ?>
+    <div class="content">
+        <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    
+                    'title',
+                    'description:ntext',
+                    [
+                        'label' => 'Sent Date',
+                        'value' => 'created_at'
+                    ],
+                ],
+            ]) ?>
+    </div>
 
 </div>

@@ -13,22 +13,23 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="notification-index">
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <div class="content">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-            'title',
-            //'description:ntext',
-            //'generality',
-            //'created_at',
+                'title',
+                //'description:ntext',
+                //'generality',
+                //'created_at',
 
-            ['class' => 'yii\grid\ActionColumn',
+                ['class' => 'yii\grid\ActionColumn',
 
-                'template' => '{view}'
+                    'template' => '{view}'
+                ],
             ],
-        ],
-    ]); ?>
-
+        ]); ?>
+    </div>
 
 </div>
