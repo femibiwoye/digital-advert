@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="referrer-code-index">
 
     <p>
-        <?= Html::a('Create Referrer Code', ['create'], ['class' => 'btn btn-success']) ?>
+        <?//= Html::a('Create Referrer Code', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            //'user_id',
+            'user_id',
             'code',
             'created_at',
 

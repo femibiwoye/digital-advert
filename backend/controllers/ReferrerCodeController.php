@@ -76,12 +76,10 @@ class ReferrerCodeController extends Controller
     {
         $model = new ReferrerCode();
 
-        if ($model->load(Yii::$app->request->post())){
-            $model->code= uniqid($model->user_id);
-        
-          $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
         return $this->render('create', [
             'model' => $model,
         ]);
