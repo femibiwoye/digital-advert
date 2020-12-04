@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description:ntext',
             [
-                'label' => '',
+                'label' => 'Sent Date',
                 'value' => 'created_at'
             ],
         ],
