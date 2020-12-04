@@ -17,7 +17,7 @@ class UserModelSearch extends UserModel
     public function rules()
     {
         return [
-            [['id', 'is_admin', 'verification_status', 'status', 'affliliate_id'], 'integer'],
+            [['id', 'is_admin', 'verification_status', 'status', 'affiliate_id'], 'integer'],
             [['remember_token', 'created_at', 'updated_at', 'name', 'email', 'email_verified_at', 'phone_number', 'password', 'twitter_id', 'username', 'image_path', 'auth_key', 'phone', 'token'], 'safe'],
             [['wallet_balance'], 'number'],
         ];
@@ -67,7 +67,7 @@ class UserModelSearch extends UserModel
             'verification_status' => $this->verification_status,
             'email_verified_at' => $this->email_verified_at,
             'status' => $this->status,
-            'affliliate_id' => $this->affliliate_id,
+            'affiliate_id' => $this->affiliate_id,
         ]);
 
         $query->andFilterWhere(['like', 'remember_token', $this->remember_token])
