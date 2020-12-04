@@ -23,6 +23,11 @@ $module = Yii::$app->controller->module->id;
                                 Us</a>
                         </li>
                         <li class="nav-item ">
+                            <a class="nav-link" href="<?= Url::to(['/blog']) ?>" aria-haspopup="true"
+                               aria-expanded="false">Blog
+                                </a>
+                        </li>
+                        <li class="nav-item ">
                             <a class="nav-link" href="<?= Url::to(['/affiliates']) ?>" aria-haspopup="true"
                                aria-expanded="false">Affiliate</a>
                         </li>

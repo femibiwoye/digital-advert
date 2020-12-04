@@ -3,18 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Notification;
-use common\models\NotificationSearch;
-use common\models\User;
+use common\models\ReferrerCode;
+use common\models\ReferrerCodeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * NotificationController implements the CRUD actions for Notification model.
+ * ReferrerCodeController implements the CRUD actions for ReferrerCode model.
  */
-class NotificationController extends Controller
+class ReferrerCodeController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -24,16 +23,9 @@ class NotificationController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
+                        'allow' => (!\Yii::$app->user->isGuest && Yii::$app->user->identity->level == 'super') ? true : false,
                         'roles' => ['@'],
                     ],
                 ],
@@ -48,12 +40,12 @@ class NotificationController extends Controller
     }
 
     /**
-     * Lists all Notification models.
+     * Lists all ReferrerCode models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NotificationSearch();
+        $searchModel = new ReferrerCodeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -63,7 +55,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Displays a single Notification model.
+     * Displays a single ReferrerCode model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -76,41 +68,27 @@ class NotificationController extends Controller
     }
 
     /**
-     * Creates a new Notification model.
+     * Creates a new ReferrerCode model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Notification();
+        $model = new ReferrerCode();
 
         if ($model->load(Yii::$app->request->post())){
-
-            if($model->generality=='user'){
-                $user = User::find()->select(['id','name'])->all();
-
-                $model->admin_id = Yii::$app->user->id;
-
-            } else if($model->generality == 'general'){
-                $model->admin_id = Yii::$app->user->id;
-           
-            } 
-
-            $model->admin_id = Yii::$app->user->id;
-            $model->save();
+            $model->code= uniqid($model->user_id);
+        
+          $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
-   
-
-
     /**
-     * Updates an existing Notification model.
+     * Updates an existing ReferrerCode model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -130,7 +108,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Deletes an existing Notification model.
+     * Deletes an existing ReferrerCode model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -144,15 +122,15 @@ class NotificationController extends Controller
     }
 
     /**
-     * Finds the Notification model based on its primary key value.
+     * Finds the ReferrerCode model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Notification the loaded model
+     * @return ReferrerCode the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Notification::findOne($id)) !== null) {
+        if (($model = ReferrerCode::findOne($id)) !== null) {
             return $model;
         }
 

@@ -1,7 +1,9 @@
 <?php
 
+use Codeception\Command\Shared\Style;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Notification */
@@ -11,20 +13,21 @@ use yii\widgets\ActiveForm;
 <div class="notification-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?//= $form->field($model, 'user_id')->textInput() ?>
-
+    
+    
+    
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'generality')->dropDownList([ 'user' => 'User', 'general' => 'General', 'affiliate' => 'Affiliate', ], ['prompt' => '']) ?>
+  
+    <?= $form->field($model, 'generality')->dropDownList([ 'general' => 'General', 'user' => 'User', 'affiliate' => 'Affiliate', ], ['prompt' => '', 'id' => 'generality',
+  
+    ])?>
 
-    <?//= $form->field($model, 'admin_id')->textInput() ?>
+    <?= $form->field($model, 'user_id')->textInput(['style'=>'display:none', 'id'=>'user', 'placeholder'=>'Enter User id'])->label(false)?>
 
-    <?//= $form->field($model, 'created_at')->textInput() ?>
 
-    <?//= $form->field($model, 'updated_at')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -33,3 +36,16 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+     $(function () {
+        $("#generality").change(function () {
+            if ($(this).val() == "user") {
+                $("#user").show();
+            } else {
+                $("#user").hide();
+            }
+        });
+    });
+</script>

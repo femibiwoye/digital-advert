@@ -81,6 +81,11 @@ class BlogPost extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(),['id'=>'category_id']);
+    }
+
     public function getCreator()
     {
         return $this->hasOne(Admin::className(),['id'=>'created_by']);

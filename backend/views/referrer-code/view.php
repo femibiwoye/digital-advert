@@ -4,15 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\UserModel */
+/* @var $model common\models\ReferrerCode */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'User Models', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Referrer Codes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="user-model-view">
+<div class="referrer-code-view">
 
+    
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,25 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'remember_token',
+            'user_id',
+            'code',
             'created_at',
-            'updated_at',
-            'is_admin',
-            'wallet_balance',
-            'verification_status',
-            'name',
-            'email:email',
-            'email_verified_at:email',
-            'phone_number',
-            'password',
-            'twitter_id',
-            'username',
-            'image_path',
-            'auth_key',
-            'phone',
-            'status',
-            'token:ntext',
-            'affliliate_id',
         ],
     ]) ?>
 

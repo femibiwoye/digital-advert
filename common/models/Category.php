@@ -79,6 +79,11 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getCountPost()
+    {
+        return $this->hasMany(BlogPost::className(),['category_id'=>'id'])->count();
+    }
+
     public function getCreator()
     {
         return $this->hasOne(Admin::className(),['id'=>'created_by']);

@@ -33,7 +33,7 @@ class Notification extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'admin_id'], 'integer'],
-            [['title', 'description', 'generality'], 'required'],
+            [['title', 'description'], 'required'],
             [['description', 'generality'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 50],
@@ -55,14 +55,5 @@ class Notification extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-    public function beforeSave($insert)
-    {
-        if ($this->isNewRecord) {
-            $this->created_at = date('y-m-d H-i-s');
-        } else {
-            $this->updated_at = date('y-m-d H-i-s');
-        }
-        return parent::beforeSave($insert);
     }
 }

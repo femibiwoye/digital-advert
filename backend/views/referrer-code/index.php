@@ -4,17 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\WalletHistoriesSearch */
+/* @var $searchModel common\models\ReferrerCodeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Wallet Histories';
+$this->title = 'Referrer Codes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="wallet-histories-index">
-
+<div class="referrer-code-index">
 
     <p>
-        <?= Html::a('Create Wallet Histories', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Referrer Code', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,14 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'operation',
-            //'updated_at',
-            'user_id',
-            'type',
-            'old_balance',
-            'new_balance',
+            //'user_id',
+            'code',
             'created_at',
-            //'IP',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

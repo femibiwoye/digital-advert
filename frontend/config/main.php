@@ -53,7 +53,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'about' => 'site/about',
-                //'affiliate'=>'site/affiliate'
+                'blog/<slug:[-a-zA-Z 0-9]+>' => 'blog/default/details',
             ],
         ],
 
