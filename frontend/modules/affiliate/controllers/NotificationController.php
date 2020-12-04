@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\modules\affiliate\controllers;
 
 use Yii;
 use common\models\Notification;
