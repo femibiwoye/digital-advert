@@ -106,26 +106,7 @@ class NotificationController extends Controller
         ]);
     }
 
-    // public function actionGenerality($id)
-    // {
-    //     $count = Cities::find()
-    //         ->where(['state' => $id,])
-    //         ->count();
-
-    //     $cities = Cities::find()
-    //         ->where(['state' => $id])
-    //         ->orderBy('id DESC')
-    //         ->all();
-
-    //     if ($count > 0) {
-    //         foreach ($cities as $city) {
-    //             echo "<option value='" . $city->id . "'>" . $city->name . "</option>";
-    //         }
-    //     } else {
-    //         echo "<option>-</option>";
-    //     }
-
-    // }
+   
 
 
     /**
