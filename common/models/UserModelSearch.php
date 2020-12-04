@@ -17,9 +17,9 @@ class UserModelSearch extends UserModel
     public function rules()
     {
         return [
-            [['id', 'email_verified', 'profile_verified', 'status', 'is_boarded'], 'integer'],
-            [['username', 'first_name', 'middle_name', 'last_name', 'phone', 'email', 'image', 'type', 'auth_key', 'password_hash', 'password_reset_token', 'verification_token', 'oauth_provider', 'oauth_uid', 'token', 'token_expires', 'last_accessed', 'created_at', 'updated_at'], 'safe'],
-            [['wallet', 'previous_wallet'], 'number'],
+            [['id', 'is_admin', 'verification_status', 'status', 'affiliate_id'], 'integer'],
+            [['remember_token', 'created_at', 'updated_at', 'name', 'email', 'email_verified_at', 'phone_number', 'password', 'twitter_id', 'username', 'image_path', 'auth_key', 'phone', 'token'], 'safe'],
+            [['wallet_balance'], 'number'],
         ];
     }
 
@@ -60,32 +60,26 @@ class UserModelSearch extends UserModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'wallet' => $this->wallet,
-            'previous_wallet' => $this->previous_wallet,
-            'email_verified' => $this->email_verified,
-            'profile_verified' => $this->profile_verified,
-            'status' => $this->status,
-            'token_expires' => $this->token_expires,
-            'last_accessed' => $this->last_accessed,
-            'is_boarded' => $this->is_boarded,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'is_admin' => $this->is_admin,
+            'wallet_balance' => $this->wallet_balance,
+            'verification_status' => $this->verification_status,
+            'email_verified_at' => $this->email_verified_at,
+            'status' => $this->status,
+            'affiliate_id' => $this->affiliate_id,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'middle_name', $this->middle_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'phone', $this->phone])
+        $query->andFilterWhere(['like', 'remember_token', $this->remember_token])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'phone_number', $this->phone_number])
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'twitter_id', $this->twitter_id])
+            ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'image_path', $this->image_path])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'verification_token', $this->verification_token])
-            ->andFilterWhere(['like', 'oauth_provider', $this->oauth_provider])
-            ->andFilterWhere(['like', 'oauth_uid', $this->oauth_uid])
+            ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'token', $this->token]);
 
         return $dataProvider;

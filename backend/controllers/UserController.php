@@ -8,6 +8,8 @@ use common\models\UserModelSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for UserModel model.
@@ -20,6 +22,22 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -85,15 +103,28 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $img_name = $model->image_path;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $imageFile = UploadedFile::getInstance($model, 'image_path');
+            if (isset($imageFile->size)) {
+                $imageName = $model->username . '.' . $imageFile->extension;
+                $imageFile->saveAs('img/user/' . $imageName);
+
+                // Save the path in the db column
+                $model->image_path = $imageName;
+            } else {
+                $model->image_path = $img_name;
+            }
+            //$model->updated_at = time();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
     }
+
 
     /**
      * Deletes an existing UserModel model.

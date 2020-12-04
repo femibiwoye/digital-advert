@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posts-create">
 
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

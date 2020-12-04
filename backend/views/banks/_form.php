@@ -12,9 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList([1 => 'Active', 0 => 'Inactive']) ?>
+    <?//= $form->field($model, 'updated_at')->textInput() ?>
+
+    <?//= $form->field($model, 'user_id')->textInput() ?>
+
+    <?= $form->field($model, 'bank_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'account_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'account_number')->textInput(['maxlength' => true]) ?>
+
+    <?//= $form->field($model, 'approval_status')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

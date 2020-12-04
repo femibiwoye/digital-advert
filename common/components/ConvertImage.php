@@ -9,6 +9,7 @@
 namespace common\components;
 
 
+use common\models\User;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
@@ -18,7 +19,7 @@ class ConvertImage extends Widget
 
     public $model;
 
-    public function ImageUpload($folder = null)
+    public function ImageUpload($folder = null, $isAdmin = false)
     {
         $model = $this->model;
 
@@ -27,7 +28,7 @@ class ConvertImage extends Widget
         $cfile = new \CURLFile(realpath($model->tempName), $model->type, $model->name);
 
 
-        $response = $this->FileUpload($folder, $cfile);
+        $response = $this->FileUpload($folder, $cfile, $isAdmin);
         return ArrayHelper::toArray($response)['data'];
 //        } catch (\Exception $e) {
 //            return $e;
@@ -50,11 +51,16 @@ class ConvertImage extends Widget
 
     }
 
-    private function FileUpload($folder, $cfile)
+    private function FileUpload($folder, $cfile, $isAdmin = false)
     {
         $curl = curl_init(Yii::$app->params['S3FileUpload'] . $folder);
+        if ($isAdmin) {
+            $user = User::findOne(['<>', 'status', 0]);
+            $token = 'lihdfiusdhgosidhjfiudshfoiehfo8wr92384rheiuwqfhqweoifh2309r8u23098ujf238h9fjijoew';//!empty($user) ? $user->token : null;
+        } else
+            $token = Yii::$app->user->identity->token;
         $header = [
-            'Authorization: Bearer ' . Yii::$app->user->identity->token,
+            'Authorization: Bearer ' . $token,
             "Content-Type: multipart/form-data"
         ];
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

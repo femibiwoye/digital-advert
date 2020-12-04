@@ -1,84 +1,76 @@
 <?php
 
-use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\UserModel;
-use yii\helpers\ArrayHelper;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Posts */
 /* @var $form yii\widgets\ActiveForm */
-
-$users = ArrayHelper::map(UserModel::find()->all(), 'id', function ($model) {
-    return $model->firstname . ' ' . $model->middlename . ' ' . $model->lastname;
-});
 ?>
 
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'owner_id')->dropDownList($users) ?>
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-        </div>
-    </div>
+    <?//= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 3]) ?>
+    <?//= $form->field($model, 'updated_at')->textInput() ?>
 
-    <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'platform')->dropDownList(['twitter' => 'Twitter', 'instagram' => 'Instagram',], ['prompt' => '']) ?>
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'approved')->dropDownList([1 => 'Active', 0 => 'Disapprove',], ['prompt' => '']) ?>
-        </div>
-    </div>
+    <?//= $form->field($model, 'user_id')->textInput() ?>
 
+    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <?php
-    echo $form->field($model, 'file')->widget(FileInput::classname(), [
-        'name' => 'image',
-        'pluginOptions' => [
-            'initialPreview' => [
-                !empty($model->file) ? Html::img($model->file, ['class' => 'file-preview-image', 'alt' => $model->title, 'title' => $model->title, 'width' => 150]) : null,
-            ],
-            'initialCaption' => $model->title,
-            'overwriteInitial' => true,
+
+function image($image)
+{
+    if (empty($image)) {
+        return '@web/img/user-icon.png';
+    } else {
+        return '@web/img/media/' . $image;
+    }
+}
+
+echo $form->field($model, 'media')->widget(FileInput::classname(), [
+    'name' => 'media',
+    'pluginOptions' => [
+        'initialPreview' => [
+            Html::img(image($model->media), ['class' => 'file-preview-image', 'alt' => $model->user_id, 'title' => $model->media, 'width' => 150]),
         ],
+        'initialCaption' => $model->media,
+        'overwriteInitial' => true,
+    ],
 
-        'options' => [
-            'accept' => 'image/*',
-            'multiple' => false,
+    'options' => [
+        'accept' => 'image/*',
+        'multiple' => false,
 
-        ],
+    ],
 
-    ]);
-    ?>
+]);
 
-    <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'paid_post')->textInput([1 => 'Paid', 0 => 'Free']) ?>
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'approved')->dropDownList([1 => 'Active', 0 => 'Disapprove',], ['prompt' => '']) ?>
-        </div>
-    </div>
+?>
+    <?= $form->field($model, 'platforms')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'multiple_file')->hiddenInput(['value' => 0])->label(false) ?>
 
-    <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'advert_amount')->textInput(['type' => 'number']) ?>
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'payment_status')->dropDownList([1 => 'Paid', 0 => 'Unpaid'], ['prompt' => '']) ?>
-        </div>
-    </div>
+    <?= $form->field($model, 'is_approved')->textInput() ?>
+
+    <?//= $form->field($model, 'is_promoted')->textInput() ?>
+
+    <?//= $form->field($model, 'comment_count')->textInput() ?>
+
+    <?//= $form->field($model, 'like_count')->textInput() ?>
+
+    <?= $form->field($model, 'boost_amount')->textInput() ?>
+
+    <?= $form->field($model, 'tweet_id')->textInput(['maxlength' => true]) ?>
+
+    <?//= $form->field($model, 'retweet_post_id')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'is_posted_to_twitter')->textInput() ?>
+
+    <?= $form->field($model, 'raw')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

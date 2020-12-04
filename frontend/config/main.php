@@ -16,10 +16,16 @@ return [
         'affiliate' => [
             'class' => 'frontend\modules\affiliate\Module',
         ],
+        'blog' => [
+            'class' => 'frontend\modules\blog\Module',
+        ],
     ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'enableCookieValidation' => true,
+            'cookieValidationKey' => 'fklkkwvssqeolwa13p8cvsnm3k4hjskk',
+            
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -47,7 +53,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'about' => 'site/about',
-                //'affiliate'=>'site/affiliate'
+                'blog/<slug:[-a-zA-Z 0-9]+>' => 'blog/default/details',
             ],
         ],
 

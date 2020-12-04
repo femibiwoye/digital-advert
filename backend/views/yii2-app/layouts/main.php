@@ -32,9 +32,33 @@ if (Yii::$app->controller->action->id === 'login') {
     <head>
         <meta charset="<?= Yii::$app->charset ?>"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+        <style>
+            .main-header .logo .logo-lg img{
+                max-width: 200px;
+                max-height: 60px;
+            }
+            .main-header .logo img {
+                padding: 1px;
+
+            }
+            .skin-blue .main-header .navbar {
+                background-color: #0a6bf7;
+            }
+            .skin-blue .main-header .logo {
+                background-color: #0b53bd;
+
+            }
+            .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+                background-color: #052b63;
+            }
+            .skin-blue .sidebar-menu>li.header {
+                background: #052048;
+            }
+        </style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
     <?php $this->beginBody() ?>

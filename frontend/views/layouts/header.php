@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Url;
-
+$module = Yii::$app->controller->module->id;
 ?>
 
 
 <!-- Header Area -->
-<header class="site-header bg--conflower-blue sticky-header">
+<header class="site-header bg--conflower-blue <?=$module != 'blog'?'sticky-header':null?> ">
     <div class="container-fluid pr-lg--30 pl-lg--30">
         <nav class="navbar site-navbar offcanvas-active navbar-expand-lg navbar-light">
             <!-- Brand Logo-->
@@ -21,6 +21,11 @@ use yii\helpers\Url;
                             <a class="nav-link" href="<?= Url::to(['/site/about']) ?>" aria-haspopup="true"
                                aria-expanded="false">About
                                 Us</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="<?= Url::to(['/blog']) ?>" aria-haspopup="true"
+                               aria-expanded="false">Blog
+                                </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<?= Url::to(['/affiliates']) ?>" aria-haspopup="true"

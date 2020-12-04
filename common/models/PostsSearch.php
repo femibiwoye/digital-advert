@@ -17,9 +17,8 @@ class PostsSearch extends Posts
     public function rules()
     {
         return [
-            [['id', 'owner_id', 'approved', 'multiple_file', 'paid_post', 'created_by', 'updated_by', 'approved_by'], 'integer'],
-            [['title', 'slug', 'content', 'platform', 'file', 'post_token', 'payment_status', 'created_at', 'updated_at'], 'safe'],
-            [['advert_amount'], 'number'],
+            [['id', 'user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
+            [['created_at', 'updated_at', 'content', 'media', 'platforms', 'tweet_id', 'retweet_post_id', 'raw'], 'safe'],
         ];
     }
 
@@ -60,25 +59,23 @@ class PostsSearch extends Posts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'owner_id' => $this->owner_id,
-            'approved' => $this->approved,
-            'multiple_file' => $this->multiple_file,
-            'paid_post' => $this->paid_post,
-            'advert_amount' => $this->advert_amount,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
-            'approved_by' => $this->approved_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'user_id' => $this->user_id,
+            'is_approved' => $this->is_approved,
+            'is_promoted' => $this->is_promoted,
+            'comment_count' => $this->comment_count,
+            'like_count' => $this->like_count,
+            'boost_amount' => $this->boost_amount,
+            'is_posted_to_twitter' => $this->is_posted_to_twitter,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'platform', $this->platform])
-            ->andFilterWhere(['like', 'file', $this->file])
-            ->andFilterWhere(['like', 'post_token', $this->post_token])
-            ->andFilterWhere(['like', 'payment_status', $this->payment_status]);
+        $query->andFilterWhere(['like', 'content', $this->content])
+            ->andFilterWhere(['like', 'media', $this->media])
+            ->andFilterWhere(['like', 'platforms', $this->platforms])
+            ->andFilterWhere(['like', 'tweet_id', $this->tweet_id])
+            ->andFilterWhere(['like', 'retweet_post_id', $this->retweet_post_id])
+            ->andFilterWhere(['like', 'raw', $this->raw]);
 
         return $dataProvider;
     }

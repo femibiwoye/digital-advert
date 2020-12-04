@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="shortcut icon" href="<?= Url::to('@web') ?>img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= Url::to('@web/') ?>img/favicon.png" type="image/x-icon">
     <?php $this->head() ?>
 </head>
 <body>
@@ -37,6 +37,8 @@ elseif ($action == 'terms' || $action == 'privacy')
     $extraClass = 'terms-page landing-1';
 elseif ($controller == 'affiliates' && $action == 'index')
     $extraClass = 'landing-6';
+elseif($module == 'blog')
+    $extraClass = 'blog-page blog-details';
 else
     $extraClass = 'terms-page landing-1';
 ?>
@@ -48,9 +50,12 @@ else
 <div class="site-wrapper overflow-hidden">
     <div class="<?= $extraClass ?>">
         <?= $this->render('header') ?>
-        <?=\frontend\components\Alert::widget()?>
+        <?= \frontend\components\Alert::widget() ?>
         <?= $content ?>
-        <?= $this->render('footer') ?>
+        <?php
+        if ($action != 'error')
+            echo $this->render('footer');
+        ?>
     </div>
 </div>
 
