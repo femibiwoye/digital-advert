@@ -72,8 +72,7 @@ class BusinessController extends Controller
 
         $dataProvider = new \yii\data\ActiveDataProvider([
 
-            'query' => User::find()->innerJoin('posts p')->where([
-                'users.id' => 'p.user_id',
+            'query' => User::find()->innerJoin('posts p','users.id = p.user_id')->where([
                 'is_approved' => 1,
                 'is_promoted' => 1,
                 'affiliate_id' => Yii::$app->user->id
@@ -95,10 +94,8 @@ class BusinessController extends Controller
 
         $dataProvider = new \yii\data\ActiveDataProvider([
 
-            'query' => User::find()->innerJoin('posts p')->where([
+            'query' => User::find()->innerJoin('posts p','users.id = p.user_id')->where([
                 'is_approved' => 0,
-                'boost_amount' => 0,
-                'users.id' => 'p.user_id',
                 'affiliate_id' => Yii::$app->user->id
             ])
         ]);
