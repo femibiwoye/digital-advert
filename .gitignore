@@ -47,5 +47,4 @@ backend/runtime
 theme
 backend/web/images
 frontend/web/images
-frontend/web/ckeditor
 var.php

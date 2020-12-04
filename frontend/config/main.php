@@ -16,6 +16,9 @@ return [
         'affiliate' => [
             'class' => 'frontend\modules\affiliate\Module',
         ],
+        'blog' => [
+            'class' => 'frontend\modules\blog\Module',
+        ],
     ],
     'components' => [
         'request' => [

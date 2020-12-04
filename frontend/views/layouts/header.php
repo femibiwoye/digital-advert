@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Url;
-
+$module = Yii::$app->controller->module->id;
 ?>
 
 
 <!-- Header Area -->
-<header class="site-header bg--conflower-blue sticky-header">
+<header class="site-header bg--conflower-blue <?=$module != 'blog'?'sticky-header':null?> ">
     <div class="container-fluid pr-lg--30 pl-lg--30">
         <nav class="navbar site-navbar offcanvas-active navbar-expand-lg navbar-light">
             <!-- Brand Logo-->
