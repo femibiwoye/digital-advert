@@ -51,4 +51,14 @@ class WithdrawalRequests extends \yii\db\ActiveRecord
             'method' => 'Method',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('y-m-d H-i-s');
+        } else {
+            $this->updated_at = date('y-m-d H-i-s');
+        }
+        return parent::beforeSave($insert);
+    }
 }
