@@ -13,13 +13,20 @@
                     ['label' => 'Users', 'icon' => 'users', 'url' => ['/user']],
                     ['label' => 'Banks', 'icon' => 'bank', 'url' => ['/banks']],
                     ['label' => 'Checkout', 'icon' => 'arrow-right', 'url' => ['/checkouts']],
-                    ['label' => 'withdrawal Request', 'icon' => 'cc-mastercard', 'url' => ['/withdrawal-requests']],
-                    ['label' => 'Wallet Histories', 'icon' => 'history', 'url' => ['/wallet-histories']],
+
+                    ['label' => 'withdrawal', 'icon' => 'bank', 'url' => ['/withdrawal-requests']],
+                    ['label' => 'Wallet-Histories', 'icon' => 'history', 'url' => ['/wallet-histories']],
                     ['label' => 'Notification', 'icon' => 'bell', 'url' => ['/notification']],
                     ['label' => 'Referrer-code', 'icon' => 'connectdevelop', 'url' => ['/referrer-code']],
-
-
-
+                    [
+                        'label' => 'Blog',
+                        'icon' => 'list',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Posts', 'icon' => 'arrow-right', 'url' => ['/blog-post'],],
+                            ['label' => 'Categories', 'icon' => 'arrow-right', 'url' => ['/category'],],
+                        ],
+                    ],
                 ],
             ]
         ) ?>

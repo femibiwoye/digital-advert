@@ -4,7 +4,7 @@
 
 use yii\web\View;
 
-$this->title = 'BE MOTIVATED TO ENGAGE';
+$this->title = 'Be motivated to engage';
 ?>
 
 <div class="hero-area ">

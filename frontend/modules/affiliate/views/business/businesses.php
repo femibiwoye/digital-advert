@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'name',
-                'image_path',
+                //'image_path',
                 [
                     'label' => 'Amount Earned',
                     'value' => function($index, $model, $url){
