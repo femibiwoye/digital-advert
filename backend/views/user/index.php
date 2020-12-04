@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'is_admin',
             //'wallet_balance',
             //'verification_status',
-            //'name',
+            'name',
             //'email:email',
             //'email_verified_at:email',
             //'phone_number',

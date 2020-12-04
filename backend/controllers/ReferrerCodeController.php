@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\WithdrawalRequests;
-use common\models\WithdrawalRequestsSearch;
+use common\models\ReferrerCode;
+use common\models\ReferrerCodeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * WithdrawalRequestsController implements the CRUD actions for WithdrawalRequests model.
+ * ReferrerCodeController implements the CRUD actions for ReferrerCode model.
  */
-class WithdrawalRequestsController extends Controller
+class ReferrerCodeController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -40,12 +40,12 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Lists all WithdrawalRequests models.
+     * Lists all ReferrerCode models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new WithdrawalRequestsSearch();
+        $searchModel = new ReferrerCodeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -55,8 +55,8 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Displays a single WithdrawalRequests model.
-     * @param string $id
+     * Displays a single ReferrerCode model.
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -68,27 +68,29 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Creates a new WithdrawalRequests model.
+     * Creates a new ReferrerCode model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new WithdrawalRequests();
+        $model = new ReferrerCode();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())){
+            $model->code= uniqid($model->user_id);
+        
+          $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing WithdrawalRequests model.
+     * Updates an existing ReferrerCode model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -106,9 +108,9 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Deletes an existing WithdrawalRequests model.
+     * Deletes an existing ReferrerCode model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -120,15 +122,15 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Finds the WithdrawalRequests model based on its primary key value.
+     * Finds the ReferrerCode model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return WithdrawalRequests the loaded model
+     * @param integer $id
+     * @return ReferrerCode the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = WithdrawalRequests::findOne($id)) !== null) {
+        if (($model = ReferrerCode::findOne($id)) !== null) {
             return $model;
         }
 
