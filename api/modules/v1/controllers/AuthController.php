@@ -4,6 +4,8 @@ namespace api\modules\v1\controllers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use api\components\Utility;
+use api\modules\v1\models\TwitterAccounts;
+use common\models\UserModel;
 use Yii;
 use api\modules\v1\models\{Login, User, ApiResponse, PasswordResetRequestForm, ResetPasswordForm};
 use yii\helpers\ArrayHelper;
@@ -156,17 +158,20 @@ class AuthController extends Controller
     {
 
         $connection = Utility::TwitterConnection();
-        $response = $connection->oauth("oauth/request_token", ["oauth_callback" => Yii::$app->params['apiDomain'] . "/twitter_callback?h=23"]);
+        $response = $connection->oauth("oauth/request_token", ["oauth_callback" => Yii::$app->params['apiDomain'] . "/twitter_callback"]);
 
         $oauth_token = $response["oauth_token"];
         //$oauth_token_secret = $response["oauth_token_secret"];
 
         $url = $connection->url("oauth/authorize", ["oauth_token" => $oauth_token]);
-        return $url;
+        return $this->redirect($url);
     }
 
-    public function actionAuthenticateTwitterUser($oauth_token,$oauth_verifier)
+
+    public function actionAuthenticateTwitterUser($oauth_token, $oauth_verifier)
     {
+
+        // try {
         $connection = Utility::TwitterConnection();
 //        $oauth_token = $request->input("oauth_token");
 //        $oauth_verifier = $request->input("oauth_verifier");
@@ -177,23 +182,50 @@ class AuthController extends Controller
         $connection = new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], $oauth_token, $oauth_token_secret);
 
         $userDetails = $connection->get("account/verify_credentials");
-        $profilePic = $userDetails->profile_image_url_https;
-        $name = $userDetails->name;
-        $handle = $userDetails->screen_name;
 
-        $ID = $userDetails->id;
-        return $userDetails;
 
-//        //$user = User::where("twitter_id", $ID)->first(); if($user == null)
-//        User::truncate();
-//        $user = User::create(["id"=>1, "twitter_id" => $ID, "name"=>$name, "username"=>$handle, "image_path"=>$profilePic]);
-//
-//        TwitterAccount::create(["user_id" => $user->id, "oauth_token" => $oauth_token, "oauth_token_secret" => $oauth_token_secret]);
-//
-//        //create user access token
-//        $token =  $user->createToken( env("APP_NAME") )->accessToken;
-//
-//        return redirect(env("CLOSE_WINDOW_URL")."?data=$token,$profilePic,$handle,$name");
+        if ($model = User::findOne(['twitter_id' => $userDetails->id])) {
+            $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);
+            return $this->redirect(Yii::$app->params['apiDomainBase'] . '/closeWindow.html?token=' . $model->updateAccessToken());
+        } else {
+            $model = new User();
+            $model->twitter_id = $userDetails->id;
+            $model->image_path = $userDetails->profile_image_url_https;
+            $model->name = $userDetails->screen_name;
+            $model->generateAuthKey();
+            $location = explode(',', $userDetails->location, 2);
+            if ($location[0])
+                $model->state = $location[0];
+            if ($location[1])
+                $model->country = $location[1];
+            $model->about = $userDetails->description;
+            if ($model->save()) {
+                $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);
+                return $this->redirect(Yii::$app->params['apiDomain'] . '/closeWindow.html?token=' . $model->token);
+            }
+        }
+//        } catch (\Exception $e) {
+//            return (new ApiResponse)->error($e, ApiResponse::SUCCESSFUL, 'Error occur in server');
+//        }
+        return (new ApiResponse)->error(null, ApiResponse::SUCCESSFUL, 'Not successful');
+    }
+
+    private function saveLastTwitterToken($model, $oauth_token, $oauth_verifier)
+    {
+        $twitterModel = new TwitterAccounts();
+        $twitterModel->twitter_id = $model->twitter_id;
+        $twitterModel->user_id = $model->id;
+        $twitterModel->oauth_token = $oauth_token;
+        $twitterModel->oauth_token_secret = $oauth_verifier;
+        return $twitterModel->save();
+    }
+
+    public function actionUser($token)
+    {
+        if (!$token)
+            return (new ApiResponse)->error(null, ApiResponse::UNAUTHORIZED, 'Token is required');
+
+        return User::find()->where(['token' => $token])->exists() ? true : false;
     }
 }
 

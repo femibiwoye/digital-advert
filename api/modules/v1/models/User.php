@@ -20,6 +20,30 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
         return '{{%users}}';
     }
 
+    public function fields()
+    {
+        $user = [
+            'id',
+            'wallet_balance',
+            'name',
+            'email',
+            'email_verified_at',
+            'phone',
+            'image_path',
+            'status',
+            'token',
+            'affiliate_id',
+            'state',
+            'country',
+        ];
+
+        if (Yii::$app->controller->id != 'auth') {
+            if (($key = array_search('token', $user)) !== false) unset($user[$key]);
+        }
+
+        return $user;
+    }
+
     /**
      * @inheritdoc
      */
@@ -177,7 +201,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
 
     public static function find()
     {
-        return parent::find()->andWhere(['<>', 'user.status', self::STATUS_DELETED]);
+        return parent::find()->andWhere(['<>', 'users.status', self::STATUS_DELETED]);
     }
 
     public function getRateLimit($request, $action)

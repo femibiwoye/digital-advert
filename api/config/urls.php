@@ -10,6 +10,8 @@ return [
 
     'GET v1/token/<video_token:[a-zA-Z0-9/]+>' => 'v1/token',
 
-    'GET v1/twitter-authorization' => 'v1/auth/twitter-authorization'
+    'GET v1/twitter-authorization' => 'v1/auth/twitter-authorization',
+    'GET v1/twitter_callback' => 'v1/auth/authenticate-twitter-user',
+    'GET v1/user' => 'v1/auth/user',
 
 ];
