@@ -41,6 +41,10 @@ class Checkouts extends \yii\db\ActiveRecord
             [['user_id', 'message'], 'string', 'max' => 191],
         ];
     }
+    
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'user_id']);
+    }
 
     /**
      * {@inheritdoc}
