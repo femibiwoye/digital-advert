@@ -32,7 +32,8 @@
         "codeception/verify": "~0.5.0 || ~1.1.0",
         "symfony/browser-kit": ">=2.7 <=4.2.4",
         "kartik-v/yii2-widget-growl": "dev-master",
-        "aws/aws-sdk-php": "^3.158"
+        "aws/aws-sdk-php": "^3.158",
+        "abraham/twitteroauth": "^1.1"
     },
     "config": {
         "process-timeout": 1800,
