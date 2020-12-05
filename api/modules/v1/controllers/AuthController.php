@@ -36,7 +36,7 @@ class AuthController extends Controller
         //$behaviors['authenticator'] = $auth;
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            'only' => ['logout'],
+            'only' => ['logout', 'user'],
         ];
 
         return $behaviors;
@@ -207,7 +207,7 @@ class AuthController extends Controller
 //        } catch (\Exception $e) {
 //            return (new ApiResponse)->error($e, ApiResponse::SUCCESSFUL, 'Error occur in server');
 //        }
-        return (new ApiResponse)->error(null, ApiResponse::SUCCESSFUL, 'Not successful');
+        return (new ApiResponse)->error(null, ApiResponse::REQ, 'Not successful');
     }
 
     private function saveLastTwitterToken($model, $oauth_token, $oauth_verifier)
@@ -220,12 +220,17 @@ class AuthController extends Controller
         return $twitterModel->save();
     }
 
-    public function actionUser($token)
+    public function actionUser()
+    {
+        return (new ApiResponse)->success(User::findOne(['id' => Yii::$app->user->id]));
+    }
+
+    public function actionActiveStatus($token)
     {
         if (!$token)
             return (new ApiResponse)->error(null, ApiResponse::UNAUTHORIZED, 'Token is required');
 
-        return User::find()->where(['token' => $token])->exists() ? true : false;
+        return User::find()->where(['token' => $token])->one() ? true : false;
     }
 }
 

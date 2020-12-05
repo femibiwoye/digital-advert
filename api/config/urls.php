@@ -13,5 +13,6 @@ return [
     'GET v1/twitter-authorization' => 'v1/auth/twitter-authorization',
     'GET v1/twitter_callback' => 'v1/auth/authenticate-twitter-user',
     'GET v1/user' => 'v1/auth/user',
+    'GET v1/active-status' => 'v1/auth/active-status',
 
 ];
