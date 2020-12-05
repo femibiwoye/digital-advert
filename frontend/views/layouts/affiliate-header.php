@@ -2,9 +2,16 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use common\models\Notification;
 
 $user = Yii::$app->user->identity;
 
+
+$count =  Notification::find()->where(['user_id' => Yii::$app->user->id])
+          ->orWhere(['user_id' => NULL])->count();
+
+$notificationCount = ($count > 0) ? $count : 0;
+                 
 ?>
 
 <header id="header" class="header">
@@ -27,7 +34,9 @@ $user = Yii::$app->user->identity;
                 <div class="user-menu dropdown-menu">
                     <a class="nav-link" href="<?=Url::to(['/affiliate/profile'])?>"><i class="fa fa- user"></i>My Profile</a>
 
-                    <a class="nav-link" href="<?=Url::to(['/affiliate/notifications'])?>"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                    <a class="nav-link" href="<?=Url::to(['/affiliate/notification'])?>"><i class="fa fa- user"></i>Notifications <span class="count">
+                        <?= $notificationCount ?>
+                    </span></a>
 
                     <a class="nav-link" href="<?=Url::to(['/affiliate/profile/password'])?>"><i class="fa fa -cog"></i>Settings</a>
 

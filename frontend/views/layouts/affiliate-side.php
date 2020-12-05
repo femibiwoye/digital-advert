@@ -23,7 +23,7 @@ use yii\helpers\Url;
                     <a href="<?=Url::to(['referral/index'])?>"> <i class="menu-icon ti-shortcode"></i>Referrers </a>
                 </li>
                 <li>
-                    <a href="<?=Url::to(['notifications'])?>"> <i class="menu-icon ti-bell"></i>Notifications </a>
+                    <a href="<?=Url::to(['./notification'])?>"> <i class="menu-icon ti-bell"></i>Notifications </a>
                 </li>
                 <li>
                     <a href="<?=Url::to(['profile/password'])?>"> <i class="menu-icon ti-settings"></i>Settings </a>

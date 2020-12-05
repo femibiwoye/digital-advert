@@ -28,6 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.name',
             'created_at',
             //'updated_at',
+<<<<<<< HEAD
+=======
+            'user.name',
+>>>>>>> 83c0e7a8870c5d46af1a8e6f3f8b962054bc1678
             'content:ntext',
             //'media:ntext',
             //'platforms:ntext',
