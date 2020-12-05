@@ -59,6 +59,10 @@ class WalletHistories extends \yii\db\ActiveRecord
             'IP' => 'Ip',
         ];
     }
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'user_id']);
+    }
+
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {

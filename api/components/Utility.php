@@ -1,11 +1,13 @@
 <?php
 
-namespace api\modules\v1\components;
+namespace api\components;
 
-use yii\db\ActiveRecord;
+use Abraham\TwitterOAuth\TwitterOAuth;
+use Yii;
+use yii\base\Model;
 
 
-class Utility extends ActiveRecord
+class Utility extends Model
 {
 
     public static function FormatBytesSize($bytes, $precision = 2)
@@ -21,5 +23,10 @@ class Utility extends ActiveRecord
         $bytes /= (1 << (10 * $pow));
 
         return round($bytes, $precision) . $units[$pow];
+    }
+
+    public static function TwitterConnection()
+    {
+        return new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], Yii::$app->params['TwitterAccessToken'],Yii::$app->params['TwitterAccessTokenSecret']);
     }
 }

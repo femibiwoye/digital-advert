@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'operation',
             //'updated_at',
-            'user_id',
+            'user.name',
             'type',
             'old_balance',
             'new_balance',

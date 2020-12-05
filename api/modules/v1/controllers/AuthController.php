@@ -2,6 +2,8 @@
 
 namespace api\modules\v1\controllers;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+use api\components\Utility;
 use Yii;
 use api\modules\v1\models\{Login, User, ApiResponse, PasswordResetRequestForm, ResetPasswordForm};
 use yii\helpers\ArrayHelper;
@@ -148,6 +150,50 @@ class AuthController extends Controller
     {
         return $token;
 
+    }
+
+    public function actionTwitterAuthorization()
+    {
+
+        $connection = Utility::TwitterConnection();
+        $response = $connection->oauth("oauth/request_token", ["oauth_callback" => Yii::$app->params['apiDomain'] . "/twitter_callback?h=23"]);
+
+        $oauth_token = $response["oauth_token"];
+        //$oauth_token_secret = $response["oauth_token_secret"];
+
+        $url = $connection->url("oauth/authorize", ["oauth_token" => $oauth_token]);
+        return $url;
+    }
+
+    public function actionAuthenticateTwitterUser($oauth_token,$oauth_verifier)
+    {
+        $connection = Utility::TwitterConnection();
+//        $oauth_token = $request->input("oauth_token");
+//        $oauth_verifier = $request->input("oauth_verifier");
+        $response = $connection->oauth("oauth/access_token", ["oauth_token" => $oauth_token, "oauth_verifier" => $oauth_verifier]);
+
+        $oauth_token = $response["oauth_token"];
+        $oauth_token_secret = $response["oauth_token_secret"];
+        $connection = new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], $oauth_token, $oauth_token_secret);
+
+        $userDetails = $connection->get("account/verify_credentials");
+        $profilePic = $userDetails->profile_image_url_https;
+        $name = $userDetails->name;
+        $handle = $userDetails->screen_name;
+
+        $ID = $userDetails->id;
+        return $userDetails;
+
+//        //$user = User::where("twitter_id", $ID)->first(); if($user == null)
+//        User::truncate();
+//        $user = User::create(["id"=>1, "twitter_id" => $ID, "name"=>$name, "username"=>$handle, "image_path"=>$profilePic]);
+//
+//        TwitterAccount::create(["user_id" => $user->id, "oauth_token" => $oauth_token, "oauth_token_secret" => $oauth_token_secret]);
+//
+//        //create user access token
+//        $token =  $user->createToken( env("APP_NAME") )->accessToken;
+//
+//        return redirect(env("CLOSE_WINDOW_URL")."?data=$token,$profilePic,$handle,$name");
     }
 }
 
