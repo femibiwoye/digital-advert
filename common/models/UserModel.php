@@ -27,6 +27,9 @@ use Yii;
  * @property int|null $status
  * @property int|null $affiliate_id
  * @property string|null $token
+ * @property string|null $state
+ * @property string|null $country
+ * @property string|null $about
  */
 class UserModel extends User
 {
