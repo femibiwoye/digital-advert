@@ -194,9 +194,9 @@ class AuthController extends Controller
             $model->name = $userDetails->screen_name;
             $model->generateAuthKey();
             $location = explode(',', $userDetails->location, 2);
-            if ($location[0])
+            if (isset($location[0]))
                 $model->state = $location[0];
-            if ($location[1])
+            if (isset($location[1]))
                 $model->country = $location[1];
             $model->about = $userDetails->description;
             if ($model->save()) {
