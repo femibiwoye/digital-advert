@@ -20,6 +20,7 @@ $config = [
             'class' => 'api\modules\v1\Module',
         ],
     ],
+
     'components' => [
         'response' => [
             'format' => \yii\web\Response::FORMAT_JSON
