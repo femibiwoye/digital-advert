@@ -15,4 +15,9 @@ return [
     'GET v1/user' => 'v1/auth/user',
     'GET v1/active-status' => 'v1/auth/active-status',
 
+    'GET v1/post/feed' => 'v1/post/all-post',
+    'GET v1/post/my-post' => 'v1/post/my-post',
+    'GET v1/post/approved-post' => 'v1/post/approved-post',
+    'GET v1/post/pending-post' => 'v1/post/pending-post',
+
 ];
