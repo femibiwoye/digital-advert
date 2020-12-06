@@ -35,6 +35,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             'affiliate_id',
             'state',
             'country',
+            'about'
         ];
 
         if (Yii::$app->controller->id != 'auth') {

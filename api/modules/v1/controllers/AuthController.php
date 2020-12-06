@@ -182,6 +182,7 @@ class AuthController extends Controller
         $connection = new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], $oauth_token, $oauth_token_secret);
 
         $userDetails = $connection->get("account/verify_credentials");
+        return $userDetails;
 
 
         if ($model = User::findOne(['twitter_id' => $userDetails->id])) {
@@ -191,7 +192,8 @@ class AuthController extends Controller
             $model = new User();
             $model->twitter_id = $userDetails->id;
             $model->image_path = $userDetails->profile_image_url_https;
-            $model->name = $userDetails->screen_name;
+            $model->username = $userDetails->screen_name;
+            $model->name = $userDetails->name;
             $model->generateAuthKey();
             $location = explode(',', $userDetails->location, 2);
             if (isset($location[0]))
