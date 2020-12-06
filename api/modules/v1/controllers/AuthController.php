@@ -182,8 +182,6 @@ class AuthController extends Controller
         $connection = new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], $oauth_token, $oauth_token_secret);
 
         $userDetails = $connection->get("account/verify_credentials");
-        return $userDetails;
-
 
         if ($model = User::findOne(['twitter_id' => $userDetails->id])) {
             $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);

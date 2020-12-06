@@ -26,6 +26,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             'id',
             'wallet_balance',
             'name',
+            'username',
             'email',
             'email_verified_at',
             'phone',
