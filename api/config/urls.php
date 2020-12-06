@@ -19,5 +19,18 @@ return [
     'GET v1/post/my-post' => 'v1/post/my-post',
     'GET v1/post/approved-post' => 'v1/post/approved-post',
     'GET v1/post/pending-post' => 'v1/post/pending-post',
+    'GET v1/post/likes/<post_id:\d+>' => 'v1/post/likes',
+    'GET v1/post/comments/<post_id:\d+>' => 'v1/post/likes',
+
+    'GET v1/general/dashboard-statistics'=>'v1/general/dashboard-statistics',
+    'GET v1/general/settings'=>'v1/general/settings',
+
+    'POST v1/payment/create-payment'=>'v1/payment/create-payment',
+    'POST v1/payment/create-checkout'=>'v1/payment/create-checkout',
+    'GET v1/payment/get-checkout'=>'v1/payment/get-checkout',
+    'GET v1/payment/wallet-history'=>'v1/payment/wallet-history',
+    'GET v1/payment/bank'=>'v1/payment/my-bank',
+    'POST v1/payment/bank'=>'v1/payment/create-bank',
+    'GET v1/payment/bank-list'=>'v1/payment/bank-list',
 
 ];

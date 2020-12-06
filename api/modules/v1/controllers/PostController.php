@@ -4,9 +4,10 @@ namespace api\modules\v1\controllers;
 
 
 use api\modules\v1\models\ApiResponse;
+use api\modules\v1\models\PostComments;
+use api\modules\v1\models\PostLikes;
 use api\modules\v1\models\Posts;
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
 
@@ -68,6 +69,7 @@ class PostController extends Controller
     public function actionPendingPost()
     {
         $model = Posts::find()
+            //->joinWith(['postLike'])
             ->where(['user_id' => Yii::$app->user->id, 'is_approved' => 0])
             ->all();
 
@@ -76,5 +78,27 @@ class PostController extends Controller
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }
+
+    public function actionLikes($post_id)
+    {
+        $model = PostLikes::findAll(['post_id' => $post_id]);
+
+        if (!$model)
+            return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionComments($post_id)
+    {
+        $model = PostComments::findAll(['post_id' => $post_id]);
+
+        if (!$model)
+            return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+
 }
 

@@ -51,11 +51,12 @@ class Posts extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
-//        if ($this->isRelationPopulated('parentChildren')) {
-//            $fields['parentChildren'] = 'parentChildren';
-//        }
+
         $fields['user'] = 'user';
         $fields['activity'] = 'activity';
+        if ($this->isRelationPopulated('postLikes')) {
+            $fields['postLikes'] = 'postLikes';
+        }
         if (($key = array_search('raw', $fields)) !== false) unset($fields[$key]);
 
         return $fields;
@@ -92,6 +93,11 @@ class Posts extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getPostLikes()
+    {
+        return $this->hasMany(PostLikes::className(), ['post_id' => 'id']);
+    }
+
     /**
      * Get activities of a post.
      * The duration is in seconds
@@ -100,7 +106,7 @@ class Posts extends \yii\db\ActiveRecord
     public function getActivity()
     {
         $return = [
-            'likes' => 0,
+            'likes' => PostLikes::find()->where(['post_id'=>$this->id])->count(),
             'comments' => 0,
             'impression' => 0,
             'reached' => 0,
