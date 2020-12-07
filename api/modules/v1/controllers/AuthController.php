@@ -9,6 +9,7 @@ use common\models\UserModel;
 use Yii;
 use api\modules\v1\models\{Login, User, ApiResponse, PasswordResetRequestForm, ResetPasswordForm};
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
 use yii\web\Response;
@@ -171,42 +172,42 @@ class AuthController extends Controller
     public function actionAuthenticateTwitterUser($oauth_token, $oauth_verifier)
     {
 
-        // try {
-        $connection = Utility::TwitterConnection();
+        try {
+            $connection = Utility::TwitterConnection();
 //        $oauth_token = $request->input("oauth_token");
 //        $oauth_verifier = $request->input("oauth_verifier");
-        $response = $connection->oauth("oauth/access_token", ["oauth_token" => $oauth_token, "oauth_verifier" => $oauth_verifier]);
+            $response = $connection->oauth("oauth/access_token", ["oauth_token" => $oauth_token, "oauth_verifier" => $oauth_verifier]);
 
-        $oauth_token = $response["oauth_token"];
-        $oauth_token_secret = $response["oauth_token_secret"];
-        $connection = new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], $oauth_token, $oauth_token_secret);
+            $oauth_token = $response["oauth_token"];
+            $oauth_token_secret = $response["oauth_token_secret"];
+            $connection = new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], $oauth_token, $oauth_token_secret);
 
-        $userDetails = $connection->get("account/verify_credentials");
+            $userDetails = $connection->get("account/verify_credentials");
 
-        if ($model = User::findOne(['twitter_id' => $userDetails->id])) {
-            $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);
-            return $this->redirect(Yii::$app->params['apiDomainBase'] . '/closeWindow.html?token=' . $model->updateAccessToken());
-        } else {
-            $model = new User();
-            $model->twitter_id = $userDetails->id;
-            $model->image_path = $userDetails->profile_image_url_https;
-            $model->username = $userDetails->screen_name;
-            $model->name = $userDetails->name;
-            $model->generateAuthKey();
-            $location = explode(',', $userDetails->location, 2);
-            if (isset($location[0]))
-                $model->state = $location[0];
-            if (isset($location[1]))
-                $model->country = $location[1];
-            $model->about = $userDetails->description;
-            if ($model->save()) {
+            if ($model = User::findOne(['twitter_id' => $userDetails->id])) {
                 $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);
-                return $this->redirect(Yii::$app->params['apiDomain'] . '/closeWindow.html?token=' . $model->token);
+                return $this->redirect(Yii::$app->params['apiDomainBase'] . '/closeWindow.html?token=' . $model->updateAccessToken());
+            } else {
+                $model = new User();
+                $model->twitter_id = $userDetails->id;
+                $model->image_path = $userDetails->profile_image_url_https;
+                $model->username = $userDetails->screen_name;
+                $model->name = $userDetails->name;
+                $model->generateAuthKey();
+                $location = explode(',', $userDetails->location, 2);
+                if (isset($location[0]))
+                    $model->state = $location[0];
+                if (isset($location[1]))
+                    $model->country = $location[1];
+                $model->about = $userDetails->description;
+                if ($model->save()) {
+                    $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);
+                    return $this->redirect(Yii::$app->params['apiDomainBase'] . '/closeWindow.html?token=' . $model->token);
+                }
             }
+        } catch (\Exception $e) {
+            return (new ApiResponse)->error($e, ApiResponse::SUCCESSFUL, 'Error occur in server');
         }
-//        } catch (\Exception $e) {
-//            return (new ApiResponse)->error($e, ApiResponse::SUCCESSFUL, 'Error occur in server');
-//        }
         return (new ApiResponse)->error(null, ApiResponse::REQ, 'Not successful');
     }
 
