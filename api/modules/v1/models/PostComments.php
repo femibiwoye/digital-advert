@@ -33,10 +33,12 @@ class PostComments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'media'], 'safe'],
-            [['user_id', 'post_id', 'comment', 'type', 'value_earned', 'media'], 'required'],
+            [['created_at', 'updated_at', 'media', 'value_earned', 'media'], 'safe'],
+            [['user_id', 'post_id', 'comment', 'type'], 'required'],
             [['type'], 'string'],
-            [['user_id', 'post_id', 'comment', 'value_earned'], 'string', 'max' => 191],
+            [['post_id','user_id'],'integer'],
+            [['comment', 'value_earned'], 'string', 'max' => 191],
+            [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['post_id' => 'id']],
         ];
     }
 
