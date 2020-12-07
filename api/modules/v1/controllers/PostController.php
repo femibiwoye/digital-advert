@@ -99,6 +99,35 @@ class PostController extends Controller
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }
 
+    public function actionCreatePost()
+    {
+        $model = new Posts();
+        $model->user_id = Yii::$app->user->id;
+        $model->attributes = Yii::$app->request->post();
+        if (!$model->validate()) {
+            return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
+        }
 
+        if (!$model->save())
+            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionRetweetPost()
+    {
+        $model = new PostComments();
+        $model->user_id = Yii::$app->user->id;
+        $model->type = 'share';
+        $model->attributes = Yii::$app->request->post();
+        if (!$model->validate()) {
+            return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
+        }
+
+        if (!$model->save())
+            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
 }
 

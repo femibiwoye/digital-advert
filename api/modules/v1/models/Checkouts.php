@@ -11,11 +11,13 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property string $user_id
+ * @property int $post_id
  * @property float $amount
  * @property float $current_balance
  * @property string $message
  * @property string $preferred_choice
  * @property int $approval_status
+ * @property int $payment_id
  */
 class Checkouts extends \yii\db\ActiveRecord
 {
@@ -34,10 +36,10 @@ class Checkouts extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'message'], 'safe'],
-            [['user_id', 'amount', 'current_balance', 'preferred_choice'], 'required'],
+            [['user_id', 'amount', 'current_balance', 'preferred_choice', 'post_id', 'payment_id', 'message'], 'required'],
             [['amount', 'current_balance'], 'number'],
             [['preferred_choice'], 'string'],
-            [['approval_status','user_id'], 'integer'],
+            [['approval_status', 'user_id'], 'integer'],
             [['message'], 'string', 'max' => 191],
         ];
     }
