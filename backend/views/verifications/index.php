@@ -14,21 +14,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="verifications-index">
 
-    <p>
-        <?= Html::a('Create Verifications', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-            <?php
-                Modal::begin([
-                        'header' => '<h4>Approve</h4>',
-                        'id' => 'modal',
-                        'size' => 'modal-lg',
-                    ]);
-                
-                    echo "<div id='modalContent'></div>";
-                    Modal::end();
-            ?>  
+    <?php
+    Modal::begin([
+        'header' => '<h4>Approve</h4>',
+        'id' => 'modal',
+        'size' => 'modal-lg',
+    ]);
+
+    echo "<div id='modalContent'></div>";
+    Modal::end();
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,25 +37,33 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             'user.name',
             'verification_method',
+            [
+                'attribute' => 'verification_media',
+                'value' => function ($model) {
+                    return $model->verification_media;
+                },
+                'format' => ['image', ['height' => 100]],
+            ],
             'created_at',
-            //'verification_media:ntext',
             //'status',
             //'verified_by',
 
             ['class' => 'yii\grid\ActionColumn',
-            'template' => '{View} {Update}',
-            'buttons' => [
-                'View' => function ($url, $model) {
-                    $url =  Url::to(['verifications/approve', 'id' => $model->id]);
-                   return Html::a('<span class="fa fa-thumbs-up"></span>',$url,['title' => 'approve']);
-                },
-                'Update' => function ($url, $model) {
-                    $url = Url::to(['controller/verification-decline', 'id' => $model->id]);
-                    return Html::a('<span class="fa fa-thumbs-down"></span>', $url, ['title' => 'decline']);
-                },
-             ]
-               
-        ],],
+                'template' => '{view} {approve} {disapprove}',
+                'buttons' => [
+                    'approve' => function ($url, $model) {
+                        if ($model->status != 1) {
+                            $url = Url::to(['verifications/approve', 'id' => $model->id]);
+                            return Html::a('<span class="fa fa-thumbs-up"></span>', $url, ['title' => 'approve']);
+                        }
+                    },
+                    'disapprove' => function ($url, $model) {
+                        $url = Url::to(['controller/verification-decline', 'id' => $model->id]);
+                        return Html::a('<span class="fa fa-thumbs-down"></span>', $url, ['title' => 'decline']);
+                    },
+                ]
+
+            ],],
     ]); ?>
 
 
@@ -75,5 +80,5 @@ $script = <<< JS
     });
 JS;
 
-    $this->registerJs($script);
+$this->registerJs($script);
 ?>

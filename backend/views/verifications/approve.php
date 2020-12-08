@@ -3,14 +3,18 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Modal;
+
+$this->title = 'Approve: '.$model->user->name;
 ?>
 <div class="verifications-form">
 
-        <?= Html::beginForm(['approve'],'post') ?>
-        
+        <?= Html::beginForm(null,'post') ?>
+
+    <img src="<?=$model->verification_media?>" height="200">
+
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="name" class="form-control" name="name" id="name" placeholder="Enter name">
+            <input type="text" class="form-control" name="name" id="name" value="<?=$user->name?>" placeholder="Enter name">
         </div>
         <div class="form-group">
             <label for="message">Message</label>

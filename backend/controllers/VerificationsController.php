@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\components\UpdateNotification;
 use common\models\User;
 use Yii;
 use common\models\Verifications;
@@ -87,26 +88,33 @@ class VerificationsController extends Controller
     }
 
 
-
-    public function actionApprove($id){
-        $user = new User();
+    public function actionApprove($id)
+    {
         $model = $this->findModel($id);
+        $user = User::findOne(['id' => $model->user_id]);
 
-        if (Yii::$app->request->post()){   
-            
-             $user->name = $_POST['name'];
-             $message = $_POST['message']; 
-             
-             //$model->verified_by = Yii::$app->user->id;
-             //$model->status = 1;
-             //$model->save();
-             //$user->save();
-        
-            //return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->post('name')) {
+
+
+            $user->name = Yii::$app->request->post('name');
+            $user->verification_status = 1;
+
+
+            $model->verified_by = Yii::$app->user->id;
+            $model->status = 1;
+            if ($model->save() && $user->save()) {
+                UpdateNotification::widget(['generality' => 'user', 'user_id' => $user->id, 'title' => 'Verification is approved', 'content' => Yii::$app->request->post('message')]);
+                if (!empty($user->email)) {
+                    $model->sendEmail($user, Yii::$app->request->post('message'), 'Approved');
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-       
-            return $this->render('approve', [
+
+        }
+
+        return $this->render('approve', [
             'model' => $model,
+            'user'=>$user
         ]);
     }
 

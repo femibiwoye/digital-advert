@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Verifications */
 
-$this->title = $model->id;
+$this->title = $model->user->name;
 $this->params['breadcrumbs'][] = ['label' => 'Verifications', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="verifications-view">
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php //= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -30,11 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'created_at',
             'updated_at',
-            'user_id',
+            'user.name',
             'verification_method',
-            'verification_media:ntext',
+            [
+                'attribute' => 'verification_media',
+                'value' => $model->verification_media,
+                'format' => ['image', ['height' => '200']],
+            ],
             'status',
-            'verified_by',
+            'admin.username',
         ],
     ]) ?>
 
