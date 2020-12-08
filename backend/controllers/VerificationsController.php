@@ -2,20 +2,19 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
-use common\models\Checkouts;
-use common\models\CheckoutsSearch;
+use common\models\Verifications;
+use common\models\VerificationsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\WalletHistories;
-use common\models\User;
 
 /**
- * CheckoutsController implements the CRUD actions for Checkouts model.
+ * VerificationsController implements the CRUD actions for Verifications model.
  */
-class CheckoutsController extends Controller
+class VerificationsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -42,12 +41,12 @@ class CheckoutsController extends Controller
     }
 
     /**
-     * Lists all Checkouts models.
+     * Lists all Verifications models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CheckoutsSearch();
+        $searchModel = new VerificationsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,7 +56,7 @@ class CheckoutsController extends Controller
     }
 
     /**
-     * Displays a single Checkouts model.
+     * Displays a single Verifications model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -70,13 +69,13 @@ class CheckoutsController extends Controller
     }
 
     /**
-     * Creates a new Checkouts model.
+     * Creates a new Verifications model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Checkouts();
+        $model = new Verifications();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -87,48 +86,52 @@ class CheckoutsController extends Controller
         ]);
     }
 
+
+
+    public function actionApprove($id){
+        $user = new User();
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->post()){   
+            
+             $user->name = $_POST['name'];
+             $message = $_POST['message']; 
+             
+             //$model->verified_by = Yii::$app->user->id;
+             //$model->status = 1;
+             //$model->save();
+             //$user->save();
+        
+            //return $this->redirect(['view', 'id' => $model->id]);
+            }
+       
+            return $this->render('approve', [
+            'model' => $model,
+        ]);
+    }
+
     /**
-     * Updates an existing Checkouts model.
+     * Updates an existing Verifications model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    
-
     public function actionUpdate($id)
     {
-       
         $model = $this->findModel($id);
-        $wallet = new WalletHistories();
-        
-        if ($model->load(Yii::$app->request->post())){
-            
-            if($model->approval_status == 1){
 
-                $model->approved_by = Yii::$app->user->id;
-                $new_amount = ($model->current_balance - $model->amount);
-                $old_balance = $model->current_balance;
-                $new_balance = $new_amount;
-                $model->save();
-
-                $wallet->user_id = $model->user_id;
-                $wallet->old_balance = $model->current_balance;
-                $wallet->new_balance = $model->current_balance - $model->amount;
-                $wallet->amount = $model->amount;
-                //$wallet->type = $model->preferred_choice;
-                $wallet->save(false);
-            }
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-    }
+        }
+
         return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing Checkouts model.
+     * Deletes an existing Verifications model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -142,15 +145,15 @@ class CheckoutsController extends Controller
     }
 
     /**
-     * Finds the Checkouts model based on its primary key value.
+     * Finds the Verifications model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Checkouts the loaded model
+     * @return Verifications the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Checkouts::findOne($id)) !== null) {
+        if (($model = Verifications::findOne($id)) !== null) {
             return $model;
         }
 

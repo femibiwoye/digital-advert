@@ -5,26 +5,25 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "checkouts".
+ * This is the model class for table "verifications".
  *
  * @property int $id
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property string $user_id
- * @property float $amount
- * @property float $current_balance
- * @property string $message
- * @property string $preferred_choice
- * @property int $approval_status
+ * @property string $verification_method
+ * @property string $verification_media
+ * @property int $status
+ * @property string $verified_by
  */
-class Checkouts extends \yii\db\ActiveRecord
+class Verifications extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'checkouts';
+        return 'verifications';
     }
 
     /**
@@ -34,18 +33,17 @@ class Checkouts extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at'], 'safe'],
-            [['user_id', 'amount', 'current_balance', 'message', 'preferred_choice'], 'required'],
-            [['amount', 'current_balance'], 'number'],
-            [['preferred_choice'], 'string'],
-            [['approval_status'], 'integer'],
-            [['user_id', 'message'], 'string', 'max' => 191],
+            [['user_id', 'verification_method', 'verification_media'], 'required'],
+            [['verification_method', 'verification_media'], 'string'],
+            [['status'], 'integer'],
+            [['user_id', 'verified_by'], 'string', 'max' => 191],
         ];
     }
 
     public function getUser(){
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -56,13 +54,22 @@ class Checkouts extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'user_id' => 'User ID',
-            'amount' => 'Amount',
-            'current_balance' => 'Current Balance',
-            'message' => 'Message',
-            'preferred_choice' => 'Preferred Choice',
-            'approval_status' => 'Approval Status',
+            'verification_method' => 'Verification Method',
+            'verification_media' => 'Verification Media',
+            'status' => 'Status',
+            'verified_by' => 'Verified By',
         ];
     }
+
+    public function sendEmail($email)
+{
+    return Yii::$app->mailer->compose()
+        ->setTo($email)
+        ->setFrom([$this->email => $this->name])
+        ->setSubject($this->message)
+        ->setTextBody($this->name. ' ' .'has '. 'sent you a mail here'. $this->message. ' etc.')
+        ->send();
+        }
 
     public function beforeSave($insert)
     {

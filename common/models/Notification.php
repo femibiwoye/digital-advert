@@ -60,4 +60,14 @@ class Notification extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('y-m-d H-i-s');
+        } else {
+            $this->updated_at = date('y-m-d H-i-s');
+        }
+        return parent::beforeSave($insert);
+    }
 }

@@ -17,6 +17,7 @@
                     ['label' => 'withdrawal', 'icon' => 'bank', 'url' => ['/withdrawal-requests']],
                     ['label' => 'Wallet-Histories', 'icon' => 'history', 'url' => ['/wallet-histories']],
                     ['label' => 'Notification', 'icon' => 'bell', 'url' => ['/notification']],
+                    ['label' => 'Verification', 'icon' => 'thumbs-up', 'url' => ['/verifications']],
                     ['label' => 'Referrer-code', 'icon' => 'connectdevelop', 'url' => ['/referrer-code']],
                     [
                         'label' => 'Blog',

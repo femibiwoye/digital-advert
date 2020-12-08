@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Checkouts */
+/* @var $model common\models\Verifications */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Checkouts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Verifications', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="checkouts-view">
+<div class="verifications-view">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -31,12 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
             'user_id',
-            'amount',
-            'current_balance',
-            'message',
-            'approved_by',
-            'preferred_choice',
-            'approval_status',
+            'verification_method',
+            'verification_media:ntext',
+            'status',
+            'verified_by',
         ],
     ]) ?>
 

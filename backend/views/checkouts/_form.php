@@ -12,11 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?//= $form->field($model, 'created_at')->textInput() ?>
 
-    <?//= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?//= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>
 
@@ -26,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'preferred_choice')->dropDownList([ 'bank' => 'Bank', 'card' => 'Card', ], ['prompt' => '']) ?>
 
-    <?//= $form->field($model, 'approval_status')->textInput() ?>
+    <?= $form->field($model, 'approval_status')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
