@@ -7,6 +7,7 @@ use api\modules\v1\models\ApiResponse;
 use api\modules\v1\models\Posts;
 use api\modules\v1\models\Settings;
 use api\modules\v1\models\User;
+use api\modules\v1\models\Verifications;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\rest\Controller;
@@ -61,6 +62,53 @@ class GeneralController extends Controller
             return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionSubmitVerification()
+    {
+        if (Verifications::find()->where(['user_id' => Yii::$app->user->id])->exists()) {
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Verification submitted!');
+        }
+
+        $model = new Verifications();
+        $model->user_id = Yii::$app->user->id;
+        $model->attributes = Yii::$app->request->post();
+        if (!$model->validate()) {
+            return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
+        }
+
+        User::updateAll(['country' => $model->country], ['id' => Yii::$app->user->id]);
+
+        if (!$model->save())
+            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionMyVerification()
+    {
+        if (!$model = Verifications::find()->where(['user_id' => Yii::$app->user->id])->one()) {
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'No verification submitted');
+        }
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionProfileImage()
+    {
+        $image = Yii::$app->request->post('image');
+
+        if (empty($image))
+            return (new ApiResponse)->error(null, ApiResponse::VALIDATION_ERROR, 'Image cannot be empty');
+
+        $model = User::findOne(['id' => Yii::$app->user->id]);
+        $model->image_path = $image;
+        if (!$model->update())
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Could not update image');
+
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+
     }
 }
 

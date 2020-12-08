@@ -9,6 +9,7 @@ use api\modules\v1\models\Banks;
 use api\modules\v1\models\Checkouts;
 use api\modules\v1\models\Payments;
 use api\modules\v1\models\WalletHistories;
+use api\modules\v1\models\WithdrawalRequests;
 use Yii;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
@@ -62,22 +63,23 @@ class PaymentController extends Controller
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }
 
-    public function actionCreateCheckout()
+    public function actionCreateCheckout($post_id)
     {
         $model = new Checkouts();
         $model->user_id = Yii::$app->user->id;
+        $model->post_id = $post_id;
         $model->current_balance = Yii::$app->user->identity->wallet_balance;
         $model->attributes = Yii::$app->request->post();
         if (!$model->validate()) {
             return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
         }
 
-        if (!$model->save())
-            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
-
         if (Yii::$app->user->identity->wallet_balance < $model->amount) {
             return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Insufficient balance');
         }
+
+        if (!$model->save())
+            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }
@@ -91,6 +93,36 @@ class PaymentController extends Controller
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }
+
+    public function actionCreateWithdrawal()
+    {
+        $model = new WithdrawalRequests();
+        $model->user_id = Yii::$app->user->id;
+        $model->attributes = Yii::$app->request->post();
+        if (!$model->validate()) {
+            return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
+        }
+
+        if (Yii::$app->user->identity->wallet_balance < $model->amount) {
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Insufficient balance');
+        }
+
+        if (!$model->save())
+            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionGetWithdrawals()
+    {
+        $model = WithdrawalRequests::find()->where(['user_id' => Yii::$app->user->id])->all();
+
+        if (!$model)
+            return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
 
     public function actionMyBank()
     {
