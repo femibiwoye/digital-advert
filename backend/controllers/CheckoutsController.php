@@ -96,37 +96,53 @@ class CheckoutsController extends Controller
      */
     
 
-    public function actionUpdate($id)
-    {
-       
-        $model = $this->findModel($id);
-        $wallet = new WalletHistories();
-        
-        if ($model->load(Yii::$app->request->post())){
+        public function actionUpdate($id)
+        {
+            $model = $this->findModel($id);
+    
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             
-            if($model->approval_status == 1){
-
-                $model->approved_by = Yii::$app->user->id;
-                $new_amount = ($model->current_balance - $model->amount);
-                $old_balance = $model->current_balance;
-                $new_balance = $new_amount;
-                $model->save();
-
-                $wallet->user_id = $model->user_id;
-                $wallet->old_balance = $model->current_balance;
-                $wallet->new_balance = $model->current_balance - $model->amount;
-                $wallet->amount = $model->amount;
-                //$wallet->type = $model->preferred_choice;
-                $wallet->save(false);
             }
-
-            return $this->redirect(['view', 'id' => $model->id]);
-    }
-        return $this->render('update', [
+            return $this->render('update', [
             'model' => $model,
         ]);
     }
 
+
+    public function actionApprove($id)
+    {
+       
+        $model = $this->findModel($id);
+        $user = User::findOne(['id' => $model->user_id]);
+        $wallet = new WalletHistories();
+            
+                $model->approval_status = 1;
+                $model->approved_by = Yii::$app->user->id;
+
+                //wallet balance
+                $old_balance = $user->wallet_balance;
+
+                $current_balance = ($old_balance - $model->amount);
+                $model->current_balance = $current_balance;
+
+                $wallet->user_id = $model->user_id;
+                $wallet->old_balance = $old_balance;
+                $wallet->new_balance = $current_balance;
+                $wallet->amount = $model->amount;
+
+                //save to database
+                $model->save();
+                $wallet->save(false);
+
+                // if($model->preferred_choice=='wallet'){
+                //     echo 
+                // }
+            
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Deletes an existing Checkouts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

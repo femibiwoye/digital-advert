@@ -12,11 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wallet-histories-index">
 
-
-    <p>
-        <?//= Html::a('Create Wallet Histories', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([

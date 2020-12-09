@@ -44,6 +44,9 @@ class Notification extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
+    public function getAdmin(){
+        return $this->hasOne(Admin::className(),['id'=>'admin_id']);
+    }
     /**
      * {@inheritdoc}
      */

@@ -46,6 +46,10 @@ class Checkouts extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
+    public function getAdmin(){
+        return $this->hasOne(Admin::className(),['id'=>'approved_by']);
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -9,7 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use common\models\WalletHistories;
+use common\models\User;
 /**
  * WithdrawalRequestsController implements the CRUD actions for WithdrawalRequests model.
  */
@@ -84,6 +85,41 @@ class WithdrawalRequestsController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionApprove($id)
+    {
+       
+        $model = $this->findModel($id);
+        $user = User::findOne(['id' => $model->user_id]);
+        $wallet = new WalletHistories();
+            
+            if($user->wallet_balance >= $model->amount){
+                //old balnce
+                $old_balance = $user->wallet_balance;
+        
+                //new balance
+                $new_amount = ($user->wallet_balance - $model->amount);
+                $new_balance = $new_amount;
+
+                $user->wallet_balance = $new_balance;
+
+                $wallet->user_id = $model->user_id;
+                $wallet->old_balance = $old_balance;
+                $wallet->new_balance = $new_balance;
+                $wallet->amount = $model->amount;
+
+                //save records
+                $user->save();
+                $wallet->save(false);
+                Yii::$app->session->setFlash('success', "Withdrawal Approved!");
+            }else
+              Yii::$app->session->setFlash('error', "Not enough funds!"); 
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+
 
     /**
      * Updates an existing WithdrawalRequests model.

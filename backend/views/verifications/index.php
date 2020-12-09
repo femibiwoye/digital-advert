@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     },
                     'disapprove' => function ($url, $model) {
-                        $url = Url::to(['controller/verification-decline', 'id' => $model->id]);
+                        $url = Url::to(['verifications/decline', 'id' => $model->id]);
                         return Html::a('<span class="fa fa-thumbs-down"></span>', $url, ['title' => 'decline']);
                     },
                 ]

@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="checkouts-view">
 
     <p>
+        <?php if($model->approval_status != 1){?>
+        <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?php }?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -30,11 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'created_at',
             'updated_at',
-            'user_id',
+            'user.name',
             'amount',
             'current_balance',
             'message',
-            'approved_by',
+            'admin.username',
             'preferred_choice',
             'approval_status',
         ],

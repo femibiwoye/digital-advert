@@ -105,7 +105,8 @@ class VerificationsController extends Controller
             if ($model->save() && $user->save()) {
                 UpdateNotification::widget(['generality' => 'user', 'user_id' => $user->id, 'title' => 'Verification is approved', 'content' => Yii::$app->request->post('message')]);
                 if (!empty($user->email)) {
-                    $model->sendEmail($user, Yii::$app->request->post('message'), 'Approved');
+                    $model->sendEmail($user, Yii::$app->request->post('message'), 'Approve');
+                    Yii::$app->session->setFlash('success', "Verification Approved!");
                 }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -113,6 +114,33 @@ class VerificationsController extends Controller
         }
 
         return $this->render('approve', [
+            'model' => $model,
+            'user'=>$user
+        ]);
+    }
+
+    public function actionDecline($id)
+    {
+        $model = $this->findModel($id);
+        $user = User::findOne(['id' => $model->user_id]);
+
+        if (Yii::$app->request->post('message')) {
+
+            $user->verification_status = 0;
+            $model->verified_by = Yii::$app->user->id;
+            $model->status = 0;
+            
+            if($model->save() && $user->save()){
+                UpdateNotification::widget(['generality' => 'user', 'user_id' => $user->id, 'title' => 'Verification is declined', 'content' => Yii::$app->request->post('message')]);
+                if (!empty($user->email)) {
+                    $model->sendEmail($user, Yii::$app->request->post('message'), 'Decline');
+                    Yii::$app->session->setFlash('error', "Verification Declined!");
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('decline', [
             'model' => $model,
             'user'=>$user
         ]);
