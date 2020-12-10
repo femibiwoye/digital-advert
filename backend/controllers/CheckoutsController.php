@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\WalletHistories;
+use common\models\Payments;
 use common\models\User;
 
 /**
@@ -64,8 +65,21 @@ class CheckoutsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if($model->preferred_choice=='wallet'){
+            
+            $preferred_choice = WalletHistories::findOne(['reference_id' => $model->id ]);     
+            return $this->render('view', ['model' => $model, 'preferred_choice'=>$preferred_choice]);
+
+        }else if($model->preferred_choice=='card'||'bank'){
+            $preferred_choice = Payments::findOne(['id' => $model->id]);
+            return $this->render('view', ['model' => $model, 'preferred_choice'=>$preferred_choice]);
+         
+        } 
         return $this->render('view', [
             'model' => $this->findModel($id),
+
+
         ]);
     }
 
@@ -135,9 +149,15 @@ class CheckoutsController extends Controller
                 $model->save();
                 $wallet->save(false);
 
-                // if($model->preferred_choice=='wallet'){
-                //     echo 
-                // }
+                if($model->preferred_choice=='wallet'){
+                    $preferred_choice = WalletHistories::findOne(['reference_id' => $model->id ]);
+                    return $this->redirect(['view', 'id' => $model->id, 'preferred_choice'=>$preferred_choice]);
+
+                }else if($model->preferred_choice=='card'||'bank'){
+                    $preferred_choice = Payments::findOne(['id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->id, 'preferred_choice'=>$preferred_choice]);
+                 
+                }
             
         return $this->render('view', [
             'model' => $model,

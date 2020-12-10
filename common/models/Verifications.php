@@ -70,8 +70,8 @@ class Verifications extends \yii\db\ActiveRecord
     return Yii::$app->mailer->compose(['html'=>'layouts/verification'],['content'=>$message])
         ->setTo($user->email)
         ->setFrom([Yii::$app->params['supportEmail'] =>Yii::$app->params['emailSender']])
-        ->setSubject('Your verification is '.$status)
-        ->setTextBody($user->name. ' ' .'has '. 'sent you a mail here'. $message. ' etc.')
+        ->setSubject('Your verification is '. $status)
+        ->setTextBody($user->name. ' ' .' here is your ' . $status . ' mail here ' . $message . ' etc.')
         ->send();
         }
 

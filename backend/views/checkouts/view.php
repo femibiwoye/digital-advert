@@ -43,4 +43,25 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">username</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td><?=$preferred_choice->user->name ?></td>
+      <td><?=$preferred_choice->amount ?></td>
+      <td><?=$preferred_choice->type ?></td>
+    </tr>
+  </tbody>
+</table>
+
+
 </div>

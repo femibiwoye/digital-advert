@@ -48,7 +48,8 @@ return [
 
         'mailer' => [
             'class'=>'yii\swiftmailer\Mailer',
-            'useFileTransport' => true,
+            'enableSwiftMailerLogging' =>false,
+            'useFileTransport' => false,
             'htmlLayout' => 'layouts/verification',
 
             'transport' => [
