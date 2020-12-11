@@ -23,7 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'operation')->textInput(['maxlength' => true]) ?>
 
-    <?//= $form->field($model, 'IP')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
