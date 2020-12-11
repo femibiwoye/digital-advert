@@ -16,13 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <button type="button" class="btn btn-danger">
+            Wallet Balance <span class="badge badge-light">&#8358;<?=$user_balance->wallet_balance?></span>
+        </button>
     </p>
 
     <?= DetailView::widget([
@@ -35,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'amount',
             'method',
         ],
+        
     ]) ?>
-
+    
   
 </div>

@@ -139,6 +139,7 @@ class CheckoutsController extends Controller
 
                 $current_balance = ($old_balance - $model->amount);
                 $model->current_balance = $current_balance;
+                $user->wallet_balance = $current_balance;
 
                 $wallet->user_id = $model->user_id;
                 $wallet->old_balance = $old_balance;
@@ -147,6 +148,7 @@ class CheckoutsController extends Controller
 
                 //save to database
                 $model->save();
+                $user->save();
                 $wallet->save(false);
 
                 if($model->preferred_choice=='wallet'){
