@@ -41,9 +41,13 @@ class Checkouts extends \yii\db\ActiveRecord
             [['user_id', 'message'], 'string', 'max' => 191],
         ];
     }
-    
+
     public function getUser(){
         return $this->hasOne(User::className(),['id'=>'user_id']);
+    }
+
+    public function getAdmin(){
+        return $this->hasOne(Admin::className(),['id'=>'approved_by']);
     }
 
     /**
@@ -62,5 +66,15 @@ class Checkouts extends \yii\db\ActiveRecord
             'preferred_choice' => 'Preferred Choice',
             'approval_status' => 'Approval Status',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = date('Y-m-d H:i:s');
+        }
+        return parent::beforeSave($insert);
     }
 }

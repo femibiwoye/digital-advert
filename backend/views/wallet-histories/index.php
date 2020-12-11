@@ -12,11 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wallet-histories-index">
 
-
-    <p>
-        <?//= Html::a('Create Wallet Histories', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -26,10 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'operation',
+            //'operation',
             //'updated_at',
             'user.name',
             'type',
+            'amount',
             'old_balance',
             'new_balance',
             'created_at',

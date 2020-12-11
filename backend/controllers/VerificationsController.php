@@ -2,19 +2,20 @@
 
 namespace backend\controllers;
 
+use common\components\UpdateNotification;
+use common\models\User;
 use Yii;
-use common\models\WithdrawalRequests;
-use common\models\WithdrawalRequestsSearch;
+use common\models\Verifications;
+use common\models\VerificationsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\WalletHistories;
-use common\models\User;
+
 /**
- * WithdrawalRequestsController implements the CRUD actions for WithdrawalRequests model.
+ * VerificationsController implements the CRUD actions for Verifications model.
  */
-class WithdrawalRequestsController extends Controller
+class VerificationsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -41,12 +42,12 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Lists all WithdrawalRequests models.
+     * Lists all Verifications models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new WithdrawalRequestsSearch();
+        $searchModel = new VerificationsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -56,7 +57,7 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Displays a single WithdrawalRequests model.
+     * Displays a single Verifications model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -69,13 +70,13 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Creates a new WithdrawalRequests model.
+     * Creates a new Verifications model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new WithdrawalRequests();
+        $model = new Verifications();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -86,43 +87,67 @@ class WithdrawalRequestsController extends Controller
         ]);
     }
 
+
     public function actionApprove($id)
     {
-       
         $model = $this->findModel($id);
         $user = User::findOne(['id' => $model->user_id]);
-        $wallet = new WalletHistories();
-            
-            if($user->wallet_balance >= $model->amount){
-                //old balnce
-                $old_balance = $user->wallet_balance;
-        
-                //new balance
-                $new_amount = ($user->wallet_balance - $model->amount);
-                $new_balance = $new_amount;
 
-                $user->wallet_balance = $new_balance;
+        if (Yii::$app->request->post('name')) {
 
-                $wallet->user_id = $model->user_id;
-                $wallet->old_balance = $old_balance;
-                $wallet->new_balance = $new_balance;
-                $wallet->amount = $model->amount;
 
-                //save records
-                $user->save();
-                $wallet->save(false);
-                Yii::$app->session->setFlash('success', "Withdrawal Approved!");
-            }else
-              Yii::$app->session->setFlash('error', "Not enough funds!"); 
-        return $this->render('view', [
+            $user->name = Yii::$app->request->post('name');
+            $user->verification_status = 1;
+
+
+            $model->verified_by = Yii::$app->user->id;
+            $model->status = 1;
+            if ($model->save() && $user->save()) {
+                UpdateNotification::widget(['generality' => 'user', 'user_id' => $user->id, 'title' => 'Verification is approved', 'content' => Yii::$app->request->post('message')]);
+                if (!empty($user->email)) {
+                    $model->sendEmail($user, Yii::$app->request->post('message'), 'Approve');
+                    Yii::$app->session->setFlash('success', "Verification Approved!");
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+        }
+
+        return $this->render('approve', [
             'model' => $model,
+            'user'=>$user
         ]);
     }
 
+    public function actionDecline($id)
+    {
+        $model = $this->findModel($id);
+        $user = User::findOne(['id' => $model->user_id]);
 
+        if (Yii::$app->request->post('message')) {
+
+            $user->verification_status = 0;
+            $model->verified_by = Yii::$app->user->id;
+            $model->status = 0;
+            
+            if($model->save() && $user->save()){
+                UpdateNotification::widget(['generality' => 'user', 'user_id' => $user->id, 'title' => 'Verification is declined', 'content' => Yii::$app->request->post('message')]);
+                if (!empty($user->email)) {
+                    $model->sendEmail($user, Yii::$app->request->post('message'), 'Decline');
+                    Yii::$app->session->setFlash('error', "Verification Declined!");
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('decline', [
+            'model' => $model,
+            'user'=>$user
+        ]);
+    }
 
     /**
-     * Updates an existing WithdrawalRequests model.
+     * Updates an existing Verifications model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -142,7 +167,7 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Deletes an existing WithdrawalRequests model.
+     * Deletes an existing Verifications model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -156,15 +181,15 @@ class WithdrawalRequestsController extends Controller
     }
 
     /**
-     * Finds the WithdrawalRequests model based on its primary key value.
+     * Finds the Verifications model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return WithdrawalRequests the loaded model
+     * @return Verifications the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = WithdrawalRequests::findOne($id)) !== null) {
+        if (($model = Verifications::findOne($id)) !== null) {
             return $model;
         }
 

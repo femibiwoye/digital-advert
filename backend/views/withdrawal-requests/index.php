@@ -12,9 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="withdrawal-requests-index">
 
-    <p>
-        <?= Html::a('Create Withdrawal Requests', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -31,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'method',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
         ],
     ]); ?>
 

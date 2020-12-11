@@ -4,17 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\WalletHistories */
+/* @var $model common\models\Verifications */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Wallet Histories', 'url' => ['index']];
+$this->title = $model->user->name;
+$this->params['breadcrumbs'][] = ['label' => 'Verifications', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="wallet-histories-view">
+<div class="verifications-view">
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php //= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -31,11 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
             'user.name',
-            'type',
-            'old_balance',
-            'new_balance',
-            'operation',
-            'IP',
+            'verification_method',
+            [
+                'attribute' => 'verification_media',
+                'value' => $model->verification_media,
+                'format' => ['image', ['height' => '200']],
+            ],
+            'status',
+            'admin.username',
         ],
     ]) ?>
 

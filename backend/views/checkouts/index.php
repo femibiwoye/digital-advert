@@ -13,9 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="checkouts-index">
 
 
-    <p>
-        <?//= Html::a('Create Checkouts', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -36,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'preferred_choice',
             //'approval_status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template' => '{view} {update}'],
         ],
     ]); ?>
 

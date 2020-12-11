@@ -44,6 +44,9 @@ class Notification extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
+    public function getAdmin(){
+        return $this->hasOne(Admin::className(),['id'=>'admin_id']);
+    }
     /**
      * {@inheritdoc}
      */
@@ -59,5 +62,15 @@ class Notification extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = date('Y-m-d H:i:s');
+        }
+        return parent::beforeSave($insert);
     }
 }

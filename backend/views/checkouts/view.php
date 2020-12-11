@@ -13,9 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="checkouts-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
+        <?php if($model->approval_status != 1){?>
+        <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?php }?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -32,13 +33,35 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'created_at',
             'updated_at',
-            'user_id',
+            'user.name',
             'amount',
             'current_balance',
             'message',
+            'admin.username',
             'preferred_choice',
             'approval_status',
         ],
     ]) ?>
+
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">username</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td><?=$preferred_choice->user->name ?></td>
+      <td><?=$preferred_choice->amount ?></td>
+      <td><?=$preferred_choice->type ?></td>
+    </tr>
+  </tbody>
+</table>
+
 
 </div>

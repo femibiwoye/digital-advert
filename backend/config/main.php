@@ -46,6 +46,22 @@ return [
             'errorAction' => 'site/error',
         ],
 
+        'mailer' => [
+            'class'=>'yii\swiftmailer\Mailer',
+            'enableSwiftMailerLogging' =>false,
+            'useFileTransport' => false,
+            'htmlLayout' => 'layouts/verification',
+
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'abiodunnoyekunle@gmail.com',
+                'password' => 'December_1994',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
