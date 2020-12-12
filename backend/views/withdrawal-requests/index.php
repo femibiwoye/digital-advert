@@ -12,7 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="withdrawal-requests-index">
 
-    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

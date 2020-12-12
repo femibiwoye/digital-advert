@@ -174,7 +174,7 @@ class AuthController extends Controller
     public function actionAuthenticateTwitterUser($oauth_token, $oauth_verifier, $affiliate_code = null)
     {
 
-        echo $oauth_token . ' ' . $oauth_verifier . ' ' . $affiliate_code;
+        //echo $oauth_token . ' ' . $oauth_verifier . ' ' . $affiliate_code;
 
         try {
             $connection = Utility::TwitterConnection();

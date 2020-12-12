@@ -46,6 +46,7 @@ class WithdrawalRequestsController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new WithdrawalRequestsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -63,8 +64,11 @@ class WithdrawalRequestsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $user_balance = User::findOne(['id'=>$model->user_id]);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'user_balance' =>$user_balance,
         ]);
     }
 
@@ -94,7 +98,7 @@ class WithdrawalRequestsController extends Controller
         $wallet = new WalletHistories();
             
             if($user->wallet_balance >= $model->amount){
-                //old balnce
+                //old balance
                 $old_balance = $user->wallet_balance;
         
                 //new balance

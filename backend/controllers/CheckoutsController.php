@@ -66,21 +66,16 @@ class CheckoutsController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        if($model->preferred_choice=='wallet'){
-            
-            $preferred_choice = WalletHistories::findOne(['reference_id' => $model->id ]);     
-            return $this->render('view', ['model' => $model, 'preferred_choice'=>$preferred_choice]);
+        if ($model->preferred_choice == 'wallet') {
 
-        }else if($model->preferred_choice=='card'||'bank'){
-            $preferred_choice = Payments::findOne(['id' => $model->id]);
-            return $this->render('view', ['model' => $model, 'preferred_choice'=>$preferred_choice]);
-         
-        } 
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+            $preferred_choice = WalletHistories::findOne(['reference_id' => $model->payment_id]);
+            return $this->render('view', ['model' => $model, 'preferred_choice' => $preferred_choice]);
 
+        } else {
+        $preferred_choice = Payments::findOne(['id' => $model->payment_id]);
+        return $this->render('view', ['model' => $model, 'preferred_choice' => $preferred_choice]);
+    }
 
-        ]);
     }
 
     /**
@@ -108,17 +103,17 @@ class CheckoutsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    
 
-        public function actionUpdate($id)
-        {
-            $model = $this->findModel($id);
-    
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            
-            }
-            return $this->render('update', [
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+
+        }
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
@@ -126,43 +121,47 @@ class CheckoutsController extends Controller
 
     public function actionApprove($id)
     {
-       
+
         $model = $this->findModel($id);
         $user = User::findOne(['id' => $model->user_id]);
         $wallet = new WalletHistories();
-            
-                $model->approval_status = 1;
-                $model->approved_by = Yii::$app->user->id;
 
-                //wallet balance
-                $old_balance = $user->wallet_balance;
+        $model->approval_status = 1;
+        $model->approved_by = Yii::$app->user->id;
 
-                $current_balance = ($old_balance - $model->amount);
-                $model->current_balance = $current_balance;
+        //wallet balance
+        $old_balance = $user->wallet_balance;
 
-                $wallet->user_id = $model->user_id;
-                $wallet->old_balance = $old_balance;
-                $wallet->new_balance = $current_balance;
-                $wallet->amount = $model->amount;
+        $current_balance = ($old_balance - $model->amount);
+        $model->current_balance = $current_balance;
+        $user->wallet_balance = $current_balance;
 
-                //save to database
-                $model->save();
-                $wallet->save(false);
+        $wallet->user_id = $model->user_id;
+        $wallet->old_balance = $old_balance;
+        $wallet->new_balance = $current_balance;
+        $wallet->amount = $model->amount;
+        $wallet->IP = Yii::$app->request->userIP;
 
-                if($model->preferred_choice=='wallet'){
-                    $preferred_choice = WalletHistories::findOne(['reference_id' => $model->id ]);
-                    return $this->redirect(['view', 'id' => $model->id, 'preferred_choice'=>$preferred_choice]);
+        //save to database
+        $model->save();
+        $user->save();
+        $wallet->save(false);
 
-                }else if($model->preferred_choice=='card'||'bank'){
-                    $preferred_choice = Payments::findOne(['id' => $model->id]);
-                    return $this->redirect(['view', 'id' => $model->id, 'preferred_choice'=>$preferred_choice]);
-                 
-                }
-            
+        if ($model->preferred_choice == 'wallet') {
+            $preferred_choice = WalletHistories::findOne(['reference_id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'preferred_choice' => $preferred_choice]);
+
+        } else if ($model->preferred_choice == 'card' || 'bank') {
+            $preferred_choice = Payments::findOne(['id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'preferred_choice' => $preferred_choice]);
+
+        }
+
         return $this->render('view', [
             'model' => $model,
         ]);
     }
+
     /**
      * Deletes an existing Checkouts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

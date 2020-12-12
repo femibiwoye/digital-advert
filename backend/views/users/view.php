@@ -4,18 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\UserModel */
+/* @var $model common\models\Users */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'User Models', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="user-model-view">
+<div class="users-view">
 
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php //= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            //'remember_token',
+            'remember_token',
             'created_at',
             'updated_at',
             'is_admin',
@@ -39,19 +40,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'email_verified_at:email',
             'phone_number',
-            //'password',
+            'password',
             'twitter_id',
             'username',
-            [
-                'attribute' => 'image_path',
-                'value' => $model->image_path,
-                'format' => ['image', ['height' => '200']],
-            ],
-            //'auth_key',
+            'image_path',
+            'auth_key',
             'phone',
             'status',
-            //'token:ntext',
-            'affliliate_id',
+            'token:ntext',
+            'affiliate_id',
+            'state',
+            'country',
+            'about:ntext',
         ],
     ]) ?>
 

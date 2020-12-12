@@ -27,7 +27,6 @@ class ConvertImage extends Widget
         //$data = file_get_contents($this->model->fileImage->tempName);
         $cfile = new \CURLFile(realpath($model->tempName), $model->type, $model->name);
 
-
         $response = $this->FileUpload($folder, $cfile, $isAdmin);
         return ArrayHelper::toArray($response)['data'];
 //        } catch (\Exception $e) {
@@ -56,7 +55,7 @@ class ConvertImage extends Widget
         $curl = curl_init(Yii::$app->params['S3FileUpload'] . $folder);
         if ($isAdmin) {
             $user = User::findOne(['<>', 'status', 0]);
-            $token = 'lihdfiusdhgosidhjfiudshfoiehfo8wr92384rheiuwqfhqweoifh2309r8u23098ujf238h9fjijoew';//!empty($user) ? $user->token : null;
+            $token = 'jksdngflsjdgopskdfoijewofijew9r4jofiewkfljsdopfje09fjwelv0pwjf9jmk454sdg';//!empty($user) ? $user->token : null;
         } else
             $token = Yii::$app->user->identity->token;
         $header = [
@@ -80,7 +79,7 @@ class ConvertImage extends Widget
 
     public function DeleteImage($image)
     {
-        $url = "https://tapi.gradely.ng/v2/aws/delete-file?url=" . $image;
+        $url = "https://api.morerave.com/v2/aws/delete-file?url=" . $image;
         $curl = curl_init("$url");
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

@@ -4,6 +4,8 @@ use Codeception\Command\Shared\Style;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+use common\models\User;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Notification */
@@ -25,7 +27,7 @@ use yii\helpers\Url;
   
     ])?>
 
-    <?= $form->field($model, 'user_id')->textInput(['style'=>'display:none', 'id'=>'user', 'placeholder'=>'Enter User id'])->label(false)?>
+    <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(),'id','name'),['style'=>'display:none', 'id'=>'user', 'prompt'=>'Select User'])->label(false)?>
 
 
 

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\components\ConvertImage;
 use Yii;
 use common\models\Posts;
 use common\models\PostsSearch;
@@ -9,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * PostsController implements the CRUD actions for Posts model.
@@ -76,8 +78,21 @@ class PostsController extends Controller
     {
         $model = new Posts();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->media = UploadedFile::getInstance($model, 'media');
+            if (isset($model->media) && $model->media->size > 0) {
+                $s3 = new ConvertImage(['model' => $model->media]);
+                $imageResponse = $s3->ImageUpload('posts', true);
+                if (isset($imageResponse['ObjectURL']) && !empty($imageResponse['ObjectURL'])) {
+                    $model->media = $imageResponse['ObjectURL'];
+                }
+            }
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Successful');
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                Yii::$app->session->setFlash('danger', 'Not successful');
+            }
         }
 
         return $this->render('create', [
