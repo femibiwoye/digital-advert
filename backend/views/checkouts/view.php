@@ -54,12 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
   </thead>
   
   <tbody>
+  <?php if(isset($preferred_choice->user)){?>
     <tr>
       <th scope="row">1</th>
       <td><?=$preferred_choice->user->name ?></td>
       <td><?=$preferred_choice->amount ?></td>
       <td><?=$preferred_choice->type ?></td>
     </tr>
+  <?php } ?>
   </tbody>
 </table>
 

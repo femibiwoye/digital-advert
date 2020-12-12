@@ -23,6 +23,8 @@ use Yii;
  * @property string $retweet_post_id
  * @property int $is_posted_to_twitter
  * @property string|null $raw
+ * @property string|null $start_at
+ * @property string|null $end_at
  */
 class Posts extends \yii\db\ActiveRecord
 {
@@ -43,7 +45,7 @@ class Posts extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['user_id', 'content', 'media', 'platforms'], 'required'],
             [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
-            [['content', 'media', 'platforms', 'raw'], 'string'],
+            [['content', 'media', 'platforms', 'raw','start_at','end_at'], 'string'],
             [['tweet_id', 'retweet_post_id'], 'string', 'max' => 191],
         ];
     }
@@ -81,10 +83,8 @@ class Posts extends \yii\db\ActiveRecord
     {
         if ($this->isNewRecord) {
             $this->created_at = date('y-m-d H-i-s');
-            $this->created_by = Yii::$app->user->id;
         } else {
             $this->updated_at = date('y-m-d H-i-s');
-            $this->updated_by = Yii::$app->user->id;
         }
         return parent::beforeSave($insert);
     }

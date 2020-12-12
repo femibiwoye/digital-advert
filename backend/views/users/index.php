@@ -4,14 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\UserModelSearch */
+/* @var $searchModel common\models\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'User';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-model-index">
+<div class="users-index">
 
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -21,29 +26,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-            //'remember_token',
-            'name',
-            //'updated_at',
-            //'is_admin',
-            'wallet_balance',
+            'id',
+            'remember_token',
+            'created_at',
+            'updated_at',
+            'is_admin',
+            //'wallet_balance',
             //'verification_status',
             //'name',
-            'email:email',
+            //'email:email',
             //'email_verified_at:email',
-            'phone_number',
+            //'phone_number',
             //'password',
             //'twitter_id',
-            'username',
+            //'username',
             //'image_path',
             //'auth_key',
             //'phone',
             //'status',
             //'token:ntext',
-            //'affliliate_id',
-            'created_at',
+            //'affiliate_id',
+            //'state',
+            //'country',
+            //'about:ntext',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{vi}'],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

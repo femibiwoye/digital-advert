@@ -70,17 +70,13 @@ class UserModelSearch extends UserModel
             'affiliate_id' => $this->affiliate_id,
         ]);
 
-        $query->andFilterWhere(['like', 'remember_token', $this->remember_token])
+        $query
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'phone_number', $this->phone_number])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'twitter_id', $this->twitter_id])
             ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'image_path', $this->image_path])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'token', $this->token]);
+            ->andFilterWhere(['like', 'phone', $this->phone]);
+
 
         return $dataProvider;
     }

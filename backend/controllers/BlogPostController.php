@@ -84,7 +84,7 @@ class BlogPostController extends Controller
             $model->image = UploadedFile::getInstance($model, 'image');
             if (isset($model->image) && $model->image->size > 0) {
                 $s3 = new ConvertImage(['model' => $model->image]);
-                $imageResponse = $s3->ImageUpload('users',true);
+                $imageResponse = $s3->ImageUpload('blog',true);
                 if (isset($imageResponse['ObjectURL']) && !empty($imageResponse['ObjectURL'])) {
                     $model->image = $imageResponse['ObjectURL'];
                 }

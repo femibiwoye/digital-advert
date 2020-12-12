@@ -3,74 +3,74 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
+use common\models\User;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Posts */
 /* @var $form yii\widgets\ActiveForm */
+$model->media = is_array($model->media) ? $model->media[0] : $model->media;
 ?>
 
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?//= $form->field($model, 'created_at')->textInput() ?>
-
-    <?//= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?//= $form->field($model, 'user_id')->textInput() ?>
-
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <?php
 
-function image($image)
-{
-    if (empty($image)) {
-        return '@web/img/user-icon.png';
-    } else {
-        return '@web/img/media/' . $image;
+    function image($image)
+    {
+
+        if (empty($image)) {
+            return '@web/img/user-icon.png';
+        } else {
+            return $image;
+        }
     }
-}
 
-echo $form->field($model, 'media')->widget(FileInput::classname(), [
-    'name' => 'media',
-    'pluginOptions' => [
-        'initialPreview' => [
-            Html::img(image($model->media), ['class' => 'file-preview-image', 'alt' => $model->user_id, 'title' => $model->media, 'width' => 150]),
+    echo $form->field($model, 'media')->widget(FileInput::classname(), [
+        'pluginOptions' => [
+            'initialPreview' => [
+                Html::img(image($model->media), ['class' => 'file-preview-image', 'alt' => $model->user_id, 'title' => $model->media, 'width' => 150]),
+            ],
+            'initialCaption' => $model->media,
+            'overwriteInitial' => true,
         ],
-        'initialCaption' => $model->media,
-        'overwriteInitial' => true,
-    ],
 
-    'options' => [
-        'accept' => 'image/*',
-        'multiple' => false,
+        'options' => [
+            'accept' => 'image/*',
+            'multiple' => false,
 
-    ],
+        ],
 
-]);
+    ]);
 
-?>
-    <?= $form->field($model, 'platforms')->textarea(['rows' => 6]) ?>
+    ?>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(),'id','name')) ?>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'platforms')->dropDownList(['twitter']) ?>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'is_approved')->dropDownList([1 => 'Approved', 2 => 'Disapprove']) ?>
+        </div>
+    </div>
 
-
-    <?= $form->field($model, 'is_approved')->textInput() ?>
-
-    <?//= $form->field($model, 'is_promoted')->textInput() ?>
-
-    <?//= $form->field($model, 'comment_count')->textInput() ?>
-
-    <?//= $form->field($model, 'like_count')->textInput() ?>
-
-    <?= $form->field($model, 'boost_amount')->textInput() ?>
-
-    <?= $form->field($model, 'tweet_id')->textInput(['maxlength' => true]) ?>
-
-    <?//= $form->field($model, 'retweet_post_id')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_posted_to_twitter')->textInput() ?>
-
-    <?= $form->field($model, 'raw')->textarea(['rows' => 6]) ?>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'boost_amount')->textInput() ?>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'start_at')->textInput(['type' => 'datetime-local']) ?>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'end_at')->textInput(['type' => 'datetime-local']) ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

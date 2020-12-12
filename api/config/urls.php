@@ -41,4 +41,7 @@ return [
     'POST v1/payment/withdrawal'=>'v1/payment/create-withdrawal',
     'GET v1/payment/withdrawal'=>'v1/payment/get-withdrawals',
 
+
+    'GET v1/notification'=>'v1/notification/index',
+
 ];

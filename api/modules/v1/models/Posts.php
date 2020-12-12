@@ -23,6 +23,8 @@ use Yii;
  * @property string $retweet_post_id
  * @property int $is_posted_to_twitter
  * @property string|null $raw
+ * @property string|null $start_at
+ * @property string|null $end_at
  */
 class Posts extends \yii\db\ActiveRecord
 {
@@ -43,7 +45,7 @@ class Posts extends \yii\db\ActiveRecord
             [['created_at', 'updated_at', 'media', 'platforms'], 'safe'],
             [['user_id', 'content', 'media', 'platforms'], 'required'],
             [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
-            [['content', 'raw'], 'string'],
+            [['content', 'raw', 'start_at', 'end_at'], 'string'],
             [['tweet_id', 'retweet_post_id'], 'string', 'max' => 191],
         ];
     }
@@ -106,7 +108,7 @@ class Posts extends \yii\db\ActiveRecord
     public function getActivity()
     {
         $return = [
-            'likes' => PostLikes::find()->where(['post_id'=>$this->id])->count(),
+            'likes' => PostLikes::find()->where(['post_id' => $this->id])->count(),
             'comments' => 0,
             'impression' => 0,
             'reached' => 0,
