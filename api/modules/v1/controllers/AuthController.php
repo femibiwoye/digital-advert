@@ -4,7 +4,9 @@ namespace api\modules\v1\controllers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use api\components\Utility;
+use api\modules\v1\models\AffiliateLog;
 use api\modules\v1\models\TwitterAccounts;
+use api\modules\v1\models\ReferrerCode;
 use common\models\UserModel;
 use Yii;
 use api\modules\v1\models\{Login, User, ApiResponse, PasswordResetRequestForm, ResetPasswordForm};
@@ -155,7 +157,7 @@ class AuthController extends Controller
 
     }
 
-    public function actionTwitterAuthorization()
+    public function actionTwitterAuthorization($affiliate_code = null)
     {
 
         $connection = Utility::TwitterConnection();
@@ -169,13 +171,13 @@ class AuthController extends Controller
     }
 
 
-    public function actionAuthenticateTwitterUser($oauth_token, $oauth_verifier)
+    public function actionAuthenticateTwitterUser($oauth_token, $oauth_verifier, $affiliate_code = null)
     {
+
+        echo $oauth_token . ' ' . $oauth_verifier . ' ' . $affiliate_code;
 
         try {
             $connection = Utility::TwitterConnection();
-//        $oauth_token = $request->input("oauth_token");
-//        $oauth_verifier = $request->input("oauth_verifier");
             $response = $connection->oauth("oauth/access_token", ["oauth_token" => $oauth_token, "oauth_verifier" => $oauth_verifier]);
 
             $oauth_token = $response["oauth_token"];
@@ -202,6 +204,17 @@ class AuthController extends Controller
                 $model->about = $userDetails->description;
                 if ($model->save()) {
                     $this->saveLastTwitterToken($model, $oauth_token, $oauth_verifier);
+
+                    if (!empty($affiliate_code) && $referrer = ReferrerCode::findOne(['code' => $affiliate_code])) {
+                        $newAffiliate = new AffiliateLog();
+                        $newAffiliate->affiliate_code = $affiliate_code;
+                        $newAffiliate->user_id = $model->getId();
+                        $newAffiliate->affiliate_id = $referrer->user_id;
+                        $newAffiliate->save();
+
+                        $model->affilitae_id = $newAffiliate->user_id;
+                        $model->save();
+                    }
                     return $this->redirect(Yii::$app->params['apiDomainBase'] . '/closeWindow.html?token=' . $model->token);
                 }
             }
