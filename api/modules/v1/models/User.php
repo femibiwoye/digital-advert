@@ -228,7 +228,6 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
     {
         if ($this->isNewRecord) {
             $this->created_at = date('Y-m-d H:i:s');
-            $this->updated_at = date('Y-m-d H:i:s');
             $this->status = self::STATUS_ACTIVE;
         } else {
             $this->updated_at = date('Y-m-d H:i:s');

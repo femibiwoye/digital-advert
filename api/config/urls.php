@@ -19,10 +19,12 @@ return [
     'GET v1/post/my-post' => 'v1/post/my-post',
     'GET v1/post/approved-post' => 'v1/post/approved-post',
     'GET v1/post/pending-post' => 'v1/post/pending-post',
+    'POST v1/post/likes/<post_id:\d+>' => 'v1/post/like',
     'GET v1/post/likes/<post_id:\d+>' => 'v1/post/likes',
     'GET v1/post/comments/<post_id:\d+>' => 'v1/post/likes',
     'POST v1/post/create-post' => 'v1/post/create-post',
     'POST v1/post/retweet-post/<post_id:\d+>' => 'v1/post/retweet-post',
+    'PUT v1/post/view-post/<post_id:\d+>' => 'v1/post/view-post',
 
 
     'GET v1/general/dashboard-statistics'=>'v1/general/dashboard-statistics',
@@ -30,6 +32,7 @@ return [
     'POST v1/general/submit-verification'=>'v1/general/submit-verification',
     'GET v1/general/verification'=>'v1/general/my-verification',
     'POST v1/general/profile-image'=>'v1/general/profile-image',
+    'GET v1/general/search'=>'v1/general/search',
 
     'POST v1/payment/create-payment'=>'v1/payment/create-payment',
     'POST v1/payment/create-checkout/<post_id:\d+>'=>'v1/payment/create-checkout',

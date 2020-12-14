@@ -9,6 +9,7 @@ use api\modules\v1\models\Settings;
 use api\modules\v1\models\User;
 use api\modules\v1\models\Verifications;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
@@ -108,6 +109,24 @@ class GeneralController extends Controller
 
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionSearch($search)
+    {
+
+        $query = Posts::find()->orFilterWhere(['like', 'content', '%' . $search . '%', false]);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query->orderBy('id DESC'),
+            'pagination' => [
+                'pageSize' => 10,
+                'validatePage' => false,
+            ],
+        ]);
+
+        if ($provider->totalCount > 0)
+            return (new ApiResponse)->success($provider->getModels(), ApiResponse::SUCCESSFUL, 'Search result', $provider);
+        return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT, 'No result');
 
     }
 }

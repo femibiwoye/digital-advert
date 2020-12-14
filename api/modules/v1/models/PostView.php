@@ -5,23 +5,23 @@ namespace api\modules\v1\models;
 use Yii;
 
 /**
- * This is the model class for table "post_likes".
+ * This is the model class for table "post_view".
  *
  * @property int $id
- * @property string|null $created_at
+ * @property int $user_id
+ * @property int $post_id
+ * @property int $view_count
+ * @property string $created_at
  * @property string|null $updated_at
- * @property string $user_id
- * @property string $post_id
- * @property int $like_status
  */
-class PostLikes extends \yii\db\ActiveRecord
+class PostView extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'post_likes';
+        return 'post_view';
     }
 
     /**
@@ -30,10 +30,9 @@ class PostLikes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
             [['user_id', 'post_id'], 'required'],
-            [['like_status'], 'integer'],
-            [['user_id', 'post_id'], 'integer'],
+            [['user_id', 'post_id', 'view_count'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -44,11 +43,11 @@ class PostLikes extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
             'user_id' => 'User ID',
             'post_id' => 'Post ID',
-            'like_status' => 'Like Status',
+            'view_count' => 'View Count',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 }
