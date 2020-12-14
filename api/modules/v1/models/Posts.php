@@ -109,14 +109,40 @@ class Posts extends \yii\db\ActiveRecord
     {
         $return = [
             'likes' => PostLikes::find()->where(['post_id' => $this->id])->count(),
-            'comments' => 0,
+            'comments' => PostComments::find()->where(['post_id'=>$this->id])->count(),
             'impression' => 0,
-            'reached' => 0,
+            'reached' => PostView::find()->where(['post_id'=>$this->id])->count(),
             'points' => 0,
             'hasDuration' => false,
             'durationLeft' => 1800
 
         ];
         return $return;
+    }
+
+    public function getPostLike()
+    {
+        return $this->hasOne(PostLikes::className(), ['post_id' => 'id']);
+    }
+
+    public function FeedDisliked()
+    {
+        $model = $this->getPostLike()->andWhere(['user_id' => Yii::$app->user->id])->one();
+        if (!$model->delete()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = date('Y-m-d H:i:s');
+        }
+
+        return parent::beforeSave($insert);
     }
 }

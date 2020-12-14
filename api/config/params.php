@@ -9,5 +9,6 @@ return [
     'TwitterConsumerSecret'=>TWITTER_CONSUMER_SECRET,
     'TwitterAccessToken'=>TWITTER_ACCESS_TOKEN,
     'TwitterAccessTokenSecret'=>TWITTER_ACCESS_TOKEN_SECRET,
+    's3BaseUrl'=>'https://morerave.s3.eu-west-2.amazonaws.com/'
 
 ];
