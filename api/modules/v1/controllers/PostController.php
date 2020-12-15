@@ -9,6 +9,7 @@ use api\modules\v1\models\PostLikes;
 use api\modules\v1\models\Posts;
 use api\modules\v1\models\PostView;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
 
@@ -38,10 +39,19 @@ class PostController extends Controller
 
     public function actionAllPost()
     {
-        $model = Posts::find()
-            ->where(['is_approved' => 1, 'is_promoted' => 1])
-            ->all();
-        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+        $query = Posts::find()
+            ->where(['is_approved' => 1, 'is_promoted' => 1]);
+        $provider = new ActiveDataProvider([
+            'query' => $query->orderBy('id DESC'),
+            'pagination' => [
+                'pageSize' => 3,
+                'validatePage' => false,
+            ],
+        ]);
+
+        if ($provider->totalCount > 0)
+            return (new ApiResponse)->success($provider->getModels(), ApiResponse::SUCCESSFUL, 'Search result', $provider);
+        return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT, 'No result');
     }
 
     public function actionMyPost()
