@@ -11,6 +11,13 @@ $count =  Notification::find()->where(['user_id' => Yii::$app->user->id])
           ->orWhere(['user_id' => NULL])->count();
 
 $notificationCount = ($count > 0) ? $count : 0;
+
+
+if(Yii::$app->user->identity->login_first_time == 0 && Yii::$app->controller->action->id != 'password'){
+    Yii::$app->response->redirect(['/affiliate/profile/password']);
+
+}
+
                  
 ?>
 

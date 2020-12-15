@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
@@ -83,26 +84,20 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin($token=null)
+    public function actionLogin($token = null)
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $first_time = User::findOne(['token' => $token]);
+        if (!empty($token) && User::find()->where(['AND', ['token' => $token], ['<>', 'status', 0]])->exists()) {
+            Yii::$app->user->loginByAccessToken($token);
+            return $this->redirect(['/affiliate']);
+        }
 
-        if($first_time){
-            //return $this->redirect(['/affiliate/']);
-        
 
         $model = new LoginForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->login()){
-
-            // if($first_time->login_first_time == 0){
-            //     $first_time->login_first_time = 1;
-            //     return $this->redirect(['/affiliate/profile/password']);
-            // } 
-
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect(['/affiliate']);
         } else {
             $model->password = '';
@@ -111,8 +106,8 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
-    }
-    
+
+
     }
 
     /**
@@ -241,8 +236,8 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {
