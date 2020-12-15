@@ -87,4 +87,32 @@ class ProfileController extends Controller
         }
         return $this->render('password', ['model' => $model]);
     }
+
+    public function actionChangepassword()
+    {
+        $model = UserModel::findOne(['id' => Yii::$app->user->id]);
+        $model->scenario = 'password';
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->validate()) {
+                Yii::$app->session->setFlash('danger', 'Try again');
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+           
+                $model->password = Yii::$app->security->generatePasswordHash($model->new_password);
+
+                //update login_first_time in the database
+                $model->login_first_time = 1;
+
+                if ($model->save()) { //update is successful
+                    Yii::$app->session->setFlash('success', 'Password updated');
+                    return $this->refresh();
+                } else { //update was not successful
+                    Yii::$app->session->setFlash('danger', 'Try again');
+                }
+           
+                Yii::$app->session->setFlash('danger', 'Invalid Current Password!');
+           
+        }
+        return $this->render('changepassword', ['model' => $model]);
+    }
 }

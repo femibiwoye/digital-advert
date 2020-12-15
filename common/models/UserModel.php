@@ -57,7 +57,7 @@ class UserModel extends User
 
             // For changing of password
             [['current_password', 'new_password', 'password_repeat'], 'string', 'on' => 'password'],
-            [['current_password', 'new_password', 'password_repeat'], 'required', 'on' => 'password'],
+            [['new_password', 'password_repeat'], 'required', 'on' => 'password'],
             ['password_repeat', 'compare', 'compareAttribute' => 'new_password', 'on' => 'password'],
         ];
     }
