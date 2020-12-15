@@ -14,6 +14,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\User;
 
 /**
  * Site controller
@@ -82,14 +83,26 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
+    public function actionLogin($token=null)
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $first_time = User::findOne(['token' => $token]);
+
+        if($first_time){
+            //return $this->redirect(['/affiliate/']);
+        
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()){
+
+            // if($first_time->login_first_time == 0){
+            //     $first_time->login_first_time = 1;
+            //     return $this->redirect(['/affiliate/profile/password']);
+            // } 
+
             return $this->redirect(['/affiliate']);
         } else {
             $model->password = '';
@@ -98,6 +111,8 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+    
     }
 
     /**

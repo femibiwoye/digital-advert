@@ -30,9 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.name',
             'amount',
             'method',
+            'user.phone_number',
+            'account_number.account_number'   
         ],
         
     ]) ?>
     
-  
 </div>

@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.name',
             'code',
             'created_at',
+            'referralCount',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
