@@ -45,10 +45,10 @@ class GeneralController extends Controller
             "adverts" => $post->andWhere(['is_promoted' => 1, 'is_approved' => 1])->count(),
             "total_posts" => $post->count(),
             "total_reached" => 0,
-            "total_points" => 0,
+            "total_points" => Yii::$app->user->identity->wallet_balance,
             "new_tweets" => Posts::find()->andWhere('created_at >= DATE_SUB(NOW(),INTERVAL 1 HOUR)')->count(),
             "tweets_today" => Posts::find()->andWhere(['DATE(created_at)' => date('Y-m-d')])->count(),
-            "points_today" => 0,
+            "points_today" => rand(0,1000),
             "tweets_in_total" => Posts::find()->andWhere(['is_promoted' => 1, 'is_approved' => 1])->count(),
             "user" => User::findOne(['id' => Yii::$app->user->id])
         ];
