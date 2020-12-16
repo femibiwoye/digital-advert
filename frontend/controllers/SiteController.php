@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
@@ -14,6 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\User;
 
 /**
  * Site controller
@@ -82,13 +84,19 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
+    public function actionLogin($token = null)
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        if (!empty($token) && User::find()->where(['AND', ['token' => $token], ['<>', 'status', 0]])->exists()) {
+            Yii::$app->user->loginByAccessToken($token);
+            return $this->redirect(['/affiliate']);
+        }
+
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect(['/affiliate']);
         } else {
@@ -98,6 +106,8 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+
+
     }
 
     /**
@@ -226,8 +236,8 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {

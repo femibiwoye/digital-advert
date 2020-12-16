@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\AffiliateLog;
 use Yii;
 use common\models\ReferrerCode;
 use common\models\ReferrerCodeSearch;
@@ -62,8 +63,12 @@ class ReferrerCodeController extends Controller
      */
     public function actionView($id)
     {
+        $model= $this->findModel($id);
+        $referral_count = AffiliateLog::findAll(['affiliate_code' => $model->code]);
+    
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'referral_count' => $referral_count
         ]);
     }
 

@@ -49,6 +49,14 @@ class ReferrerCode extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'user_id']);
+    }
+
+    public function getReferralCount(){
+        return $this->hasOne(AffiliateLog::className(),['affiliate_code'=>'code'])->count();
+    }
+
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {

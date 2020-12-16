@@ -11,6 +11,7 @@ use yii\bootstrap\Modal;
 
 $this->title = 'Verifications';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="verifications-index">
 
@@ -49,8 +50,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'verified_by',
 
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {approve} {disapprove}',
+                'template' => '{mybutton} {view} {approve} {disapprove} ',
                 'buttons' => [
+                        'mybutton' => function($url, $model) {     // render your custom button
+                            $url = Url::to(['verifications/search', 'user_name'=> $model->user->name]);
+                            return Html::a('<button class="btn btn-primary">Search</button>', $url, ['title' => 'search']);
+                        },
+
                     'approve' => function ($url, $model) {
                         if ($model->status != 1) {
                             $url = Url::to(['verifications/approve', 'id' => $model->id]);

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Banks;
 use Yii;
 use common\models\WithdrawalRequests;
 use common\models\WithdrawalRequestsSearch;
@@ -66,9 +67,11 @@ class WithdrawalRequestsController extends Controller
     {
         $model = $this->findModel($id);
         $user_balance = User::findOne(['id'=>$model->user_id]);
+        $account_balance = Banks::findOne(['user_id'=>$model->user_id]);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'user_balance' =>$user_balance,
+            'user_balance' => $user_balance,
+            'account_balance' => $account_balance,
         ]);
     }
 

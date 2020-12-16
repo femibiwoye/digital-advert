@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\components\UpdateNotification;
 use common\models\User;
+use common\models\Verification;
 use Yii;
 use common\models\Verifications;
 use common\models\VerificationsSearch;
@@ -85,6 +86,18 @@ class VerificationsController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSearch(){
+        {
+            $searchModel = new VerificationsSearch();
+            $dataProvider = $searchModel->searchname(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
 

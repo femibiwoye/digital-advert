@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <button type="button" class="btn btn-success">
+            Referral Count <span class="badge badge-light"><?=count($referral_count)?></span>
+        </button>
     </p>
 
     <?= DetailView::widget([
@@ -33,7 +36,33 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.name',
             'code',
             'created_at',
+            'referralCount'
         ],
     ]) ?>
 
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">username</th>
+      <th scope="col">Affiliate ID</th>
+      <th scope="col">Affiliate Code</th>
+      <th scope="col">Created at</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <?php foreach ($referral_count as $referral){?>
+    <tr>
+      <th scope="row">1</th>
+      
+      <td><?=$referral->user->name ?></td>
+      <td><?=$referral->affiliate_id ?></td>
+      <td><?=$referral->affiliate_code ?></td>
+      <td><?=$referral->created_at ?></td>
+
+    </tr>
+  <?php } ?>
+  </tbody>
+</table>
 </div>
