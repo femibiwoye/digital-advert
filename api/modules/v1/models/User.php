@@ -34,6 +34,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             'status',
             'token',
             'affiliate_id',
+            'verification_status',
             'state',
             'country',
             'about'
