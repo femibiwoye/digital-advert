@@ -48,7 +48,7 @@ class GeneralController extends Controller
             "total_points" => Yii::$app->user->identity->wallet_balance,
             "new_tweets" => Posts::find()->andWhere('created_at >= DATE_SUB(NOW(),INTERVAL 1 HOUR)')->count(),
             "tweets_today" => Posts::find()->andWhere(['DATE(created_at)' => date('Y-m-d')])->count(),
-            "points_today" => rand(0,1000),
+            "points_today" => rand(0, 1000),
             "tweets_in_total" => Posts::find()->andWhere(['is_promoted' => 1, 'is_approved' => 1])->count(),
             "user" => User::findOne(['id' => Yii::$app->user->id])
         ];
@@ -128,6 +128,17 @@ class GeneralController extends Controller
             return (new ApiResponse)->success($provider->getModels(), ApiResponse::SUCCESSFUL, 'Search result', $provider);
         return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT, 'No result');
 
+    }
+
+    public function actionDeleteAccount()
+    {
+        if ($model = User::find()->where(['AND',['id' => Yii::$app->user->id],['<>','status',0]])->one()) {
+            $model->status = 0;
+            $model->token = null;
+            if ($model->save())
+                return true;
+        }
+        return false;
     }
 }
 

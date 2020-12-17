@@ -33,7 +33,7 @@ class PostComments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'media', 'value_earned', 'media'], 'safe'],
+            [['created_at', 'updated_at', 'media', 'value_earned'], 'safe'],
             [['user_id', 'post_id', 'comment', 'type'], 'required'],
             [['type'], 'string'],
             [['post_id','user_id'],'integer'],

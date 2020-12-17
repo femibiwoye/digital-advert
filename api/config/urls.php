@@ -23,7 +23,7 @@ return [
     'GET v1/post/likes/<post_id:\d+>' => 'v1/post/likes',
     'GET v1/post/comments/<post_id:\d+>' => 'v1/post/likes',
     'POST v1/post/create-post' => 'v1/post/create-post',
-    'POST v1/post/retweet-post/<post_id:\d+>' => 'v1/post/retweet-post',
+    'POST v1/post/retweet-post' => 'v1/post/retweet-post',
     'PUT v1/post/view-post/<post_id:\d+>' => 'v1/post/view-post',
 
 
@@ -46,5 +46,7 @@ return [
 
 
     'GET v1/notification'=>'v1/notification/index',
+
+    'DELETE /v1/delete-account'=>'/v1/general/delete-account',
 
 ];
