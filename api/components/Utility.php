@@ -29,4 +29,25 @@ class Utility extends Model
     {
         return new TwitterOAuth(Yii::$app->params['TwitterConsumerKey'], Yii::$app->params['TwitterConsumerSecret'], Yii::$app->params['TwitterAccessToken'],Yii::$app->params['TwitterAccessTokenSecret']);
     }
+
+    public static function GetFileNameWithExtension($file,$path)
+    {
+        if (empty(pathinfo($file, PATHINFO_EXTENSION)) || !filter_var($file, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+
+        $fileName = pathinfo($file, PATHINFO_FILENAME);
+        $fileExt = pathinfo($file, PATHINFO_EXTENSION);
+        $name = "$path/$fileName.$fileExt";
+        file_put_contents($name, file_get_contents($file));
+        return $name;
+    }
+
+    public static function CreateFolder($folder)
+    {
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
+        return true;
+    }
 }

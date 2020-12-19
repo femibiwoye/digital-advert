@@ -16,6 +16,9 @@ use Yii;
  * @property string $type
  * @property string $value_earned
  * @property string $media
+ * @property string $tweet_id
+ * @property string $raw
+ * @property int|null $status
  */
 class PostComments extends \yii\db\ActiveRecord
 {
@@ -33,13 +36,32 @@ class PostComments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'media', 'value_earned'], 'safe'],
+            [['created_at', 'updated_at', 'media', 'value_earned', 'status', 'raw'], 'safe'],
             [['user_id', 'post_id', 'comment', 'type'], 'required'],
-            [['type'], 'string'],
-            [['post_id','user_id'],'integer'],
+            [['type', 'tweet_id'], 'string'],
+            [['post_id', 'user_id'], 'integer'],
             [['comment', 'value_earned'], 'string', 'max' => 191],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['post_id' => 'id']],
+            ['media', 'validateMedia']
         ];
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        if (($key = array_search('raw', $fields)) !== false) unset($fields[$key]);
+
+        return $fields;
+    }
+
+    public function validateMedia()
+    {
+        if (is_array($this->media))
+            return true;
+
+        $this->addError('media', 'Media must be an array');
+        return false;
     }
 
     /**
@@ -58,5 +80,21 @@ class PostComments extends \yii\db\ActiveRecord
             'value_earned' => 'Value Earned',
             'media' => 'Media',
         ];
+    }
+
+    public function getPost()
+    {
+        return $this->hasOne(Posts::className(), ['id' => 'post_id'])->andWhere(['is_posted_to_twitter' => 1]);
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = date('Y-m-d H:i:s');
+        }
+
+        return parent::beforeSave($insert);
     }
 }

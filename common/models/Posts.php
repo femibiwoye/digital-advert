@@ -42,10 +42,10 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'media', 'platforms'], 'safe'],
             [['user_id', 'content', 'media', 'platforms'], 'required'],
             [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
-            [['content', 'media', 'platforms', 'raw','start_at','end_at'], 'string'],
+            [['content', 'raw','start_at','end_at'], 'string'],
             [['tweet_id', 'retweet_post_id'], 'string', 'max' => 191],
         ];
     }
