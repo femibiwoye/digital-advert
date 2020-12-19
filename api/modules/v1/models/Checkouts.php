@@ -61,4 +61,15 @@ class Checkouts extends \yii\db\ActiveRecord
             'approval_status' => 'Approval Status',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = date('Y-m-d H:i:s');
+        }
+
+        return parent::beforeSave($insert);
+    }
 }

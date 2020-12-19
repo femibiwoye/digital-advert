@@ -48,6 +48,10 @@ return [
     'GET v1/notification'=>'v1/notification/index',
 
     'POST v1/report/<type:[a-zA-Z]+>'=>'v1/general/report-post',
-    'DELETE /v1/delete-account'=>'/v1/general/delete-account',
+    'DELETE v1/delete-account'=>'v1/general/delete-account',
 
+
+
+    'POST v1/tweets/post-tweet/<post_id:\d+>'=>'v1/tweets/post-tweet',
+    'POST v1/tweets/post-retweet/<comment_id:\d+>'=>'v1/tweets/post-retweet'
 ];

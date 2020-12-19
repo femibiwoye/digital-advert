@@ -27,7 +27,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             'wallet_balance',
             'name',
             'username',
-            'email',
+            'email' => 'emailAddress',
             'email_verified_at',
             'phone',
             'image_path',
@@ -58,6 +58,10 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
         ];
     }
 
+    public function getEmailAddress()
+    {
+        return empty($this->email) ? 'user' . $this->getId() . '@morerave.com':$this->email;
+    }
 
     public static function findIdentity($id)
     {

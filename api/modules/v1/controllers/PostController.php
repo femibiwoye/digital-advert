@@ -3,13 +3,16 @@
 namespace api\modules\v1\controllers;
 
 
+use api\components\Utility;
 use api\modules\v1\models\ApiResponse;
 use api\modules\v1\models\PostComments;
 use api\modules\v1\models\PostLikes;
 use api\modules\v1\models\Posts;
 use api\modules\v1\models\PostView;
+use api\modules\v1\models\TwitterAccounts;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
 
@@ -108,6 +111,7 @@ class PostController extends Controller
         $model = new PostLikes();
         $model->post_id = $post_id;
         $model->user_id = Yii::$app->user->id;
+        $model->like_status = 1;
         if (!$model->save()) {
             return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Post not liked');
         }
@@ -127,7 +131,7 @@ class PostController extends Controller
 
     public function actionComments($post_id)
     {
-        $model = PostComments::findAll(['post_id' => $post_id]);
+        $model = PostComments::findAll(['post_id' => $post_id,'status'=>1]);
 
         if (!$model)
             return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
@@ -162,6 +166,36 @@ class PostController extends Controller
 
         if (!$model->save())
             return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        if($twitterAccount = TwitterAccounts::find()->where(['user_id'=>Yii::$app->user->id])->one()) {
+            $status_id = $model->post->tweet_id;
+            $media = $model->media;
+            //$connection = Utility::TwitterConnection($twitterAccount->oauth_token,$twitterAccount->oauth_token_secret);
+            $connection = Utility::TwitterConnection();
+            $path = Url::to("@webfolder/images/tmp");
+            Utility::CreateFolder($path);
+            if (!empty($media) && $media != "[]") {
+
+                if (is_array($media)) {
+                    $upload = [];
+                    foreach ($media as $m) {
+                        $uploadResponse = $connection->upload('media/upload', ['media' => Utility::GetFileNameWithExtension($m, $path)]);
+                        $upload[] = $uploadResponse->media_id_string;
+                    }
+                    $data['media_ids'] = implode(',', $upload);
+                } else {
+                    $upload = $connection->upload('media/upload', ['media' => Utility::GetFileNameWithExtension($media, $path)]);
+                    $data["media_ids"] = $upload->media_id_string;
+                }
+            }
+
+            if ($response = $connection->post('statuses/update', array('in_reply_to_status_id' => $status_id, 'status' => $model->comment, 'media_ids' => $data['media_ids']))) {
+                $model->tweet_id = $response->id_str;
+                $model->raw = json_encode($response);
+                $model->status = 1;
+                $model->save();
+            }
+        }
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }

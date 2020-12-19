@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\components\Twitter;
 use common\components\ConvertImage;
 use Yii;
 use common\models\Posts;
@@ -54,6 +55,21 @@ class PostsController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionApprove($id)
+    {
+        if (Twitter::TweetPost($id))
+            Yii::$app->session->setFlash('success', 'Successfully published to twitter');
+        else
+            Yii::$app->session->setFlash('danger', 'Could not publish to twitter');
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionRetweet()
+    {
+        Twitter::Retweet();
     }
 
     /**
