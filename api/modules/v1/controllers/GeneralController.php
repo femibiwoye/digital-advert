@@ -5,6 +5,7 @@ namespace api\modules\v1\controllers;
 
 use api\modules\v1\models\ApiResponse;
 use api\modules\v1\models\Posts;
+use api\modules\v1\models\Report;
 use api\modules\v1\models\Settings;
 use api\modules\v1\models\User;
 use api\modules\v1\models\Verifications;
@@ -130,9 +131,33 @@ class GeneralController extends Controller
 
     }
 
+    public function actionReportPost($type)
+    {
+        $model = new Report();
+        $model->user_id = Yii::$app->user->id;
+        $model->type = $type;
+        $model->attributes = Yii::$app->request->post();
+        if (!$model->validate()) {
+            return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
+        }
+
+        if (!Posts::find()->where(['id' => $model->reference_id])->exists()) {
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Post id is not valid');
+        }
+
+        if (Report::find()->where(['user_id' => Yii::$app->user->id, 'reference_id' => $model->reference_id, 'report_status' => 0])->exists()) {
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Already reported this post');
+        }
+
+        if (!$model->save())
+            return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
     public function actionDeleteAccount()
     {
-        if ($model = User::find()->where(['AND',['id' => Yii::$app->user->id],['<>','status',0]])->one()) {
+        if ($model = User::find()->where(['AND', ['id' => Yii::$app->user->id], ['<>', 'status', 0]])->one()) {
             $model->status = 0;
             $model->token = null;
             if ($model->save())

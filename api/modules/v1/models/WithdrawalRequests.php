@@ -13,6 +13,7 @@ use Yii;
  * @property string $user_id
  * @property string $amount
  * @property string $method
+ * @property string $meta
  */
 class WithdrawalRequests extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class WithdrawalRequests extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','meta'], 'safe'],
             [['user_id', 'amount', 'method'], 'required'],
             [['method'], 'string'],
             [['user_id'], 'integer'],
