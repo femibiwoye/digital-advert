@@ -15,7 +15,6 @@ use Yii;
  * @property float $old_balance
  * @property float $new_balance
  * @property string $operation
- * @property float $amount
  * @property string $IP
  * @property string|null $reference_type This could either be ad, topup or any other relevant string
  * @property int|null $reference_id e.g checkout id, post id, etc
@@ -39,7 +38,7 @@ class WalletHistories extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['user_id', 'type', 'old_balance', 'new_balance', 'IP'], 'required'],
             [['type', 'reference_type'], 'string'],
-            [['old_balance', 'new_balance', 'amount'], 'number'],
+            [['old_balance', 'new_balance'], 'number'],
             [['reference_id'], 'integer'],
             [['operation', 'IP'], 'string', 'max' => 191],
         ];
@@ -59,7 +58,6 @@ class WalletHistories extends \yii\db\ActiveRecord
             'old_balance' => 'Old Balance',
             'new_balance' => 'New Balance',
             'operation' => 'Operation',
-            'amount' => 'Amount',
             'IP' => 'Ip',
             'reference_type' => 'Reference Type',
             'reference_id' => 'Reference ID',
