@@ -17,7 +17,7 @@ class NotificationSearch extends Notification
     public function rules()
     {
         return [
-            [['id', 'user_id', 'admin_id'], 'integer'],
+            [['id', 'user_id', 'initiator_id'], 'integer'],
             [['title', 'description', 'generality', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class NotificationSearch extends Notification
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'admin_id' => $this->admin_id,
+            'initiator_id' => $this->initiator_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
