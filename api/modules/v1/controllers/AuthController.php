@@ -246,5 +246,14 @@ class AuthController extends Controller
 
         return User::find()->where(['token' => $token])->one() ? true : false;
     }
+
+    public function actionReferrerCode($code)
+    {
+        $referrer = ReferrerCode::findOne(['code' => $code]);
+        if (!$referrer)
+            return (new ApiResponse)->error(null, ApiResponse::UNAUTHORIZED, 'Code is not valid');
+
+        return (new ApiResponse)->success($referrer);
+    }
 }
 

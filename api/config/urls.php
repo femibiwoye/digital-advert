@@ -14,6 +14,7 @@ return [
     'GET v1/twitter_callback' => 'v1/auth/authenticate-twitter-user',
     'GET v1/user' => 'v1/auth/user',
     'GET v1/active-status' => 'v1/auth/active-status',
+    'GET v1/referrer-code' => 'v1/auth/referrer-code',
 
     'GET v1/post/feed' => 'v1/post/all-post',
     'GET v1/post/my-post' => 'v1/post/my-post',
