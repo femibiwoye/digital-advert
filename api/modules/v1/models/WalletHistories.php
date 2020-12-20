@@ -41,7 +41,7 @@ class WalletHistories extends \yii\db\ActiveRecord
             [['type', 'reference_type'], 'string'],
             [['old_balance', 'new_balance', 'amount'], 'number'],
             [['reference_id'], 'integer'],
-            [['user_id', 'operation', 'IP'], 'string', 'max' => 191],
+            [['operation', 'IP'], 'string', 'max' => 191],
         ];
     }
 
