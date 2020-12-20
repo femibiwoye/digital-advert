@@ -234,8 +234,19 @@ class AuthController extends Controller
         return $twitterModel->save();
     }
 
-    public function actionUser()
+    public function actionUser($referrerCode = null)
     {
+        if(!empty($referrerCode) && $referrer = ReferrerCode::findOne(['code'=>$referrerCode])){
+            $newAffiliate = new AffiliateLog();
+            $newAffiliate->affiliate_code = $referrerCode;
+            $newAffiliate->user_id = Yii::$app->user->id;
+            $newAffiliate->affiliate_id = $referrer->user_id;
+            $newAffiliate->save();
+
+            $model = User::findOne(['id'=>Yii::$app->user->id]);
+            $model->affilitae_id = $newAffiliate->affiliate_id;
+            $model->save();
+        }
         return (new ApiResponse)->success(User::findOne(['id' => Yii::$app->user->id]));
     }
 
