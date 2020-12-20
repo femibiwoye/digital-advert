@@ -8,6 +8,7 @@ use api\modules\v1\models\BankList;
 use api\modules\v1\models\Banks;
 use api\modules\v1\models\Checkouts;
 use api\modules\v1\models\Payments;
+use api\modules\v1\models\User;
 use api\modules\v1\models\WalletHistories;
 use api\modules\v1\models\WithdrawalRequests;
 use Yii;
@@ -45,6 +46,13 @@ class PaymentController extends Controller
         $model->attributes = Yii::$app->request->post();
         if (!$model->validate()) {
             return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
+        }
+
+        if($model->type =='wallet')
+        {
+            $user = User::findOne(['id'=>Yii::$app->user->id]);
+            $user->wallet_balance += $model->amount;
+            $user->save();
         }
 
         if (!$model->save())
