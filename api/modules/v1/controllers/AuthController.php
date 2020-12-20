@@ -244,7 +244,7 @@ class AuthController extends Controller
             $newAffiliate->save();
 
             $model = User::findOne(['id'=>Yii::$app->user->id]);
-            $model->affilitae_id = $newAffiliate->affiliate_id;
+            $model->affiliate_id = $newAffiliate->affiliate_id;
             $model->save();
         }
         return (new ApiResponse)->success(User::findOne(['id' => Yii::$app->user->id]));
