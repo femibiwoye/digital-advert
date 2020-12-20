@@ -51,8 +51,17 @@ class PaymentController extends Controller
         if($model->type =='wallet')
         {
             $user = User::findOne(['id'=>Yii::$app->user->id]);
+            $wallet = new WalletHistories();
+            $wallet->old_balance = $user->wallet_balance;
             $user->wallet_balance += $model->amount;
+
+            $wallet->user_id = Yii::$app->user->id;
+            $wallet->new_balance = $user->wallet_balance;
+            $wallet->IP = Yii::$app->request->userIP;
+            $wallet->type = 'credit';
             $user->save();
+            $wallet->save();
+
         }
 
         if (!$model->save())
