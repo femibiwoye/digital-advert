@@ -34,8 +34,8 @@ class WalletHistories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
-            [['user_id', 'type', 'old_balance', 'new_balance', 'IP','amount'], 'required'],
+            [['created_at', 'updated_at', 'IP'], 'safe'],
+            [['user_id', 'type', 'old_balance', 'new_balance','amount'], 'required'],
             [['type'], 'string'],
             [['old_balance', 'new_balance'], 'number'],
             [['user_id', 'operation', 'IP'], 'string', 'max' => 191],

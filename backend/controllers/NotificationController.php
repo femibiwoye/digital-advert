@@ -77,29 +77,28 @@ class NotificationController extends Controller
     {
         $model = new Notification();
 
-        if ($model->load(Yii::$app->request->post())){
+        if ($model->load(Yii::$app->request->post())) {
 
-            if($model->generality=='user'){
-                $user = User::find()->select(['id','name'])->all();
-
-                $model->admin_id = Yii::$app->user->id;
-
-            } else if($model->generality == 'general'){
-                $model->admin_id = Yii::$app->user->id;
-           
-            } 
-
-            $model->admin_id = Yii::$app->user->id;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->generality == 'user') {
+                foreach ($model->user_id as $id) {
+                    $modelUser = new Notification();
+                    $modelUser->attributes = $model->attributes;
+                    $modelUser->user_id = $id;
+                    $modelUser->initiator_id = Yii::$app->user->id;
+                    $modelUser->save();
+                }
+                return $this->redirect(['view', 'id' => $modelUser->id]);
+            } else {
+                $model->initiator_id = Yii::$app->user->id;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
     }
-
-   
 
 
     /**

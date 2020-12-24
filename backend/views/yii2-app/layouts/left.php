@@ -11,10 +11,10 @@
                     ['label' => 'Admin', 'icon' => 'user', 'url' => ['/admin']],
                     ['label' => 'Posts', 'icon' => 'list', 'url' => ['/posts']],
                     ['label' => 'Users', 'icon' => 'users', 'url' => ['/user']],
-                    ['label' => 'Banks', 'icon' => 'bank', 'url' => ['/banks']],
-                    ['label' => 'Checkout', 'icon' => 'arrow-right', 'url' => ['/checkouts']],
+                    ['label' => 'Banks', 'icon' => 'bank', 'url' => ['/bank-list']],
+                    ['label' => 'Post Checkout', 'icon' => 'arrow-right', 'url' => ['/checkouts']],
 
-                    ['label' => 'withdrawal', 'icon' => 'bank', 'url' => ['/withdrawal-requests']],
+                    ['label' => 'Balance withdrawal', 'icon' => 'bank', 'url' => ['/withdrawal-requests']],
                     ['label' => 'Wallet-Histories', 'icon' => 'history', 'url' => ['/wallet-histories']],
                     ['label' => 'Notification', 'icon' => 'bell', 'url' => ['/notification']],
                     ['label' => 'Verification', 'icon' => 'thumbs-up', 'url' => ['/verifications']],

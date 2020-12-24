@@ -4,18 +4,15 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\BanksSearch */
+/* @var $searchModel common\models\BankListSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Banks';
+$this->title = 'Bank Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="banks-index">
-
-    
-
+<div class="bank-list-index">
     <p>
-        <?= Html::a('Create Banks', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Bank', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,16 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             //'id',
-            'user.name',
-            'bank_name',
-            'account_name',
+            //'slug',
+            'name',
+            ['attribute' => 'status', 'value' => function ($model) {
+                return $model->status == 1 ? 'Active' : 'Inactive';
+            }],
             'created_at',
             //'updated_at',
-            //'account_name',
-            //'account_number',
-            //'approval_status',
+            //'created_by',
+            //'updated_by',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

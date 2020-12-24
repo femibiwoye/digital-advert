@@ -3,7 +3,7 @@
 use Codeception\Command\Shared\Style;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\Url;
+use kartik\select2\Select2;
 use common\models\User;
 use yii\helpers\ArrayHelper;
 
@@ -27,7 +27,13 @@ use yii\helpers\ArrayHelper;
   
     ])?>
 
-    <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(),'id','name'),['style'=>'display:none', 'id'=>'user', 'prompt'=>'Select User'])->label(false)?>
+    <div style="display:none" id="user">
+    <?= $form->field($model, 'user_id')->widget(Select2::classname(), [
+    'data' => ArrayHelper::map(User::find()->where(['<>','status',0])->all(),'id','name'),
+    'options' => ['multiple' => true,'placeholder' => 'Select user',],
+
+]);?>
+    </div>
 
 
 

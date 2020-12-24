@@ -96,14 +96,14 @@ class WithdrawalRequestsController extends Controller
     public function actionApprove($id)
     {
        
-        $model = $this->findModel($id);
-        $user = User::findOne(['id' => $model->user_id]);
-        $wallet = new WalletHistories();
-            
-            if($user->wallet_balance >= $model->amount){
+        if($model = WithdrawalRequests::findOne(['id'=>$id,'approval_status'=>0])) {
+            $user = User::findOne(['id' => $model->user_id]);
+            $wallet = new WalletHistories();
+
+            if ($user->wallet_balance >= $model->amount) {
                 //old balance
                 $old_balance = $user->wallet_balance;
-        
+
                 //new balance
                 $new_amount = ($user->wallet_balance - $model->amount);
                 $new_balance = $new_amount;
@@ -114,16 +114,22 @@ class WithdrawalRequestsController extends Controller
                 $wallet->old_balance = $old_balance;
                 $wallet->new_balance = $new_balance;
                 $wallet->amount = $model->amount;
-
+                $wallet->type = 'debit';
                 //save records
-                $user->save();
-                $wallet->save(false);
-                Yii::$app->session->setFlash('success', "Withdrawal Approved!");
-            }else
-              Yii::$app->session->setFlash('error', "Not enough funds!"); 
-        return $this->render('view', [
-            'model' => $model,
-        ]);
+                if ($user->save() && $wallet->save()) {
+                    $model->approved_by = Yii::$app->user->id;
+                    $model->approval_status = 1;
+                    $model->save();
+                    Yii::$app->session->setFlash('success', "Withdrawal Approved!");
+                }
+
+            } else
+                Yii::$app->session->setFlash('error', "Not enough funds!");
+        }else{
+            Yii::$app->session->setFlash('error', "Your request was not successful");
+        }
+
+            return $this->redirect(Yii::$app->request->referrer);
     }
 
 
@@ -171,7 +177,7 @@ class WithdrawalRequestsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = WithdrawalRequests::findOne($id)) !== null) {
+        if (($model = WithdrawalRequests::findOne(['id'=>$id])) !== null) {
             return $model;
         }
 

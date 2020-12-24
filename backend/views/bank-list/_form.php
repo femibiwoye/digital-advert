@@ -4,20 +4,18 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Banks */
+/* @var $model common\models\BankList */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="banks-form">
+<div class="bank-list-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'bank_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'account_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'account_number')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

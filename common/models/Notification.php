@@ -12,7 +12,7 @@ use Yii;
  * @property string $title
  * @property string $description
  * @property string $generality
- * @property int|null $admin_id
+ * @property int|null $initiator_id
  * @property string|null $created_at
  * @property string|null $updated_at
  */
@@ -32,7 +32,7 @@ class Notification extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'admin_id'], 'integer'],
+            [['user_id', 'initiator_id'], 'integer'],
             [['title', 'description'], 'required'],
             [['description', 'generality'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
@@ -45,7 +45,7 @@ class Notification extends \yii\db\ActiveRecord
     }
 
     public function getAdmin(){
-        return $this->hasOne(Admin::className(),['id'=>'admin_id']);
+        return $this->hasOne(Admin::className(),['id'=>'initiator_id']);
     }
     /**
      * {@inheritdoc}
@@ -58,7 +58,7 @@ class Notification extends \yii\db\ActiveRecord
             'title' => 'Title',
             'description' => 'Description',
             'generality' => 'Generality',
-            'admin_id' => 'Admin ID',
+            'initiator_id' => 'Initiator',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

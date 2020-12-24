@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Payments;
+use common\models\Settings;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\WalletHistories;
@@ -30,6 +32,7 @@ $amount = WalletHistories::find()->alias('wh')->innerJoin('posts p')
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'id',
             'name',
             [
                 'attribute' => 'image',
@@ -38,7 +41,9 @@ $amount = WalletHistories::find()->alias('wh')->innerJoin('posts p')
             ],
             [
                 'label' => 'Amount Earned',
-                'value' => $amount ? $amount->new_balance : '0.00',
+                'value' => function ($model) {
+                    return (Payments::find()->where(['user_id' => $model->id])->sum('amount') / 100) * Settings::findOne(['key_word' => 'user_share_point'])->value;
+                },
             ],
             'phone_number',
             'email',
