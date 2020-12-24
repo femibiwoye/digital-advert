@@ -24,9 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'user.name',
             'amount',
+            'method',
+            'approval.name',
+            ['attribute'=>'approval_status','value' => function($model){
+        return $model->approval_status == 1?'Approved':'Not approved';
+            }],
             'created_at',
             //'updated_at',
-            //'method',
 
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
         ],

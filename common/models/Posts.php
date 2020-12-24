@@ -79,6 +79,10 @@ class Posts extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
+    public function getCheckout(){
+        return $this->hasOne(Checkouts::className(),['post_id'=>'id']);
+    }
+
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {

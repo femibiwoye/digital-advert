@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?php if($model->is_approved == 0) echo Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'platforms', 'value' => is_array($model->platforms) ? implode(',', $model->platforms):$model->platforms],
             'is_approved',
             'is_promoted',
+            ['value'=>isset($model->checkout) && !empty($model->checkout->payment_id) ? 'Paid' : 'Not paid','label'=>'Payment Status'],
             'comment_count',
             'like_count',
             'boost_amount',
@@ -50,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'retweet_post_id',
             'is_posted_to_twitter',
             'raw:ntext',
+
         ],
     ]) ?>
 

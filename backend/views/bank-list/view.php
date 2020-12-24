@@ -4,15 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Banks */
+/* @var $model common\models\BankList */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Banks', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Bank Lists', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="banks-view">
+<div class="bank-list-view">
 
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,13 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'slug',
+            'name',
+            'status',
             'created_at',
             'updated_at',
-            'user_id',
-            'bank_name',
-            'account_name',
-            'account_number',
-            'approval_status',
+            'created_by',
+            'updated_by',
         ],
     ]) ?>
 

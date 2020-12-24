@@ -76,7 +76,7 @@ class BusinessController extends Controller
                 'is_approved' => 1,
                 'is_promoted' => 1,
                 'affiliate_id' => Yii::$app->user->id
-            ])
+            ])->innerJoin('payments','payments.user_id = users.id')
         ]);
 
         return $this->render('paid-businesses', [

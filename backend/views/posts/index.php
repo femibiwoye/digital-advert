@@ -32,6 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'media:ntext',
             //'platforms:ntext',
             'is_approved',
+
+            ['label' => 'Payment Status', 'value' => function ($model) {
+                return isset($model->checkout) && !empty($model->checkout->payment_id) ? 'Paid' : 'Not paid';
+            }],
+            'is_posted_to_twitter',
             'created_at',
             //'is_promoted',
             //'comment_count',
@@ -39,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'boost_amount',
             //'tweet_id',
             //'retweet_post_id',
-            //'is_posted_to_twitter',
             //'raw:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],

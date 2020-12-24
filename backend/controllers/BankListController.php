@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Banks;
-use common\models\BanksSearch;
+use common\models\BankList;
+use common\models\BankListSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * BanksController implements the CRUD actions for Banks model.
+ * BankListController implements the CRUD actions for BankList model.
  */
-class BanksController extends Controller
+class BankListController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class BanksController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => (!\Yii::$app->user->isGuest && Yii::$app->user->identity->level == 'super') ? true : false,
+                        'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
@@ -40,12 +40,12 @@ class BanksController extends Controller
     }
 
     /**
-     * Lists all Banks models.
+     * Lists all BankList models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BanksSearch();
+        $searchModel = new BankListSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -55,8 +55,8 @@ class BanksController extends Controller
     }
 
     /**
-     * Displays a single Banks model.
-     * @param string $id
+     * Displays a single BankList model.
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -68,17 +68,15 @@ class BanksController extends Controller
     }
 
     /**
-     * Creates a new Banks model.
+     * Creates a new BankList model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Banks();
+        $model = new BankList();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->user_id = Yii::$app->user->id; 
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -88,9 +86,9 @@ class BanksController extends Controller
     }
 
     /**
-     * Updates an existing Banks model.
+     * Updates an existing BankList model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -108,9 +106,9 @@ class BanksController extends Controller
     }
 
     /**
-     * Deletes an existing Banks model.
+     * Deletes an existing BankList model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -122,15 +120,15 @@ class BanksController extends Controller
     }
 
     /**
-     * Finds the Banks model based on its primary key value.
+     * Finds the BankList model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Banks the loaded model
+     * @param integer $id
+     * @return BankList the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Banks::findOne($id)) !== null) {
+        if (($model = BankList::findOne($id)) !== null) {
             return $model;
         }
 

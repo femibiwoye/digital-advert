@@ -48,9 +48,8 @@ class PaymentController extends Controller
             return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
         }
 
-        if($model->type =='wallet')
-        {
-            $user = User::findOne(['id'=>Yii::$app->user->id]);
+        if ($model->type == 'wallet') {
+            $user = User::findOne(['id' => Yii::$app->user->id]);
             $wallet = new WalletHistories();
             $wallet->old_balance = $user->wallet_balance;
             $user->wallet_balance += $model->amount;
@@ -126,6 +125,17 @@ class PaymentController extends Controller
 
         if (!$model->save())
             return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
+
+        $wallet = new WalletHistories();
+        $wallet->reference_type = 'withdraw';
+        $wallet->reference_id = $model->id;
+        $wallet->amount = $model->amount;
+        $wallet->old_balance = Yii::$app->user->identity->wallet_balance;
+        $wallet->new_balance = Yii::$app->user->identity->wallet_balance - $model->amount;
+        $wallet->user_id = $model->user_id;
+        $wallet->type = 'pending';
+        $wallet->IP = Yii::$app->request->userIP;
+        $wallet->save();
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }

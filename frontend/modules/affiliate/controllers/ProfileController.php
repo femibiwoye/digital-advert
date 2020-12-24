@@ -105,7 +105,7 @@ class ProfileController extends Controller
 
                 if ($model->save()) { //update is successful
                     Yii::$app->session->setFlash('success', 'Password updated');
-                    return $this->refresh();
+                    return $this->redirect(['/affiliate']);
                 } else { //update was not successful
                     Yii::$app->session->setFlash('danger', 'Try again');
                 }

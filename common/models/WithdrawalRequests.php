@@ -12,6 +12,8 @@ use Yii;
  * @property string|null $updated_at
  * @property string $user_id
  * @property string $amount
+ * @property int $approval_status
+ * @property int $approved_by
  * @property string $method
  */
 class WithdrawalRequests extends \yii\db\ActiveRecord
@@ -30,7 +32,7 @@ class WithdrawalRequests extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'approval_status', 'approved_by'], 'safe'],
             [['user_id', 'amount', 'method'], 'required'],
             [['method'], 'string'],
             [['user_id', 'amount'], 'string', 'max' => 191],
@@ -56,8 +58,11 @@ class WithdrawalRequests extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
-    public function getAccount_number(){
+    public function getBank(){
         return $this->hasOne(Banks::className(),['user_id'=>'user_id']);
+    }
+    public function getApproval(){
+        return $this->hasOne(Admin::className(),['id'=>'approved_by']);
     }
 
     public function beforeSave($insert)

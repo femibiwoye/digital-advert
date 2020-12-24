@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Payments;
+use common\models\Settings;
 use common\models\WalletHistories;
 
 /* @var $this yii\web\View */
@@ -15,30 +17,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
 
     <div class="business-index">
-        
+
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             //'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
+                'id',
                 'name',
                 //'image_path',
                 [
                     'label' => 'Amount Earned',
-                    'value' => function($index, $model, $url){
-
-                        $amount = WalletHistories::find()->alias('wh')
-                            ->innerJoin('posts p','p.id = wh.reference_id')
-                            ->innerJoin('users u','u.id = p.user_id')
-                        ->where([
-                            'wh.user_id' => Yii::$app->user->id,
-                            'wh.reference_type' => 'ad',
-                            'u.affiliate_id'=>Yii::$app->user->id
-                            ])
-                        ->sum('amount');
-
-                        return $amount; // ? $amount->new_balance : '0.00';
+                    'value' => function ($model) {
+                        return (Payments::find()->where(['user_id' => $model->id])->sum('amount') / 100) * Settings::findOne(['key_word' => 'user_share_point'])->value;
                     },
                 ],
                 'phone_number',

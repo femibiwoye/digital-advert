@@ -3,15 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Banks */
+/* @var $model common\models\BankList */
 
-$this->title = 'Create Banks';
-$this->params['breadcrumbs'][] = ['label' => 'Banks', 'url' => ['index']];
+$this->title = 'Create Bank List';
+$this->params['breadcrumbs'][] = ['label' => 'Bank Lists', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="banks-create">
-
-    
+<div class="bank-list-create">
 
     <?= $this->render('_form', [
         'model' => $model,

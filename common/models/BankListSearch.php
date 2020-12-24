@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Notification;
+use common\models\BankList;
 
 /**
- * NotificationSearch represents the model behind the search form of `common\models\Notification`.
+ * BankListSearch represents the model behind the search form of `common\models\BankList`.
  */
-class NotificationSearch extends Notification
+class BankListSearch extends BankList
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class NotificationSearch extends Notification
     public function rules()
     {
         return [
-            [['id', 'user_id', 'initiator_id'], 'integer'],
-            [['title', 'description', 'generality', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['slug', 'name', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class NotificationSearch extends Notification
      */
     public function search($params)
     {
-        $query = Notification::find();
+        $query = BankList::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,15 @@ class NotificationSearch extends Notification
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'initiator_id' => $this->initiator_id,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'generality', $this->generality]);
+        $query->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
