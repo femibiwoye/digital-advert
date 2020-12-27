@@ -21,6 +21,8 @@ use Yii;
  * @property int $boost_amount
  * @property string $tweet_id
  * @property string $retweet_post_id
+ * @property string $payment_method
+ * @property string $payment_reference
  * @property int $is_posted_to_twitter
  * @property string|null $raw
  * @property string|null $start_at
@@ -42,10 +44,10 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'media', 'platforms'], 'safe'],
-            [['user_id', 'content', 'media', 'platforms'], 'required'],
+            [['created_at', 'updated_at', 'media', 'platforms','payment_reference'], 'safe'],
+            [['user_id', 'content', 'media', 'platforms', 'payment_method'], 'required'],
             [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
-            [['content', 'raw', 'start_at', 'end_at'], 'string'],
+            [['content', 'raw', 'start_at', 'end_at','payment_method','payment_reference'], 'string'],
             [['tweet_id', 'retweet_post_id'], 'string', 'max' => 191],
         ];
     }
@@ -109,9 +111,9 @@ class Posts extends \yii\db\ActiveRecord
     {
         $return = [
             'likes' => PostLikes::find()->where(['post_id' => $this->id])->count(),
-            'comments' => PostComments::find()->where(['post_id'=>$this->id])->count(),
+            'comments' => PostComments::find()->where(['post_id' => $this->id])->count(),
             'impression' => 0,
-            'reached' => PostView::find()->where(['post_id'=>$this->id])->count(),
+            'reached' => PostView::find()->where(['post_id' => $this->id])->count(),
             'points' => 0,
             'hasDuration' => false,
             'durationLeft' => 1800
