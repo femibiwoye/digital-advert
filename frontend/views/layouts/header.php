@@ -12,7 +12,7 @@ $module = Yii::$app->controller->module->id;
             <!-- Brand Logo-->
             <div class="brand-logo"><a href="<?= Yii::$app->homeUrl ?>"><img src="<?= Url::to('@web/') ?>img/logo.png" alt=""></a></div>
             <div class="collapse navbar-collapse" id="mobile-menu">
-                <div class="navbar-nav ml-lg-auto mr--10">
+                <div class="navbar-nav ml-lg-auto ml--10 mr--10">
                     <ul class="navbar-nav main-menu">
                         <li class="nav-item ">
                             <a class="nav-link " id="" href="<?= Yii::$app->homeUrl ?>" aria-expanded="false">Home</a>
@@ -37,7 +37,7 @@ $module = Yii::$app->controller->module->id;
 
             <div class="header-btns ml-auto ml-lg-0">
                 <?php if(Yii::$app->user->isGuest){?>
-                <a class="btn btn--primary btn-header hvr-bounce-to-left myLinkToTop" href="#">Download App</a>
+                <a class="btn btn--primary btn-header hvr-bounce-to-left myLinkToTop" href="<?=Yii::$app->params['androidUrl']?>">Download App</a>
                 <?php }else{ ?>
                     <a class="btn btn--primary btn-header hvr-bounce-to-left myLinkToTop" href="<?=Url::to(['/affiliate'])?>">Dashboard</a>
                 <?php } ?>
