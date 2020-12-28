@@ -42,7 +42,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
                     <h1 class="title">BE MOTIVATED TO ENGAGE</h1>
                     <p> Morerave is a micro-influencer platform that leverages Social Media to accelerate your marketing, engage your audience, boost your conversion and sales. </p>
                     <div class="hero-btn">
-                        <a href="<?=Url::to('@web/apps/morerave.apk')?>" class="btn--primary hvr-bounce-to-left">Download App</a>
+                        <a href="<?=Yii::$app->params['androidUrl']?>" class="btn--primary hvr-bounce-to-left">Download App</a>
 <!--                        <a href="https://www.youtube.com/watch?v=AOVRKqYy-Z0" class="excerpt video-link"-->
 <!--                           data-fancybox><i class="icon icon-triangle-right-17-2"></i> Watch the intro video</a>-->
                     </div>
@@ -94,7 +94,7 @@ $this->title = 'BE MOTIVATED TO ENGAGE';
                         Morerave gives you buck-for-buck social engagement that matter to your business and gives you value for your marketing budget.
                     </p>
                     <div class="content-btn  d-flex justify-content-center">
-                        <a href="<?=Url::to('@web/apps/morerave.apk')?>" class="btn--secondary hvr-bounce-to-left">Start your marketing</a>
+                        <a href="<?=Yii::$app->params['androidUrl']?>" class="btn--secondary hvr-bounce-to-left">Start your marketing</a>
                     </div>
                 </div>
             </div>

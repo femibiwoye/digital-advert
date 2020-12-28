@@ -20,5 +20,6 @@ return [
     'TwitterConsumerSecret'=>TWITTER_CONSUMER_SECRET,
     'TwitterAccessToken'=>TWITTER_ACCESS_TOKEN,
     'TwitterAccessTokenSecret'=>TWITTER_ACCESS_TOKEN_SECRET,
+    'androidUrl'=>'https://drive.google.com/file/d/11bHmOaS6M4iKXHE9IXY29Ob8EefNtL01/view?usp=sharing'
     //'s3BaseUrl'=>'https://morerave.s3.eu-west-2.amazonaws.com/'
 ];
