@@ -12,7 +12,7 @@ $module = Yii::$app->controller->module->id;
             <!-- Brand Logo-->
             <div class="brand-logo"><a href="<?= Yii::$app->homeUrl ?>"><img src="<?= Url::to('@web/') ?>img/logo.png" alt=""></a></div>
             <div class="collapse navbar-collapse" id="mobile-menu">
-                <div class="navbar-nav ml-lg-auto mr--10">
+                <div class="navbar-nav ml-lg-auto ml--10 mr--10">
                     <ul class="navbar-nav main-menu">
                         <li class="nav-item ">
                             <a class="nav-link " id="" href="<?= Yii::$app->homeUrl ?>" aria-expanded="false">Home</a>
