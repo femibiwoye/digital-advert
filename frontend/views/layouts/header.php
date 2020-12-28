@@ -37,7 +37,7 @@ $module = Yii::$app->controller->module->id;
 
             <div class="header-btns ml-auto ml-lg-0">
                 <?php if(Yii::$app->user->isGuest){?>
-                <a class="btn btn--primary btn-header hvr-bounce-to-left myLinkToTop" href="#">Download App</a>
+                <a class="btn btn--primary btn-header hvr-bounce-to-left myLinkToTop" href="<?=Url::to('@web/apps/morerave.apk')?>">Download App</a>
                 <?php }else{ ?>
                     <a class="btn btn--primary btn-header hvr-bounce-to-left myLinkToTop" href="<?=Url::to(['/affiliate'])?>">Dashboard</a>
                 <?php } ?>
