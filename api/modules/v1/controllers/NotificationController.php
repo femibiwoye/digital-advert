@@ -40,12 +40,32 @@ class NotificationController extends Controller
 
     public function actionIndex()
     {
-        $model = Notification::find()->all();
+        $model = Notification::find()
+            ->where(['generality' => ['general', 'affiliate']])
+            ->orWhere(['user_id' => Yii::$app->user->id])
+            ->all();
 
         if (!$model)
             return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
 
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+    }
+
+    public function actionViewStatus($id)
+    {
+        $model = Notification::find()
+            ->where(['id' => $id, 'generality' => ['general', 'affiliate']])
+            ->orWhere(['user_id' => Yii::$app->user->id])->one();
+        if ($model) {
+            $model->view_status = 1;
+            if ($model->save()) {
+                return (new ApiResponse)->success(true, ApiResponse::SUCCESSFUL);
+            } else {
+                return (new ApiResponse)->success(false, ApiResponse::SUCCESSFUL);
+            }
+        }
+
+        return (new ApiResponse)->success(null, ApiResponse::SUCCESSFUL);
     }
 }
 
