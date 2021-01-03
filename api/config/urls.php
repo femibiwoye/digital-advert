@@ -47,6 +47,7 @@ return [
 
 
     'GET v1/notification'=>'v1/notification/index',
+    'PUT v1/notification'=>'v1/notification/view-status',
 
     'POST v1/report/<type:[a-zA-Z]+>'=>'v1/general/report-post',
     'DELETE v1/delete-account'=>'v1/general/delete-account',
