@@ -32,6 +32,7 @@ return [
     'GET v1/general/settings'=>'v1/general/settings',
     'POST v1/general/submit-verification'=>'v1/general/submit-verification',
     'GET v1/general/verification'=>'v1/general/my-verification',
+    'DELETE v1/general/verification'=>'v1/general/delete-verification',
     'POST v1/general/profile-image'=>'v1/general/profile-image',
     'GET v1/general/search'=>'v1/general/search',
 

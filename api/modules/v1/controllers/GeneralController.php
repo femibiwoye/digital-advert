@@ -96,6 +96,15 @@ class GeneralController extends Controller
         return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
     }
 
+    public function actionDeleteVerification()
+    {
+        if (!$model = Verifications::find()->where(['user_id' => Yii::$app->user->id])->one()) {
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'No verification submitted');
+        }
+
+        return (new ApiResponse)->success($model->delete(), ApiResponse::SUCCESSFUL);
+    }
+
     public function actionProfileImage()
     {
         $image = Yii::$app->request->post('image');
