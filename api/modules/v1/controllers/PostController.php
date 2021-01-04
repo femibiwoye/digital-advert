@@ -9,6 +9,7 @@ use api\modules\v1\models\PostComments;
 use api\modules\v1\models\PostLikes;
 use api\modules\v1\models\Posts;
 use api\modules\v1\models\PostView;
+use api\modules\v1\models\Settings;
 use api\modules\v1\models\TwitterAccounts;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -131,7 +132,7 @@ class PostController extends Controller
 
     public function actionComments($post_id)
     {
-        $model = PostComments::findAll(['post_id' => $post_id,'status'=>1]);
+        $model = PostComments::findAll(['post_id' => $post_id, 'status' => 1]);
 
         if (!$model)
             return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
@@ -156,6 +157,8 @@ class PostController extends Controller
 
     public function actionRetweetPost()
     {
+
+
         $model = new PostComments();
         $model->user_id = Yii::$app->user->id;
         $model->type = 'share';
@@ -164,18 +167,25 @@ class PostController extends Controller
             return (new ApiResponse)->error($model->getErrors(), ApiResponse::VALIDATION_ERROR);
         }
 
+//        if (PostComments::find()->where(['user_id' => Yii::$app->user->id, 'post_id' => $model->post_id])->exists()) {
+//            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'You cannot share the same post twice');
+//        }
+
         if (!$model->save())
             return (new ApiResponse)->error($model, ApiResponse::UNABLE_TO_PERFORM_ACTION);
 
-        if($twitterAccount = TwitterAccounts::find()->where(['user_id'=>Yii::$app->user->id])->one()) {
+        if ($twitterAccount = TwitterAccounts::find()->where(['user_id' => Yii::$app->user->id])->one()) {
             $status_id = $model->post->tweet_id;
             $media = $model->media;
             //$connection = Utility::TwitterConnection($twitterAccount->oauth_token,$twitterAccount->oauth_token_secret);
+            //$token = 'ZOZCwlvwwXcG9JZ6yljAsRQlkHWGEJoEhC9-RbR2BXuccv5iqbaNi2vFleNVidGf7iPTrh5HpqIGkAdGx58HzVAWLI2sCQLu2LZfe2tkV_erN62TlM8EffLxq6guIgwSVQFFDtR38OFkzMRTmqvxtd1DACVEyOD8C_pPXYSAxOLbowK5awKMa4TKEDsJxKcSg0-kn2tD';
+            //  $tokenStr = '94iGAQAAAAABHor0AAABdsox9bI';
+            //$connection = Utility::TwitterConnection($tokenStr,$token);
             $connection = Utility::TwitterConnection();
             $path = Url::to("@webfolder/images/tmp");
             Utility::CreateFolder($path);
-            if (!empty($media) && $media != "[]") {
 
+            if (!empty($media) && $media != "[]") {
                 if (is_array($media)) {
                     $upload = [];
                     foreach ($media as $m) {
@@ -189,7 +199,14 @@ class PostController extends Controller
                 }
             }
 
-            if ($response = $connection->post('statuses/update', array('in_reply_to_status_id' => $status_id, 'status' => $model->comment, 'media_ids' => $data['media_ids']))) {
+            $reply = ['in_reply_to_status_id' => $status_id, 'status' => $model->comment];
+            if (isset($data['media_ids'])) {
+                $reply = array_merge($reply, ['media_ids' => $data['media_ids']]);
+            }
+
+            if ($response = $connection->post('statuses/update', $reply)) {
+                $earned = Settings::findOne(['key_word' => 'user_share_point']);
+                Utility::UpdateWallet($earned->value, 'credit');
                 $model->tweet_id = $response->id_str;
                 $model->raw = json_encode($response);
                 $model->status = 1;

@@ -3,6 +3,8 @@
 namespace api\components;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use api\modules\v1\models\User;
+use api\modules\v1\models\WalletHistories;
 use Yii;
 use yii\base\Model;
 
@@ -53,5 +55,22 @@ class Utility extends Model
             mkdir($folder, 0777, true);
         }
         return true;
+    }
+
+    public static function UpdateWallet($amount,$type)
+    {
+        $user = User::findOne(['id'=>Yii::$app->user->id]);
+        $tempBalance = $user->wallet_balance;
+        $user->wallet_balance += $amount;
+        if($user->save()){
+            $wallet = new WalletHistories();
+            $wallet->old_balance = $tempBalance;
+            $wallet->amount = $amount;
+            $wallet->user_id = Yii::$app->user->id;
+            $wallet->new_balance = $user->wallet_balance;
+            $wallet->IP = Yii::$app->request->userIP;
+            $wallet->type = $type;
+            $wallet->save();
+        }
     }
 }
