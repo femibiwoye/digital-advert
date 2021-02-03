@@ -7,6 +7,7 @@ use api\components\Utility;
 use api\modules\v1\models\AffiliateLog;
 use api\modules\v1\models\TwitterAccounts;
 use api\modules\v1\models\ReferrerCode;
+use api\modules\v1\models\SignupForm;
 use common\models\UserModel;
 use Yii;
 use api\modules\v1\models\{Login, User, ApiResponse, PasswordResetRequestForm, ResetPasswordForm};
@@ -58,8 +59,6 @@ class AuthController extends Controller
         $model->attributes = Yii::$app->request->post();
         if ($model->validate() && $user = $model->login()) {
             $user->updateAccessToken();
-            if ($user->type == 'school')
-                $user = array_merge(ArrayHelper::toArray($user), Utility::getSchoolAdditionalData($user->id));
             return (new ApiResponse)->success($user, null, 'Login is successful');
         } else {
             return (new ApiResponse)->error($model->getErrors(), ApiResponse::NON_AUTHORITATIVE, 'You provided invalid login details');
@@ -69,32 +68,24 @@ class AuthController extends Controller
     /**
      * Signup action
      *
-     * @param $type
      * @return ApiResponse
      * @throws \yii\db\Exception
      */
-    public function actionSignup($type)
+    public function actionSignup()
     {
-        if (!in_array($type, SharedConstant::ACCOUNT_TYPE)) {
-            return (new ApiResponse)->error(null, ApiResponse::NOT_FOUND, 'This is an unknown user type');
-        }
-
-        $form = new SignupForm(['scenario' => "$type-signup"]);
+        $form = new SignupForm();
         $form->attributes = Yii::$app->request->post();
         if (!$form->validate()) {
-            return (new ApiResponse)->error($form->getErrors(), ApiResponse::UNABLE_TO_PERFORM_ACTION);
+            return (new ApiResponse)->error($form->getErrors(), ApiResponse::VALIDATION_ERROR);
         }
 
-        if (!$user = $form->signup($type)) {
+        if (!$user = $form->signup()) {
             return (new ApiResponse)->error($form->getErrors(), ApiResponse::UNABLE_TO_PERFORM_ACTION, 'User is not created successfully');
         }
 
         $user->updateAccessToken();
-        if ($user->type == 'school')
-            $user = array_merge(ArrayHelper::toArray($user), Utility::getSchoolAdditionalData($user->id));
 
-
-        return (new ApiResponse)->success($user, null, 'You have successfully signed up as a' . $type);
+        return (new ApiResponse)->success($user, null, 'You have successfully signed up');
     }
 
 

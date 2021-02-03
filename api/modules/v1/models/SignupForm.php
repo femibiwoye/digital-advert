@@ -1,35 +1,33 @@
 <?php
 
-namespace app\modules\v1\models;
+namespace api\modules\v1\models;
 
 
+use api\modules\v1\models\User;
 use Yii;
 use yii\base\Model;
 
 class SignupForm extends Model
 {
-
-    public $first_name;
-    public $last_name;
+    public $name;
     public $phone;
-    public $username;
     public $email;
     public $password;
 
     public function rules()
     {
         return [
-            [['first_name', 'last_name','username', 'password'], 'required'],
-            [['first_name', 'last_name', 'password'], 'filter', 'filter' => 'trim'],
+            [['name', 'phone', 'password', 'email'], 'required'],
+            [['name', 'email', 'password'], 'filter', 'filter' => 'trim'],
 
             ['email', 'trim'],
             ['email', 'email', 'message' => 'Provide a valid email address'],
             ['email', 'string', 'min' => 8, 'max' => 50],
-            ['email', 'unique', 'targetClass' => 'app\modules\v2\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => 'api\modules\v1\models\User', 'message' => 'This email address has already been taken.'],
             ['email', 'match', 'pattern' => "/^[@a-zA-Z0-9+._-]+$/", 'message' => "Email can only contain letters, numbers or any of these special characters [@._-]"],
 
             ['phone', 'trim'],
-            ['phone', 'unique', 'targetClass' => 'app\modules\v1\models\User', 'message' => 'This phone number has already been taken.'],
+            ['phone', 'unique', 'targetClass' => 'api\modules\v1\models\User', 'message' => 'This phone number has already been taken.'],
             ['phone', 'string', 'min' => 11, 'max' => 14],
             ['phone', 'match', 'pattern' => '/(^[0]\d{10}$)|(^[\+]?[234]\d{12}$)/'],
 
@@ -40,21 +38,15 @@ class SignupForm extends Model
     /**
      * This is the main signup starting point
      *
-     * @param $type
      * @return User|bool
      * @throws \yii\db\Exception
      */
-    public function signup($type)
+    public function signup()
     {
-        $user = new User;
-        $user->firstname = $this->first_name;
-        $user->lastname = $this->last_name;
-        if (!empty($this->phone))
-            $user->phone = $this->phone;
-        $user->type = $type;
-        if (!empty($this->email))
-            $user->email = $this->email;
-        $user->class = $this->class;
+        $user = new User();
+        $user->name = $this->name;
+        $user->phone = $this->phone;
+        $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generatePasswordResetToken();
         $user->generateAuthKey();
