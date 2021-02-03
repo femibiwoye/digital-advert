@@ -13,7 +13,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    public $password;
+    //public $password;
 
     public static function tableName()
     {
@@ -37,7 +37,8 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             'verification_status',
             'state',
             'country',
-            'about'
+            'about',
+            'is_boarded'
         ];
 
         if (Yii::$app->controller->id != 'auth') {
@@ -114,7 +115,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     public function updateAccessToken()
@@ -183,7 +184,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
     public function getPassword()
