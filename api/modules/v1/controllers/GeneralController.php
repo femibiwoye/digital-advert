@@ -174,5 +174,14 @@ class GeneralController extends Controller
         }
         return false;
     }
+
+    public function actionUpdateBoarding()
+    {
+        if (!$model = User::findOne(['id' => Yii::$app->user->id, 'is_boarded' => 0]))
+            return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Already boarded');
+        $model->is_boarded = 1;
+        if ($model->save())
+            return (new ApiResponse)->success(true, ApiResponse::SUCCESSFUL, 'Successfully updated');
+    }
 }
 

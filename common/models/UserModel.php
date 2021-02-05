@@ -24,6 +24,7 @@ use Yii;
  * @property string|null $image_path
  * @property string $auth_key
  * @property string|null $phone
+ * @property int|null $is_boarded
  * @property int|null $status
  * @property int|null $affiliate_id
  * @property string|null $token
