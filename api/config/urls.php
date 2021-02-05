@@ -28,33 +28,33 @@ return [
     'PUT v1/post/view-post/<post_id:\d+>' => 'v1/post/view-post',
 
 
-    'GET v1/general/dashboard-statistics'=>'v1/general/dashboard-statistics',
-    'GET v1/general/settings'=>'v1/general/settings',
-    'POST v1/general/submit-verification'=>'v1/general/submit-verification',
-    'GET v1/general/verification'=>'v1/general/my-verification',
-    'DELETE v1/general/verification'=>'v1/general/delete-verification',
-    'POST v1/general/profile-image'=>'v1/general/profile-image',
-    'GET v1/general/search'=>'v1/general/search',
+    'GET v1/general/dashboard-statistics' => 'v1/general/dashboard-statistics',
+    'GET v1/general/settings' => 'v1/general/settings',
+    'POST v1/general/submit-verification' => 'v1/general/submit-verification',
+    'GET v1/general/verification' => 'v1/general/my-verification',
+    'DELETE v1/general/verification' => 'v1/general/delete-verification',
+    'POST v1/general/profile-image' => 'v1/general/profile-image',
+    'GET v1/general/search' => 'v1/general/search',
+    'GET v1/general/update-boarding' => 'v1/general/update-boarding',
 
-    'POST v1/payment/create-payment'=>'v1/payment/create-payment',
-    'POST v1/payment/create-checkout/<post_id:\d+>'=>'v1/payment/create-checkout',
-    'GET v1/payment/get-checkout'=>'v1/payment/get-checkout',
-    'GET v1/payment/wallet-history'=>'v1/payment/wallet-history',
-    'GET v1/payment/bank'=>'v1/payment/my-bank',
-    'POST v1/payment/bank'=>'v1/payment/create-bank',
-    'GET v1/payment/bank-list'=>'v1/payment/bank-list',
-    'POST v1/payment/withdrawal'=>'v1/payment/create-withdrawal',
-    'GET v1/payment/withdrawal'=>'v1/payment/get-withdrawals',
-
-
-    'GET v1/notification'=>'v1/notification/index',
-    'PUT v1/notification'=>'v1/notification/view-status',
-
-    'POST v1/report/<type:[a-zA-Z]+>'=>'v1/general/report-post',
-    'DELETE v1/delete-account'=>'v1/general/delete-account',
+    'POST v1/payment/create-payment' => 'v1/payment/create-payment',
+    'POST v1/payment/create-checkout/<post_id:\d+>' => 'v1/payment/create-checkout',
+    'GET v1/payment/get-checkout' => 'v1/payment/get-checkout',
+    'GET v1/payment/wallet-history' => 'v1/payment/wallet-history',
+    'GET v1/payment/bank' => 'v1/payment/my-bank',
+    'POST v1/payment/bank' => 'v1/payment/create-bank',
+    'GET v1/payment/bank-list' => 'v1/payment/bank-list',
+    'POST v1/payment/withdrawal' => 'v1/payment/create-withdrawal',
+    'GET v1/payment/withdrawal' => 'v1/payment/get-withdrawals',
 
 
+    'GET v1/notification' => 'v1/notification/index',
+    'PUT v1/notification' => 'v1/notification/view-status',
 
-    'POST v1/tweets/post-tweet/<post_id:\d+>'=>'v1/tweets/post-tweet',
-    'POST v1/tweets/post-retweet/<comment_id:\d+>'=>'v1/tweets/post-retweet'
+    'POST v1/report/<type:[a-zA-Z]+>' => 'v1/general/report-post',
+    'DELETE v1/delete-account' => 'v1/general/delete-account',
+
+
+    'POST v1/tweets/post-tweet/<post_id:\d+>' => 'v1/tweets/post-tweet',
+    'POST v1/tweets/post-retweet/<comment_id:\d+>' => 'v1/tweets/post-retweet'
 ];
