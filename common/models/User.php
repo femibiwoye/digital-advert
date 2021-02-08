@@ -15,6 +15,7 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $password_reset_short_code
  * @property string $verification_token
  * @property string $email
  * @property string $image_path
@@ -213,5 +214,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+        $this->password_reset_short_code = null;
     }
 }

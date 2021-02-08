@@ -116,11 +116,11 @@ class AuthController extends Controller
             return (new ApiResponse)->error($form->getErrors(), ApiResponse::UNABLE_TO_PERFORM_ACTION);
         }
 
-        if (!$form->sendEmail()) {
+        if (!$emailStatus = $form->sendEmail()) {
             return (new ApiResponse)->error(null, ApiResponse::UNAUTHORIZED);
         }
 
-        return (new ApiResponse)->success(null, ApiResponse::SUCCESSFUL, 'Email successfully sent');
+        return (new ApiResponse)->success($emailStatus, ApiResponse::SUCCESSFUL, 'Email successfully sent');
     }
 
     /**
@@ -140,6 +140,12 @@ class AuthController extends Controller
         }
 
         return (new ApiResponse)->success(null, ApiResponse::SUCCESSFUL, 'Password successfully changed');
+    }
+
+    public function actionVerifyResetCode($email, $code)
+    {
+        return (new ApiResponse)->success(User::find()->where(['email' => $email, 'password_reset_short_code' => $code])->exists(), ApiResponse::SUCCESSFUL);
+
     }
 
     public function actionToken($token)
