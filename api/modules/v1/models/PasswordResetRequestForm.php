@@ -43,9 +43,9 @@ class PasswordResetRequestForm extends Model
             return false;
         }
 
-        if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
+        //if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
             $user->generatePasswordResetToken();
-        }
+        //}
 
         if (!$user->save(false)) {
             return false;
@@ -54,6 +54,7 @@ class PasswordResetRequestForm extends Model
 //        $notification = new InputNotification();
 //        $notification->NewNotification('request_password_reset', [['user_id', $user->id]]);
 
-        return true;
+        return $user->password_reset_short_code; //To be returned
+//        return true;
     }
 }

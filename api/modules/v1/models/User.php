@@ -61,7 +61,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
 
     public function getEmailAddress()
     {
-        return empty($this->email) ? 'user' . $this->getId() . '@morerave.com':$this->email;
+        return empty($this->email) ? 'user' . $this->getId() . '@morerave.com' : $this->email;
     }
 
     public static function findIdentity($id)
@@ -163,6 +163,7 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
         date_default_timezone_set("Africa/Lagos");
         $this->token_expires = date('Y-m-d h:i:s', strtotime("+30 minute", time()));
+        $this->password_reset_short_code = mt_rand(100000, 999999);
     }
 
     public static function findByPasswordResetToken($token)
