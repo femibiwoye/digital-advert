@@ -144,8 +144,11 @@ class AuthController extends Controller
 
     public function actionVerifyResetCode($email, $code)
     {
-        return (new ApiResponse)->success(User::find()->where(['email' => $email, 'password_reset_short_code' => $code])->exists(), ApiResponse::SUCCESSFUL);
-
+        if($user = User::find()->where(['email' => $email, 'password_reset_short_code' => $code])->one())
+            $return = $user->password_reset_token;
+        else
+            $return = null;
+        return (new ApiResponse)->success($return, ApiResponse::SUCCESSFUL);
     }
 
     public function actionToken($token)
