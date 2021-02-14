@@ -23,7 +23,7 @@ return [
     'GET v1/post/pending-post' => 'v1/post/pending-post',
     'POST v1/post/likes/<post_id:\d+>' => 'v1/post/like',
     'GET v1/post/likes/<post_id:\d+>' => 'v1/post/likes',
-    'GET v1/post/comments/<post_id:\d+>' => 'v1/post/likes',
+    'GET v1/post/comments/<post_id:\d+>' => 'v1/post/comments',
     'POST v1/post/create-post' => 'v1/post/create-post',
     'POST v1/post/retweet-post' => 'v1/post/retweet-post',
     'PUT v1/post/view-post/<post_id:\d+>' => 'v1/post/view-post',

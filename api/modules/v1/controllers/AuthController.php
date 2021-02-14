@@ -154,7 +154,6 @@ class AuthController extends Controller
     public function actionToken($token)
     {
         return $token;
-
     }
 
     public function actionTwitterAuthorization($affiliate_code = null)

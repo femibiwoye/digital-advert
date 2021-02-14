@@ -49,6 +49,7 @@ class PostComments extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
+        //$fields['poster'] = 'poster';
 
         if (($key = array_search('raw', $fields)) !== false) unset($fields[$key]);
 
@@ -85,6 +86,11 @@ class PostComments extends \yii\db\ActiveRecord
     public function getPost()
     {
         return $this->hasOne(Posts::className(), ['id' => 'post_id'])->andWhere(['is_posted_to_twitter' => 1]);
+    }
+
+    public function getPoster()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id'])->select(['id','name','image_path','twitter_id','username']);
     }
 
     public function beforeSave($insert)

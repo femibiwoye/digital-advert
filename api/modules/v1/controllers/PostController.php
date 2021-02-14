@@ -48,7 +48,7 @@ class PostController extends Controller
         $provider = new ActiveDataProvider([
             'query' => $query->orderBy('id DESC'),
             'pagination' => [
-                'pageSize' => 3,
+                'pageSize' => 10,
                 'validatePage' => false,
             ],
         ]);
@@ -122,22 +122,46 @@ class PostController extends Controller
 
     public function actionLikes($post_id)
     {
-        $model = PostLikes::findAll(['post_id' => $post_id]);
+        $model = PostLikes::find()
+            ->where(['post_id' => $post_id,'like_status'=>1])
+            ->with('poster');
 
-        if (!$model)
+        if (!$model->exists())
             return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
 
-        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+        $provider = new ActiveDataProvider([
+            'query' => $model->orderBy('id DESC')->asArray(),
+            'pagination' => [
+                'pageSize' => 10,
+                'validatePage' => false,
+            ],
+        ]);
+
+        if ($provider->totalCount > 0)
+            return (new ApiResponse)->success($provider->getModels(), ApiResponse::SUCCESSFUL, 'Search result', $provider);
+        return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
     }
 
     public function actionComments($post_id)
     {
-        $model = PostComments::findAll(['post_id' => $post_id, 'status' => 1]);
+        $model = PostComments::find()
+            ->select(['id','user_id','post_id','comment','media','status','tweet_id','created_at'])
+            ->with('poster');
 
-        if (!$model)
+        if (!$model->exists())
             return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
 
-        return (new ApiResponse)->success($model, ApiResponse::SUCCESSFUL);
+        $provider = new ActiveDataProvider([
+            'query' => $model->orderBy('id DESC')->asArray(),
+            'pagination' => [
+                'pageSize' => 10,
+                'validatePage' => false,
+            ],
+        ]);
+
+        if ($provider->totalCount > 0)
+            return (new ApiResponse)->success($provider->getModels(), ApiResponse::SUCCESSFUL, 'Search result', $provider);
+        return (new ApiResponse)->error(null, ApiResponse::NO_CONTENT);
     }
 
     public function actionCreatePost()

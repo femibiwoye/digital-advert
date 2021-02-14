@@ -38,7 +38,8 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
             'state',
             'country',
             'about',
-            'is_boarded'
+            'is_boarded',
+            'isConnected',
         ];
 
         if (Yii::$app->controller->id != 'auth') {
@@ -62,6 +63,11 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
     public function getEmailAddress()
     {
         return empty($this->email) ? 'user' . $this->getId() . '@morerave.com' : $this->email;
+    }
+
+    public function getIsConnected()
+    {
+        return !empty($this->twitter_id) ? 1 : 0;
     }
 
     public static function findIdentity($id)
