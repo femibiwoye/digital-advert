@@ -52,6 +52,11 @@ class PostLikes extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getPoster()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id'])->select(['id','name','image_path','twitter_id','username']);
+    }
+
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
