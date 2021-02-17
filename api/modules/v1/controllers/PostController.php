@@ -146,6 +146,7 @@ class PostController extends Controller
     {
         $model = PostComments::find()
             ->select(['id','user_id','post_id','comment','media','status','tweet_id','created_at'])
+            ->where(['post_id'=>$post_id])
             ->with('poster');
 
         if (!$model->exists())
