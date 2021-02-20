@@ -101,7 +101,7 @@ class PostController extends Controller
             return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Post is not found!');
         }
 
-        if ($model->postLike) {
+        if ($model->myPostLike) {
             if (!$model->feedDisliked()) {
                 return (new ApiResponse)->error(null, ApiResponse::UNABLE_TO_PERFORM_ACTION, 'Post is not disliked!');
             }
