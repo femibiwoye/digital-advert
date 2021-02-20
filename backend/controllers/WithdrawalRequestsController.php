@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\WalletHistories;
 use common\models\User;
+
 /**
  * WithdrawalRequestsController implements the CRUD actions for WithdrawalRequests model.
  */
@@ -66,8 +67,8 @@ class WithdrawalRequestsController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $user_balance = User::findOne(['id'=>$model->user_id]);
-        $account_balance = Banks::findOne(['user_id'=>$model->user_id]);
+        $user_balance = User::findOne(['id' => $model->user_id]);
+        $account_balance = Banks::findOne(['user_id' => $model->user_id]);
         return $this->render('view', [
             'model' => $this->findModel($id),
             'user_balance' => $user_balance,
@@ -95,43 +96,41 @@ class WithdrawalRequestsController extends Controller
 
     public function actionApprove($id)
     {
-       
-        if($model = WithdrawalRequests::findOne(['id'=>$id,'approval_status'=>0])) {
+
+        if ($model = WithdrawalRequests::findOne(['id' => $id, 'approval_status' => 0])) {
             $user = User::findOne(['id' => $model->user_id]);
             $wallet = new WalletHistories();
-
             if ($user->wallet_balance >= $model->amount) {
                 //old balance
                 $old_balance = $user->wallet_balance;
-
                 //new balance
                 $new_amount = ($user->wallet_balance - $model->amount);
                 $new_balance = $new_amount;
-
                 $user->wallet_balance = $new_balance;
-
                 $wallet->user_id = $model->user_id;
                 $wallet->old_balance = $old_balance;
                 $wallet->new_balance = $new_balance;
                 $wallet->amount = $model->amount;
                 $wallet->type = 'debit';
+
                 //save records
                 if ($user->save() && $wallet->save()) {
                     $model->approved_by = Yii::$app->user->id;
                     $model->approval_status = 1;
+                    $model->amount_sent = $model->amount - Yii::$app->params['withdrawalCharges'];
+                    $model->charges = Yii::$app->params['withdrawalCharges'];
                     $model->save();
                     Yii::$app->session->setFlash('success', "Withdrawal Approved!");
                 }
 
             } else
                 Yii::$app->session->setFlash('error', "Not enough funds!");
-        }else{
+        } else {
             Yii::$app->session->setFlash('error', "Your request was not successful");
         }
 
-            return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect(Yii::$app->request->referrer);
     }
-
 
 
     /**
@@ -177,7 +176,7 @@ class WithdrawalRequestsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = WithdrawalRequests::findOne(['id'=>$id])) !== null) {
+        if (($model = WithdrawalRequests::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

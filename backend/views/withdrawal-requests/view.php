@@ -34,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'user.name',
         'amount',
         'method',
+        'amount_sent',
+        'charges',
         ['attribute' => 'approval_status', 'value' => $model->approval_status == 1 ? 'Approved' : 'Not approved'],
         'approval.username',
         'created_at',

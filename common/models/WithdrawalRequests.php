@@ -14,6 +14,8 @@ use Yii;
  * @property string $amount
  * @property int $approval_status
  * @property int $approved_by
+ * @property int $amount_sent
+ * @property int $charges
  * @property string $method
  */
 class WithdrawalRequests extends \yii\db\ActiveRecord
@@ -32,7 +34,7 @@ class WithdrawalRequests extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'approval_status', 'approved_by'], 'safe'],
+            [['created_at', 'updated_at', 'approval_status', 'approved_by','amount_sent','charges'], 'safe'],
             [['user_id', 'amount', 'method'], 'required'],
             [['method'], 'string'],
             [['user_id', 'amount'], 'string', 'max' => 191],
