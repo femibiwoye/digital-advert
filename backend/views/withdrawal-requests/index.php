@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.name',
             'amount',
             'method',
+            'amount_sent',
+            'charges',
+            'method',
             'approval.name',
             ['attribute'=>'approval_status','value' => function($model){
         return $model->approval_status == 1?'Approved':'Not approved';
