@@ -44,10 +44,10 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'media', 'platforms','payment_reference'], 'safe'],
+            [['created_at', 'updated_at', 'media', 'platforms', 'payment_reference'], 'safe'],
             [['user_id', 'content', 'media', 'platforms', 'payment_method'], 'required'],
             [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
-            [['content', 'raw', 'start_at', 'end_at','payment_method','payment_reference'], 'string'],
+            [['content', 'raw', 'start_at', 'end_at', 'payment_method', 'payment_reference'], 'string'],
             [['tweet_id', 'retweet_post_id'], 'string', 'max' => 191],
         ];
     }
@@ -102,6 +102,11 @@ class Posts extends \yii\db\ActiveRecord
         return $this->hasMany(PostLikes::className(), ['post_id' => 'id']);
     }
 
+    public function getMyPostLike()
+    {
+        return $this->hasMany(PostLikes::className(), ['post_id' => 'id'])->andWhere(['user_id' => Yii::$app->user->id]);
+    }
+
     /**
      * Get activities of a post.
      * The duration is in seconds
@@ -129,7 +134,7 @@ class Posts extends \yii\db\ActiveRecord
 
     public function FeedDisliked()
     {
-        $model = $this->getPostLike()->andWhere(['user_id' => Yii::$app->user->id])->one();
+        $model = $this->getMyPostLike()->one();
         if (!$model->delete()) {
             return false;
         }
