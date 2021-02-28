@@ -10,7 +10,7 @@ use yii\widgets\ListView;
             <div class="col-lg-6">
                 <div class="banner-content">
                     <h2 class="title">
-                        MoreRave Blog
+                        The MoreRave Blog
                     </h2>
                     <p>Our blog gives you latest updates and tips on making your businesses and brands known.</p>
                 </div>

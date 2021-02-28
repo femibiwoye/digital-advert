@@ -20,7 +20,7 @@ return [
     'TwitterConsumerSecret'=>TWITTER_CONSUMER_SECRET,
     'TwitterAccessToken'=>TWITTER_ACCESS_TOKEN,
     'TwitterAccessTokenSecret'=>TWITTER_ACCESS_TOKEN_SECRET,
-    'androidUrl'=>'https://drive.google.com/file/d/1pL4XgJnvVmZOaGlwaYfIuXOb70vGtIRJ/view?usp=sharing',
+    'androidUrl'=>'https://play.google.com/store/apps/details?id=com.morerave.mobile',
 
     'withdrawalCharges'=> 50
     //'s3BaseUrl'=>'https://morerave.s3.eu-west-2.amazonaws.com/'
