@@ -10,10 +10,10 @@ $this->title = 'About';
 <div class="inner-hero-area bg-gradient">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="inner-hero-text">
                     <h1 class="title">About us</h1>
-                    <p>Get paid for engagements </p>
+                    <p>Let the power of Reviews, Referrals and Questions to drive your marketing through the engagement of a million micro-influencers and the leverage of social media. This is guaranteed to boost your conversion and sales.</p>
                 </div>
             </div>
         </div>
@@ -22,11 +22,13 @@ $this->title = 'About';
 <div class="content-area">
     <div class="container">
         <div class="section-title pb-lg--40 ">
-            <h2 class="title">Our mission is to make your life easier.</h2>
+            <h2 class="title">Motivated marketing that moves clients and customers.</h2>
             <div class="right-side">
                 <p>
-                    We are enthralled by the energy of African cities, but also challenged by the income disparity which is occasioned by the lack of requisite and adequate knowledge or access to it thereof. It is our belief that with the leaped frogged mobile technology in Africa, we can create solutions that can help individuals and businesses take advantage of the possibilities that technology can give to them.
-                    And their Hustle too.
+                    On Morerave, anytime you review, refer, or ask a question about a product or service featured on the platform, you get rewarded with points that could fund your next data purchase or that you could take as cash.
+               <br>
+               <br>
+                    Successful marketing campaigns must be sustained for a period, and for such campaigns to be effective, it must direct the target to immediately make a purchase (as the product or service fulfills a need) or at the least make the target initiate an engagement with the business behind the product. At Morerave, we seek to trigger that engagement using social media with a system that inadvertently creates contents and directs focused engagements that would ultimately lead to conversion and sales
                 </p>
             </div>
         </div>
@@ -48,81 +50,14 @@ $this->title = 'About';
 <div class="team-area pb-md--45">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-8 text-center">
                 <div class="section-title">
-                    <h2 class="title">Meet the team</h2>
-                    <p>Create custom landing pages with Omega that converts more visitors than any website. </p>
+                    <h2 class="title">Have a business?</h2>
+                    <p>If you have a business, you can start a <a href="<?=Yii::$app->params['androidUrl']?>" class="">free trial here</a>, or if you know any business that may be interested in marketing on social, you can also <a href="mailto:morerave1@gmail.com">tell us</a> too (We assure you that you will get your reward here and not in heaven)</p>
                 </div>
             </div>
         </div>
-        <div class="row mt-lg--30">
-            <div class="col-lg-4 mb--75">
-                <div class="team-widget">
-                    <div class="widget-image">
-                        <img src="image/png/about-team-2.png" alt="">
-                    </div>
-                    <div class="widget-text">
-                        <h3 class="title">Mac Johnson</h3>
-                        <span class="subtitle">Founder and CEO</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb--75">
-                <div class="team-widget">
-                    <div class="widget-image">
-                        <img src="image/custom/inf-2.png" alt="">
-                    </div>
-                    <div class="widget-text">
-                        <h3 class="title">Tola Daniel</h3>
-                        <span class="subtitle">CTO</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb--75">
-                <div class="team-widget">
-                    <div class="widget-image">
-                        <img src="image/custom/inf-1.png" alt="">
-                    </div>
-                    <div class="widget-text">
-                        <h3 class="title">Saheed Baker</h3>
-                        <span class="subtitle">Operations Manager</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb--75">
-                <div class="team-widget">
-                    <div class="widget-image">
-                        <img src="image/custom/inf-2.png" alt="">
-                    </div>
-                    <div class="widget-text">
-                        <h3 class="title">Kemi George</h3>
-                        <span class="subtitle">UX Designer</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb--75">
-                <div class="team-widget">
-                    <div class="widget-image">
-                        <img src="image/custom/inf-1.png" alt="">
-                    </div>
-                    <div class="widget-text">
-                        <h3 class="title">Tunde Kelani</h3>
-                        <span class="subtitle">Content Writer</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb--75">
-                <div class="team-widget">
-                    <div class="widget-image">
-                        <img src="image/png/about-team-2.png" alt="">
-                    </div>
-                    <div class="widget-text">
-                        <h3 class="title">Subomi Summer</h3>
-                        <span class="subtitle">Digital Marketer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 <!-- CTA section -->
