@@ -24,6 +24,8 @@ use Yii;
  * @property string $payment_method
  * @property string $payment_reference
  * @property int $is_posted_to_twitter
+ * @property int $view_count
+ * @property int $completed
  * @property string|null $raw
  * @property string|null $start_at
  * @property string|null $end_at
@@ -46,7 +48,7 @@ class Posts extends \yii\db\ActiveRecord
         return [
             [['created_at', 'updated_at', 'media', 'platforms', 'payment_reference'], 'safe'],
             [['user_id', 'content', 'media', 'platforms', 'payment_method'], 'required'],
-            [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter'], 'integer'],
+            [['user_id', 'is_approved', 'is_promoted', 'comment_count', 'like_count', 'boost_amount', 'is_posted_to_twitter', 'view_count','completed'], 'integer'],
             [['content', 'raw', 'start_at', 'end_at', 'payment_method', 'payment_reference'], 'string'],
             [['tweet_id', 'retweet_post_id'], 'string', 'max' => 191],
         ];
