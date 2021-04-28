@@ -52,8 +52,11 @@ class PaymentController extends Controller
             $user = User::findOne(['id' => Yii::$app->user->id]);
             $wallet = new WalletHistories();
             $wallet->old_balance = $user->wallet_balance;
-            $user->wallet_balance += (int)$model->amount;
-
+            if(empty($user->wallet_balance)){
+                $user->wallet_balance = $model->amount;
+            }else {
+                $user->wallet_balance += (int)$model->amount;
+            }
             $wallet->user_id = Yii::$app->user->id;
             $wallet->new_balance = $user->wallet_balance;
             $wallet->IP = Yii::$app->request->userIP;
